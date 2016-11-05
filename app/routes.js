@@ -16,7 +16,8 @@ module.exports = function(app, passport,server) {
 		var nextPage = "#";
 		 var tags = [
         { name: 'My Account', ref:'/Account' },
-        { name: 'My Orders', ref:'/Orders' }
+        { name: 'My Orders', ref:'/Orders' },
+        { name: 'Logout', ref:'/logout' }
     ];
 		response.render('index.html', {
       	user : user,
@@ -33,7 +34,8 @@ module.exports = function(app, passport,server) {
 		var nextPage = "#";
 		var tags = [
         { name: 'My Account', ref:'/Account' },
-        { name: 'My Orders', ref:'/Orders' }
+        { name: 'My Orders', ref:'/Orders' },
+        { name: 'Logout', ref:'/logout' }
     ];
 		response.render('index.html', {
       	user : user,
@@ -48,7 +50,30 @@ module.exports = function(app, passport,server) {
 			user : request.user
 		});
 	});*/
+/*app.get('/search', auth, function(request, response) {
+		response.render('search.html', {
+			user : request.user
+		});
+	});*/
 
+		app.post('/search', searchAuth, function(request, response) {
+		console.log(request.user);
+		var user = request.user;
+		var tagline = user.user.username;
+		console.log(tagline);
+		var nextPage = "#";
+		var tags = [
+        { name: 'My Account', ref:'/Account' },
+        { name: 'My Orders', ref:'/Orders' },
+        { name: 'Logout', ref:'/logout' }
+    ];
+		response.render('search.html', {
+      	user : user,
+      	nextPage:nextPage,
+        tagline: tagline,
+        tags:tags
+   		 });
+	});
 
 /*	app.get('/image.png', function (req, res) {
     		res.sendfile(path.resolve('./uploads/image_'+req.user._id));
@@ -63,11 +88,11 @@ module.exports = function(app, passport,server) {
 /*	app.get('/login', function(request, response) {
 		response.render('login.html');
 	});*/
-	app.get('/productPage', auth, function(request, response) {
+	/*app.get('/productPage', auth, function(request, response) {
 		response.render('productPage.html', {
 			user : request.user
 		});
-	});
+	});*/
 
 	/*app.get('/index', auth, function(request, response) {
 		response.render('index.html', {
@@ -79,17 +104,17 @@ module.exports = function(app, passport,server) {
 			user : request.user
 		});
 	});*/
-	app.get('/homePage', auth, function(request, response) {
+	/*app.get('/homePage', auth, function(request, response) {
 		response.render('homePage.html', {
 			user : request.user
 		});
-	});
+	});*/
 	app.get('/logout', function(request, response) {
 		request.logout();
 		response.redirect('/');
 	});
 
-//spl case fro when user puts /login in the web url
+//spl case for when user puts /login in the web url
 		app.get('/login',  splAuth, function(request, response) {
 			response.render('login.html', { message: request.flash('error') });
 		});
@@ -289,16 +314,32 @@ io.sockets.on('connection', function (socket) {
 };
 
 function auth(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
+  if (req.isAuthenticated()) {  return next(); }
+  console.log("Not logged in");
   	var tagline = "Login";
   	var nextPage = "/login";
-	var tags = [
-       
-    ];
+	var tags = [];
     /*var elementType : */
   /*	console.log(tagline);
   	console.log(nextPage);*/
   	res.render('index.html', {
+			tagline: tagline,
+			nextPage: nextPage,
+			tags:tags
+		});
+ 
+}
+
+function searchAuth(req, res, next) {
+  if (req.isAuthenticated()) {  return next(); }
+  console.log("Not logged in");
+  	var tagline = "Login";
+  	var nextPage = "/login";
+	var tags = [];
+    /*var elementType : */
+  /*	console.log(tagline);
+  	console.log(nextPage);*/
+  	res.render('search.html', {
 			tagline: tagline,
 			nextPage: nextPage,
 			tags:tags

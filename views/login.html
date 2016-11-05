@@ -1,29 +1,51 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Login Form</title>
-	<link rel="stylesheet" type="text/css" href="css/reset.css">
-	<link rel="stylesheet" type="text/css" href="css/structure.css">
+    <meta charset="utf-8">
 
+    <title>Login and Registration</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="/css/login.css">
+  
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form action="/login" method="post" class="box login">
-	<fieldset class="boxBody">
-	
-	  <label>Email</label>
-	  <input type="text" tabindex="1" placeholder="Enter Your Email Address" name="email" required>
- 	<label>Password</label>
-	  <input type="password" tabindex="2"  name="password" required>
-	</fieldset>
-	<footer>
-	<input TYPE="button"class="btnLogin" value="SignUp"  onClick="parent.location='/signup'">
-	  <input type="submit" class="btnLogin" value="Login" tabindex="4">
-	<a href="/auth/facebook" ><img src="images/f.jpg" height="30px"
+<div class="container">
+	<div class="row">
+        <div class="col-md-6">
+        <form action="/login" method="post" id="login_form" role="form">
+        	<fieldset><legend class="text-center">Login Form<span class="req"><small> required *</small></span></legend>
+        		<!-- Email -->
+            <div class="form-group">
+                <label for="email"><span class="req">* </span> Email Address: </label> 
+                    <input class="form-control" required type="text" name="email" id = "email"  placeholder="email" onchange="email_validate(this.value);" />   
+                        <div class="status" id="status"></div>
+            </div>
+<!-- Password -->
+             <div class="form-group">
+                <label for="password"><span class="req">* </span> Password: </label>
+                    <input required name="password" type="password" class="form-control inputpass" placeholder="password" minlength="4" maxlength="16"  id="pass1" />
+             </div>
+
+
+<!-- Login Button -->
+            <div class="form-group">
+                <input class="btn btn-success" type="submit" align="middle" name="submit_reg"  value="Login">
+                <a href="/auth/facebook" ><img src="images/f.jpg" height="30px"
 /> </a><!--<a href="/auth/twitter" ><img src="images/t.jpg" height="30px"
 /> </a>--><a href="/auth/google" ><img src="images/g.jpg" height="30px"
 /> </a>
-	</footer>
+                   
+			<input TYPE="button" class="btn btn-success"  value="SignUp"  onClick="parent.location='/signup'">
+			</div>
+			</fieldset>        
+        </form>
+        
+			</div>
+		</div>
+</div>
 
-</form>
 </body>
 </html>
