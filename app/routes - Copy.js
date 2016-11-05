@@ -4,52 +4,14 @@ async = require("async");
 var path = require('path'), fs = require('fs');
 
 module.exports = function(app, passport,server) {
-	// app.get('/', function(request, response) {
-	// 	response.render('index.html');
-	// });
-
-/*<%= user.user.username %>*/
-	app.get('/', auth, function(request, response) {
-		var user = request.user;
-	/*	console.log(user);*/
-		var tagline = user.user.username;
-		var nextPage = "#";
-		 var tags = [
-        { name: 'My Account', ref:'/Account' },
-        { name: 'My Orders', ref:'/Orders' }
-    ];
-		console.log(user);
-		response.render('index.html', {
-      	user : user,
-      	nextPage:nextPage,
-        tagline: tagline,
-        tags:tags
-   		 });
+	app.get('/', function(request, response) {
+		response.render('index.html');
 	});
-
-	app.post('/', auth, function(request,response) {
-		var user = request.user;
-		/*console.log(user);*/
-		var tagline = user.user.username;
-		var nextPage = "#";
-		var tags = [
-        { name: 'My Account', ref:'/Account' },
-        { name: 'My Orders', ref:'/Orders' }
-    ];
-		/*console.log(user);*/
-		response.render('index.html', {
-      	user : user,
-      	nextPage:nextPage,
-        tagline: tagline,
-        tags:tags
-   		 });
-	});
-
-	/*app.get('/user', auth, function(request, response) {
+	app.get('/user', auth, function(request, response) {
 		response.render('user.html', {
 			user : request.user
 		});
-	});*/
+	});
 
 
 /*	app.get('/image.png', function (req, res) {
@@ -62,27 +24,8 @@ module.exports = function(app, passport,server) {
 			user : request.user
 		});
 	});*/
-/*	app.get('/login', function(request, response) {
-		response.render('login.html');
-	});*/
-	app.get('/productPage', auth, function(request, response) {
-		response.render('productPage.html', {
-			user : request.user
-		});
-	});
-
-	/*app.get('/index', auth, function(request, response) {
-		response.render('index.html', {
-			user : request.user
-		});
-	});*/
-	/*app.get('/nav', auth, function(request, response) {
-		response.render('nav.html', {
-			user : request.user
-		});
-	});*/
-	app.get('/homePage', auth, function(request, response) {
-		response.render('homePage.html', {
+	app.get('/about', auth, function(request, response) {
+		response.render('about.html', {
 			user : request.user
 		});
 	});
@@ -91,13 +34,12 @@ module.exports = function(app, passport,server) {
 		response.redirect('/');
 	});
 
-//spl case fro when user puts /login in the web url
-		app.get('/login',  splAuth, function(request, response) {
+		app.get('/login', function(request, response) {
 			response.render('login.html', { message: request.flash('error') });
 		});
 
 		app.post('/login', passport.authenticate('login', {
-			successRedirect : '/', 
+			successRedirect : '/about', 
 			failureRedirect : '/login', 
 			failureFlash : true
 		}));
@@ -292,22 +234,5 @@ io.sockets.on('connection', function (socket) {
 
 function auth(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  	var tagline = "Login";
-  	var nextPage = "/login";
-var tags = [
-       
-    ];
-  /*	console.log(tagline);
-  	console.log(nextPage);*/
-  	res.render('index.html', {
-			tagline: tagline,
-			nextPage: nextPage,
-			tags:tags
-		});
- 
-}
-
-function splAuth(req, res, next) {
-  if (!req.isAuthenticated()) { return next(); }
-		res.redirect('/');
+  res.redirect('/login')
 }

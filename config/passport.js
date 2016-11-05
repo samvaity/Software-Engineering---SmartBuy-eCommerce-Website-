@@ -77,6 +77,8 @@ module.exports = function(passport) {
                         newUser.user.password = newUser.generateHash(password);
 			newUser.user.name	= ''
 			newUser.user.address	= ''
+
+            newUser.user.role    = 'Jash'
             
                         newUser.save(function(err) {
                             if (err)
@@ -93,7 +95,7 @@ module.exports = function(passport) {
                 user.user.password = user.generateHash(password);
 			user.user.name	= ''
 			user.user.address	= ''
-
+user.user.role    = 'Jash'
                 user.save(function(err) {
                     if (err)
                         throw err;
