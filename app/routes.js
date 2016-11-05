@@ -18,7 +18,6 @@ module.exports = function(app, passport,server) {
         { name: 'My Account', ref:'/Account' },
         { name: 'My Orders', ref:'/Orders' }
     ];
-		console.log(user);
 		response.render('index.html', {
       	user : user,
       	nextPage:nextPage,
@@ -36,7 +35,6 @@ module.exports = function(app, passport,server) {
         { name: 'My Account', ref:'/Account' },
         { name: 'My Orders', ref:'/Orders' }
     ];
-		/*console.log(user);*/
 		response.render('index.html', {
       	user : user,
       	nextPage:nextPage,
@@ -294,9 +292,10 @@ function auth(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   	var tagline = "Login";
   	var nextPage = "/login";
-var tags = [
+	var tags = [
        
     ];
+    /*var elementType : */
   /*	console.log(tagline);
   	console.log(nextPage);*/
   	res.render('index.html', {
