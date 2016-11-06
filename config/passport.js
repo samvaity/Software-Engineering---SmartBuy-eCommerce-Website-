@@ -1,26 +1,17 @@
 // local authentication
-// For more details go to https://github.com/jaredhanson/passport-local
 var LocalStrategy    = require('passport-local').Strategy;
 
 // Facebook authentication
-// For more details go to https://github.com/jaredhanson/passport-facebook
 var FacebookStrategy = require('passport-facebook').Strategy;
 var FACEBOOK_APP_ID = "1099430550177800"
 var FACEBOOK_APP_SECRET = "114ef61da3f4cd19ec247feb4a2ffad9";
  
-// Twitter authentication
-// For more details go to https://github.com/jaredhanson/passport-twitter
-var TwitterStrategy = require('passport-twitter').Strategy;
-var TWITTER_CONSUMER_KEY = "<Insert Your Key Here>";
-var TWITTER_CONSUMER_SECRET = "<Insert Your Secret Key Here>";
-
 // Google authentication
-// For more details go to https://github.com/jaredhanson/passport-google-oauth
 var GOOGLE_CONSUMER_KEY = "24058135543-3dp6b2i67vsmf01np7h1bn8rjoqiqq94.apps.googleusercontent.com";
 var GOOGLE_CONSUMER_SECRET = "ZxHzOIr4sd6Nge284x5Zi-XD";
 var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy
 
-var User       = require('../app/models/user');
+var User = require('../app/models/user');
 
 module.exports = function(passport) {
 
@@ -62,7 +53,7 @@ module.exports = function(passport) {
         passReqToCallback : true 
     },
     function(req, email, password, done) {
-
+                        console.log(req.body);
         process.nextTick(function() {
        
             if (!req.user) {
@@ -72,13 +63,13 @@ module.exports = function(passport) {
                         return done(null, false, req.flash('signuperror', 'User already exists'));
                     } else {
                         var newUser            = new User();
-			newUser.user.username    = req.body.username;
+			             newUser.user.username    = req.body.username;
                         newUser.user.email    = email;
                         newUser.user.password = newUser.generateHash(password);
+                        console.log(newUser);
 			newUser.user.name	= ''
 			newUser.user.address	= ''
-
-            newUser.user.role    = 'Jash'
+            newUser.user.role    = ''
             
                         newUser.save(function(err) {
                             if (err)
@@ -89,14 +80,12 @@ module.exports = function(passport) {
 
                 });
             } else {
-                var user            = req.user;
-		user.user.username    = req.body.username;
-                user.user.email    = email;
-                user.user.password = user.generateHash(password);
-			user.user.name	= ''
-			user.user.address	= ''
-user.user.role    = 'Jash'
-                user.save(function(err) {
+                    var user   = req.user;
+		            user.user.username    = req.body.username;
+                    user.user.email    = email;
+                    user.user.password = user.generateHash(password);
+			        user.user.role    = ''
+                    user.save(function(err) {
                     if (err)
                         throw err;
                     return done(null, user);
@@ -113,6 +102,8 @@ user.user.role    = 'Jash'
 // Strategies in Passport require a `verify` function, which accept
 // credentials (in this case, an accessToken, refreshToken, and Facebook
 // profile), and invoke a callback with a user object.
+
+/* one limitation here ideally fro OAuth you shouldnt update the passwword via reset password of this website*/
 	passport.use(new FacebookStrategy({
     		clientID: FACEBOOK_APP_ID,
     		clientSecret: FACEBOOK_APP_SECRET,
@@ -126,21 +117,16 @@ user.user.role    = 'Jash'
                
     			process.nextTick(function () {
             			if (!req.user) {
-                            console.log(profile);
-                           // console.log(profile.emails[0].value);
- 					User.findOne({ 'user.email' :  profile.emails[0].value }, function(err, user) {
-            	    				//User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
-
-                                    if (err){ return done(err);}
-                    				if (user) {
-                        				return done(null, user);
-                    				} else {
-                        				var newUser = new User();
-							newUser.user.username    = profile.displayName;
-                        	newUser.user.email    = profile.emails[0].value;
-							newUser.user.name	= profile.displayName
-							newUser.user.address	= ''
-
+                          				User.findOne({ 'user.email' :  profile.emails[0].value }, function(err, user) {
+                	    				if (err){ return done(err);}
+                        				if (user) {
+                            				return done(null, user);
+                        				} else {
+                            			var newUser = new User();
+            							newUser.user.username    = profile.displayName;
+                                    	newUser.user.email    = profile.emails[0].value;
+            							/*newUser.user.name	= profile.displayName
+							newUser.user.address	= ''*/
                         				newUser.save(function(err) {
                             					if (err)
                                 					throw err;
@@ -153,10 +139,10 @@ user.user.role    = 'Jash'
 					var user            = req.user;
 					user.user.username    = profile.displayName;
                 	user.user.email    = profile.emails[0].value;
-					user.user.name	= ''
+					/*user.user.name	= ''
 					user.user.address	= ''
 
-                			user.save(function(err) {
+                	*/		user.save(function(err) {
                     				if (err)
                         				throw err;
                     			return done(null, user);
@@ -164,54 +150,6 @@ user.user.role    = 'Jash'
             			}
     			});
   		}
-	));
-
-// Use the TwitterStrategy within Passport.
-// Strategies in passport require a `verify` function, which accept
-// credentials (in this case, a token, tokenSecret, and Twitter profile), and
-// invoke a callback with a user object.
-			passport.use(new TwitterStrategy({
-    			consumerKey: TWITTER_CONSUMER_KEY,
-    			consumerSecret: TWITTER_CONSUMER_SECRET,
-    			callbackURL: "http://192.168.1.101:8080/auth/twitter/callback"
-  		},
-  		function(req,token, tokenSecret, profile, done) {
-    // asynchronous verification, for effect...
-    			process.nextTick(function () {
-      
-     				 if (!req.user) {
- 					User.findOne({ 'user.username' :  profile.displayName }, function(err, user) {
-            	    				if (err){ return done(err);}
-                    				if (user) {
-                        				return done(null, user);
-                    				} else {
-                    var newUser            = new User();
-					newUser.user.username    = profile.displayName;
-					newUser.user.name	= ''
-					newUser.user.address	= ''
-
-                        				newUser.save(function(err) {
-                            					if (err)
-                                					throw err;
-                            				return done(null, newUser);
-                        				});
-                    				}
-
-                			});
-                         	} else {
-					var user            = req.user;
-					user.user.username    = profile.displayName;
-					user.user.name	= ''
-					user.user.address	= ''
-
-                			user.save(function(err) {
-                    				if (err)
-                        				throw err;
-                    			return done(null, user);
-                			});
-            			}
-    			});
-  		}		
 	));
 
 // Use the GoogleStrategy within Passport.
@@ -236,9 +174,9 @@ user.user.role    = 'Jash'
                         					var newUser            = new User();
 								newUser.user.username    = profile.displayName;
 								newUser.user.email    = profile.emails[0].value;
-								newUser.user.name	= ''
+								/*newUser.user.name	= ''
 								newUser.user.address	= ''
-
+*/
                         					newUser.save(function(err) {
                             						if (err)
                                 						throw err;

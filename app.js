@@ -52,7 +52,11 @@ app.configure(function() {
    app.use('/views', express.static(path.join(__dirname, 'views')));
    app.set('views', __dirname + '/views');
    app.engine('html', require('ejs').renderFile);
+<<<<<<< HEAD
    app.use(express.session({ secret: 'smartbuy' })); 
+=======
+   app.use(express.session({ secret: 'Samvaity' })); 
+>>>>>>> 83560b9134357ee28ec4f85333888f5baf7fc61a
    /*app.use(express.bodyParser({uploadDir:'/images'}));*/
    app.use(passport.initialize());
    app.use(passport.session()); 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Reset page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="/css/login.css">
+  <script src="/js/login.js"> </script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+        <div class="col-md-6">
+        <form action=/reset/:token method="post">
+         <div class="form-group">
+          <label for="username"><span></span> Username: </label>
+                 <input value = '<%= user.user.username%>' name= "username"/> 
+         </div>
+       <!-- Password -->
+            <div class="form-group">
+                <label for="password"><span class="req">* </span> Password: </label>
+                    <input required name="password" type="password" class="form-control inputpass" placeholder="password" minlength="4" maxlength="16"  id="pass1" />
+                <label for="password2"><span class="req">* </span> Password Confirm: </label>
+                    <input required name="password2" type="password" class="form-control inputpass" minlength="4" maxlength="16" placeholder="Enter passsword again to validate"  id="pass2" onkeyup="checkPass(); return false;"/>
+                   <span id="confirmMessage" class="confirmMessage"></span>
+            </div>
+            <div class="form-group">
+                <input class="btn btn-success" type="submit" align="middle" name="submit_reg"  value="Update password">
+                </div>
+        </form>
+        </div>
+        </div>
+        </div>
+        </body>
+        </html>

@@ -1,31 +1,55 @@
 <!doctype html>
 <html>
 <head>
-	<title>Knoldus Login Form</title>
-	<link rel="stylesheet" type="text/css" href="css/reset.css">
-	<link rel="stylesheet" type="text/css" href="css/structure.css">
-
+	 <title>Registration Form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+     	<link rel="stylesheet" type="text/css" href="/css/login.css">
+   		<script src="/js/login.js"> </script>
+    	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+          <fieldset><legend class="text-center">Registration Form</legend>
 
-<form action="/signup" method="post" class="box login">
-	<fieldset class="boxBody">
-	<% if (message.length > 0) { %>
-		<div class="alert alert-message"><%= message %></div>
-	<% } %>
-	<label>Name</label>
-	  <input type="text" tabindex="1" placeholder="Enter Your Name" name="username" required>
-	  <label>Email</label>
-	  <input type="text" tabindex="1" placeholder="Enter Your Email Address" name="email" required>
- 	<label>Password</label>
-	  <input type="password" tabindex="2"  name="password" required>
-	</fieldset>
-	<footer>
-	<input TYPE="button"class="btnLogin" value="Login"  onClick="parent.location='/login'">
-	  <input type="submit" class="btnLogin" value="SignUp" tabindex="1">
-	</footer>
+            <form action="/signup" method="post" class="box login">
+            <% if (message.length > 0) { %>
+                <div class="alert alert-message"><%= message %></div>
+            <% } %>
+<!-- Username -->
+            <div class="form-group">     
+                <label for="username"><span class="req">* </span> Username: </label>
+                    <input class="form-control" type="text" name="username" id = "txt" placeholder="Username" required /> 
+            </div>
 
-</form>
+<!-- Email -->
+            <div class="form-group">
+                <label for="email"><span class="req">* </span> Email: </label> 
+                    <input class="form-control" required type="text" name="email" id = "email"  placeholder="email" onchange="email_validate(this.value);"/>   
+                    <span id="confirmEmailMessage"></span>
+           </div>
 
+<!-- Password -->
+            <div class="form-group">
+                <label for="password"><span class="req">* </span> Password: </label>
+                    <input required name="password" type="password" class="form-control inputpass" placeholder="password" minlength="4" maxlength="16"  id="pass1" />
+                <label for="pass2"><span class="req">* </span> Password Confirm: </label>
+                    <input required name="pass2" type="password" class="form-control inputpass" minlength="4" maxlength="16" placeholder="Enter passsword again to validate"  id="pass2" onkeyup="checkPassword(); return false;" />
+                   <span id="confirmMessage" class="confirmMessage"></span>
+            </div>
+
+<!-- Register -->
+            <div class="form-group">
+                     <input class="btn btn-success" type="submit" style="margin-left:30%" value="SignUp" tabindex="1">
+            </div>
+
+            </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

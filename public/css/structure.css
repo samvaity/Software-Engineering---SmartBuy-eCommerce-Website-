@@ -1,15 +1,3 @@
-/*
-  ✰✰✰✰✰✰✰✰✰✰✰✰✰✰ 
-
-  Simple Login Form
-  HTML5/CSS3 Coded by: $hekh@r d-Ziner, CSSJunction.com
-  PSD by:PremiumPixels.com
-  
-  Uuage: Free. You can modify, remove our links and use wherever you want ☺.
-  
-  ✰✰✰✰✰✰✰✰✰✰✰✰✰✰✰ 
-  
-*/
 body {
 	background: #eff3f6;
 	background: url(../images/background.jpeg) repeat scroll;
@@ -273,8 +261,11 @@ footer#main {
 }
 
 .topContent label {
-	color: #F0F2F5;
-	font-size: 18px;
+	    font-family: monospace !important;
+    font-size: 30px !important;
+    color: aquamarine!important;
+    float: left;
+    padding: 15px;
 }
 
 .topContent img {

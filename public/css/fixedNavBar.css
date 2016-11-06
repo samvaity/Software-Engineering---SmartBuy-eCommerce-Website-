@@ -1,0 +1,11 @@
+.topContent {
+	background: url(../images/hdr-bkg.png) repeat-x scroll !important;
+	padding:20px !important;
+	height: 100px !important;
+	z-index: 100 !important;
+}
+.webTitle{
+	    font-family: monospace;
+    font-size: 30px;
+    color: aquamarine;
+}
