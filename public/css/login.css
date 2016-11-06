@@ -2,17 +2,18 @@ body {
     padding-top:50px;
 }
 fieldset {
-    border: thin solid #ccc; 
+    border: thin solid #333;; 
     border-radius: 4px;
     padding: 20px;
     padding-left: 40px;
     background: #fbfbfb;
 }
 legend {
-   color: #678;
+   color:  #080808;
+   font-family: 'san-serif';
 }
 .form-control {
-    width: 95%;
+    width: 75%;
 }
 label small {
     color: #678 !important;
@@ -21,3 +22,7 @@ span.req {
     color:maroon;
     font-size: 112%;
 }
+label{
+    font-family: "Helvetica";
+}
+

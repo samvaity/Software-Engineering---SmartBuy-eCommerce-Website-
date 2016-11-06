@@ -1,6 +1,8 @@
 <head>
-<link rel="stylesheet" type="text/css" href="css/reset.css">
-<link rel="stylesheet" type="text/css" href="css/structure.css">
+
+<link rel="stylesheet" type="text/css" href="/css/structure.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+
 <link rel="stylesheet" type="text/css" href="/css/nav.css">
 <link rel="stylesheet" type="text/css" href="/css/search.css">
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
@@ -14,14 +16,13 @@
 <script src="/js/bootstrap.min.js"> </script>
 <script src="/js/nav.js"> </script>
 </head>
-
-<!-- <div id="content"> -->
-  <div class="topContent" style="background-color:  #483D8B;">
-    <fieldset class="dropdown" style="float: left;padding:20px ">
+<div>
+<div class="topContent">
+    <fieldset class="dropdown">
     <br>
-            <label>SmartBuy</label>
-          </fieldset>
-  </div> 
+            <label class="webTitle">SmartBuy</label>
+    </fieldset>
+    </div>
 <div class="container">
   <nav class="navbar navbar-default"> 
     <div class="collapse navbar-collapse js-navbar-collapse">
@@ -100,26 +101,23 @@
      <% if(tags.length>0)
      { %>
       <a href='<%= nextPage %>' class="dropdown-toggle" data-toggle="dropdown" ><%= tagline %> <span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
-<ul class="dropdown-menu mega-dropdown-menu row"">
-                <% tags.forEach(function(tags) { %>
-        <li class="dropdown-header"><a href='<%= tags.ref %>'><%= tags.name %></a></li> 
-        <li class="divider"></li>
-    <% }); %></ul>
-     <% } else { %>
-<a href='<%= nextPage %>' ><%= tagline %></a>
+      <ul class="dropdown-menu mega-dropdown-menu row">
+      <li>
+      <ul>
+         <% tags.forEach(function(tags) { %>
+            <li><a href='<%= tags.ref %>'><%= tags.name %></a></li> 
+            <li class="divider"></li>
+          <% }); %>
+      </ul>
+      <% } else { %>
+        <a href='<%= nextPage %>' ><%= tagline %></a>
       <% } %>
-
-
-
-               <!-- <li class="dropdown-header" ><a href="#">My Account </a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header"><a href="#">My Orders</a></li> -->
-             
-            </li>
+    </li>
+    </ul>    
+       </li>
        </ul>
     
     </div>
   </nav>
 </div>
-<!-- </div>
- -->
+</div>
