@@ -1,0 +1,10 @@
+/* styles for rich text editor */
+table.small-editor
+{
+    height: 100px;
+}
+
+table.small-editor iframe.k-content
+{
+    height: 50px; /* 50px less than the Editor height */
+}

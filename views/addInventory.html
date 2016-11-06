@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Add Inventory</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/common.css">
+		<link rel="stylesheet" type="text/css" href="css/addInventory.css">
+
+		<!--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.common.min.css"/>
+	    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.rtl.min.css"/>
+	    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.silver.min.css"/>
+	    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.mobile.all.min.css"/>-->
+
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="views/js/addInventory.js"></script> 
+		<script type="text/javascript">
+		
+		</script>
+		<!--script src="http://kendo.cdn.telerik.com/2016.3.1028/js/kendo.all.min.js"></script>-->
+	</head>
+	<body>
+		<div class="container">
+		    <form class="well form-horizontal" action=" " method="post"  id="product_form" enctype="multipart/form-data">
+		    	<!--<% if (message.length > 0) { %>-->
+						<div class="alert alert-message"><%= message %></div>
+				<!--	<% } %> -->
+				<fieldset>
+					<legend>Add Product</legend>
+
+					<div class="form-group">
+					  	<label class="col-md-4 control-label">Name</label>  
+					  	<div class="col-md-5 inputGroupContainer">
+					  		<div class="input-group">
+						  		<span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+						  		<input  name="product_name" placeholder="Name" class="form-control" type="text" required>
+							</div>
+					  	</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-md-4 control-label">Description</label> 
+				  		<div class="col-md-5 inputGroupContainer">
+					  		<div class="input-group">
+						  		<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+						  		<!--<textarea class="small-editor" name="product_description" id="classicEditor" placeholder="Description" required></textarea>-->
+				        		<textarea class="form-control" name="product_description" placeholder="Description" required></textarea>
+					  		</div>
+				  		</div>
+					</div>
+
+			        <div class="form-group row">
+			        	<label class="col-md-4 control-label">Quantity</label> 
+			        	<div class="col-md-2 inputGroupContainer">
+					  		<div class="input-group quantity">
+					  			<span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
+					    		<!--<a class="input-group-addon link" id="add-quantity"><i class="glyphicon glyphicon-plus"></i></a>-->
+					  			<input name="product_quantity" placeholder="0" class="form-control" type="number" value="0" min="0">
+					  			<!--<span class="input-group-addon link" id="sub-quantity"><i class="glyphicon glyphicon-minus"></i></span>-->
+					    	</div>
+				  		</div>
+
+				  		<label class="col-md-1 control-label">Price</label>
+				  		<div class="col-md-2 inputGroupContainer">
+				    		<div class="input-group">
+				        		<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+				  				<input name="product_price" placeholder="0.00" class="form-control" type="number" step="any" min="0.00">
+				    		</div>
+				  		</div>
+
+			        </div>
+
+					<div class="form-group"> 
+				  		<label class="col-md-4 control-label">Category</label>
+				    	<div class="col-md-5 selectContainer">
+				    		<div class="input-group">
+				    			<span id="categories" style="display: none"><%= category %></span>
+				        		<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+							    <select name="product_category" class="form-control selectpicker" required>
+							      	<option value = "" >Please select your product category</option>
+								   <!-- <option value = "TV">TV</option>
+								    <option value = "Mobile">Mobile</option>
+								    <option value = "Computers">Computers</option>
+								    <option value = "Wearable Technology">Wearable Technology</option>-->
+							    </select>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+					  	<label class="col-md-4 control-label">Specifications</label>  
+					    <div class="col-md-5 inputGroupContainer">
+						    <div class="input-group">
+						        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+						  		<textarea class="form-control" name="product_specifications" placeholder="Specifications"></textarea>
+						    </div>
+					  	</div>
+					</div>
+
+					<div class="form-group">
+				  		<label class="col-md-4 control-label">Discount</label>  
+				    	<div class="col-md-5 inputGroupContainer">
+				    		<div class="input-group">
+				        		<span class="input-group-addon"><i class="glyphicon glyphicon-plus-sign"></i></span>
+				  				<input name="product_discount" placeholder="0.00" class="form-control" type="number" step="any" min="0.00">
+				    		</div>
+				  		</div>
+					</div>
+
+					<div class="form-group">
+				  		<label class="col-md-4 control-label">Discount Start Date</label>  
+				    	<div class="col-md-4 inputGroupContainer">
+				    		<div class="input-group">
+				        		<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				  				<input name="product_startDate" placeholder="0.00" class="form-control" type="date" id="disStartDate">
+				    		</div>
+				  		</div>
+					</div>
+
+					<div class="form-group">
+				  		<label class="col-md-4 control-label">Discount End Date</label>  
+				    	<div class="col-md-4 inputGroupContainer">
+				    		<div class="input-group">
+				        		<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				  				<input name="product_endDate" placeholder="0.00" class="form-control" type="date" id="disEndDate">
+				    		</div>
+				  		</div>
+					</div>
+
+					<div class="form-group">
+                        <label class="col-md-4 control-label">Are Coupons allowed for this product?</label>
+                        <div class="col-md-4">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="product_couponsApplicable" value="yes" /> Yes
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="product_couponsApplicable" value="no" /> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+					<!--<div class="form-group">
+				  		<label class="col-md-4 control-label">Pictures</label>  
+				    	<div class="col-md-4 inputGroupContainer">
+				    		<div class="input-group">
+				        		<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+								    <input type="file" name="upl">-->
+			    					<!--<input type="submit" value="Submit">-->
+				  				<!--<input name="product_picture" placeholder="Pictures" class="form-control" type="image">-->
+				    		<!--</div>
+				  		</div>
+					</div>-->
+
+					<div class="form-group">
+						<label class="col-md-4 control-label"></label>
+						<div class="col-md-4">
+						    <button type="submit" class="btn btn-warning">Save  <span class="glyphicon glyphicon-floppy-save"></span></button>
+						</div>
+					</div>
+
+				</fieldset>
+			</form>
+		</div>
+
+	</body>
+</html>
