@@ -1,6 +1,8 @@
 var User       = require('../app/models/user');
 async = require("async");
 var path = require('path'), fs = require('fs');
+var crypto = require("crypto");
+var nodemailer = require("nodemailer");
 
 module.exports = function(app, passport,server) {
 	
@@ -126,6 +128,149 @@ module.exports = function(app, passport,server) {
 			failureFlash : true 
 		}));
 
+	
+
+/* Reset Password code*/
+
+/*Forgot pwd*/
+app.get('/forgot', function(req, res) {
+  res.render('forgot.html', {
+       user: req.user
+
+  });
+});
+
+app.post('/forgot', function(req, res, next) {
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+       //console.log(req.body.email);
+      User.findOne({"user.email": req.body.email }, function(err, user) {
+        if (!user) {
+         // console.log("in error");
+          req.flash('error', 'No account with that email address exists.');
+          return res.redirect('/forgot');
+        }
+        //console.log(user);
+        user.user.resetPasswordToken = token;
+        user.user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+     /*   user.markModified(user);
+         user.markModified(user);*/
+/* User.markModified(user.resetPasswordToken);
+ User.markModified(user.resetPasswordExpires);
+*/
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {
+      var smtpTransport = nodemailer.createTransport('SMTP', {
+        service: 'Gmail',
+        auth: {
+          user: 'samsetest@gmail.com',
+          pass: 'Sam12345'
+        }
+      });
+     // console.log(user.email);
+      var mailOptions = {
+        to: req.body.email,
+        from: 'passwordreset@demo.com',
+        subject: 'Node.js Password Reset',
+        text: 'You are receiving this because you have requested the reset of the password for your account.\n\n' +
+          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+          'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+          'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+        done(err, 'done');
+      });
+    }
+  ], function(err) {
+    if (err) return next(err);
+    res.redirect('/forgot');
+  });
+});
+
+/*End of forgot*/
+
+/* reset */
+app.get('/reset/:token', function(req, res) {
+ console.log("in reset");
+   User.findOne({"user.resetPasswordToken": req.params.token, "user.resetPasswordExpires": { $gt: Date.now() } }, function(err, user) {
+    if (!user) {
+      req.flash('error', 'Password reset token is invalid or has expired.');
+      return res.redirect('/forgot');
+    }
+   console.log("Reached here!!!");
+      console.log(user);
+    res.render('reset.html', {
+      user: user
+    });
+  });
+});
+
+
+app.post('/reset/:token', function(req, res) {
+  console.log("In reset after");
+  console.log(req.body);
+  async.waterfall([
+    function(done) {
+      User.findOne({"user.username": req.body.username }, function(err, user) {
+        
+       // console.log("not coming hre");
+        if (!user) {
+          console.log("not finding teh user");
+          req.flash('error', 'Password reset token is invalid or has expired.');
+          return res.redirect('back');
+        }
+        console.log(req.body);
+          user.user.password = user.generateHash(req.body.password);
+  /*      user.user.password = req.body.password;*/
+        user.user.resetPasswordToken = null;
+        user.user.resetPasswordExpires = null;
+        console.log("After my thingy");
+   console.log(user.user.password);
+
+   user.markModified("user");
+         user.save(function(err) {
+          done(err, user);
+        });
+      });
+    },
+    function(user, done) {
+      var smtpTransport = nodemailer.createTransport('SMTP', {
+        service: 'Gmail',
+        auth: {
+          user: 'samsetest@gmail.com',
+          pass: 'Sam12345'
+        }
+      });
+      var mailOptions = {
+        to: user.user.email,
+        from: 'passwordreset@demo.com',
+        subject: 'Your password has been changed',
+        text: 'Hello,\n\n' +
+          'This is a confirmation that the password for your account ' + user.user.email + ' has just been changed.\n'
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        req.flash('success', 'Success! Your password has been changed.');
+        done(err);
+      });
+    }
+  ], function(err) {
+    res.redirect('/');
+  });
+});
+
+/*end of reset*/
+
 // GET /auth/facebook
 /*Use passport.authenticate() as route middleware to authenticate the
 request. The first step in Facebook authentication will involve
@@ -184,6 +329,7 @@ io.sockets.on('connection', function (socket) {
 });
 
 };
+
 
 /*function to check for authenticated user*/
 function auth(req, res, next) {
