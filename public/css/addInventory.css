@@ -8,3 +8,14 @@ table.small-editor iframe.k-content
 {
     height: 50px; /* 50px less than the Editor height */
 }
+.content-container button span {
+	margin:10%;
+}
+.content-container button{
+	/*background: #374148!important;
+	border-color: #374148!important; */
+	background: #816263;
+	border-color: #816263;
+}
+.content-container button:hover{ background: #816263; border-color: #816263; }
+.content-container button.cancel {padding-top: 5px;}
