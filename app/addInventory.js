@@ -3,13 +3,14 @@ var User = require('../app/models/user');
 var Category = require('../app/models/category');
 
 module.exports = function(app, server, multer, mongoose, Grid, fs, configDB) {
+  var upload = multer()
 
   var Schema = mongoose.Schema;
   mongoose.createConnection('mongodb://localhost/smartbuy');
   var conn = mongoose.connection;
   Grid.mongo = mongoose.mongo;
   // implemented for saving images.. not is use currently
-  /*var storage =   multer.diskStorage({
+  var storage =   multer.diskStorage({
     destination: function (req, file, callback) {
       callback(null, './uploads');
     },
@@ -18,20 +19,16 @@ module.exports = function(app, server, multer, mongoose, Grid, fs, configDB) {
     }
   });
   var upload = multer({ storage : storage}).single('upl');
-
   var gfs;
-
   conn.once('open', function() {
     console.log('open');
     gfs = Grid(conn.db);
     app.set('gridfs',gfs);
   });
-*/
 
-  var options="";
-  Category.find({},function(err, category){
-      //response.send('index',{docs:docs});
-      
+
+  //var options="";
+ /* Category.find({},function(err, category){
      var jsoncategory = JSON.parse(JSON.stringify(category));
       for (var i = 0, len = category.length; i < len; i++) {
         if(jsoncategory[i].level != "1"){
@@ -39,77 +36,79 @@ module.exports = function(app, server, multer, mongoose, Grid, fs, configDB) {
             options += '<option value = "' + name + '">' + name + '</option>';
         } 
       }
-  });         
+  });   */      
 	app.get('/addInventory', auth, function(request, response) {
-    response.render('addInventory.html', { 
-				user: request.user,
-				category: options,
-				message: request.flash('error in adding inventory') });
-    });
-	
-	
-  	app.post('/addInventory',function(req,res){
-      	Product.findOne({'product.name' : req.body.product_name, 'product.sellerID' : req.user.user.email}, function(err, product) {
+
+    Category.find({},{"category": 1, "category.name": 1},function(err, categories){
+      var tagline = request.user.user.username;
+      var tags = [
+        { name: 'My Account', ref:'/Account' },
+        { name: 'My Orders', ref:'/Orders' },
+        { name: 'Logout', ref:'/logout' }
+    ];
+    var nextPage = "#";
+      response.render('addInventory.html', { 
+  				user: request.user,
+  				categories: categories,
+          tagline: tagline,
+          nextPage:nextPage,
+          tags:tags,
+  				message: request.flash('error in adding inventory') });
+      });
+	});
+
+  app.post('/addInventory', upload, function (req, res, next) {
+  // req.body contains the text fields 
+      console.log(next);
+      Product.findOne({'product.name' : req.body.product_name, 'product.sellerID' : req.user.user.email}, function(err, product) {
             var newProduct = new Product();
            /// console.log(product);
-    	    if (err) { console.log('error'); return done(err);}
+          if (err) { console.log('error'); return done(err);}
             if (product) {
-                res.render('addInventory.html', { 
-                   category: options,
-					         message: 'Product already exists. Please add a new product.',
-				        });
+              // populate category on form load
+              Category.find({},function(err, categories){
+                  // needed to display user and his options.. to be moved to a common page later
+                  var tagline = req.user.user.username;
+                  var tags = [
+                    { name: 'My Account', ref:'/Account' },
+                    { name: 'My Orders', ref:'/Orders' },
+                    { name: 'Logout', ref:'/logout' }
+                  ];
+                  var nextPage = "#";
+                    res.render('addInventory.html', { 
+                      user: req.user,
+                      categories: categories,
+                      tagline: tagline,
+                      nextPage:nextPage,
+                      tags:tags,
+                      message: 'Product already exists. Please add a new product.',
+                    });
+                  });
             } 
             else {
                 
                 var newProduct = new Product();
-                newProduct.updateProduct(req, res);
-                /*newProduct.product.name = req.body.product_name;
-				newProduct.product.description = req.body.product_description;
-				newProduct.product.quantity = req.body.product_quantity;
-				newProduct.product.price = req.body.product_price;
-				newProduct.product.category = req.body.product_category;
-				newProduct.product.specifications = req.body.product_specifications;
-				newProduct.product.discountStartDate = req.body.product_startDate;
-				newProduct.product.discountEndDate = req.body.product_endDate;
-				newProduct.product.couponsAplicable = req.body.product_couponsApplicable;
-				newProduct.product.noOfItemsSold = 0;
-				newProduct.product.sellerID = req.user.user.email;
-				newProduct.product.save(function(err) {
-	                        if (err)
-	                            throw err;
-	                    });
-						res.redirect('/addInventory');*/
-				/*
-                upload(req,res,newProduct,function(err) {
+                 
+                var writeStream = gfs.createWriteStream({
+                  filename: req.file.originalFilename
+                });
 
-                 	
-			          if(err) {
-			              return res.end("Error uploading file.");
-			          }
-			          // console.log(req);
-			          // console.log(req.files.userPhoto.path);
-			          // console.log(req.files.userPhoto.originalFilename);
-
-			          var writeStream = gfs.createWriteStream({
-			            filename: req.files.upl.originalFilename
-			          });
-
-			          fs.createReadStream(req.files.upl.path).pipe(writeStream);
+                fs.createReadStream(req.file.path).pipe(writeStream);
+                returnValue = newProduct.updateProduct(req, res);  
                       //newProduct.updateProduct(req, res);
-                      console.log(newProduct);
-                      newProduct.images = JSON.stringify(req.files);
-                      newProduct.product.save(function(err) {
-	                        if (err)
-	                            throw err;
-	                    });
-						res.redirect('/addInventory');
-					});
-					
-            	*/
-            	
-            	}
+                      //console.log(newProduct);
+                    //  newProduct.images = JSON.stringify(req.files);
+                      //newProduct.product.save(function(err) {
+                       //   if (err)
+                         //     throw err;
+                     // });
+          //  res.redirect('/addInventory');   
+                if(returnValue == "success")    
+                  res.redirect('/sellerproducts');
+              }
         });
   });
+	
 }
 
 function auth(req, res, next) {
