@@ -29,24 +29,27 @@ var productSchema = mongoose.Schema({
 */
 
 productSchema.methods.updateProduct = function(request, response){
-	console.log(request.product);
+	//console.log(request.file);
 	this.product.name = request.body.product_name;
 	this.product.description = request.body.product_description;
 	this.product.quantity = request.body.product_quantity;
 	this.product.price = request.body.product_price;
 	this.product.category = request.body.product_category;
 	this.product.specifications = request.body.product_specifications;
+	this.product.discount = request.body.product_discount;
 	this.product.discountStartDate = request.body.product_startDate;
 	this.product.discountEndDate = request.body.product_endDate;
 	this.product.couponsAplicable = request.body.product_couponsApplicable;
 	this.product.noOfItemsSold = 0;
 	this.product.sellerID = request.user.user.email;
+	this.images = '"img": '+JSON.stringify(request.file);
 
 	this.product.save(function(err) {
                         if (err)
                             throw err;
                     });
-	response.redirect('/addInventory');
+	return "success";
+	//response.redirect('/addInventory');
 
   /*upload(request,response,function(err) {
           if(err) {
