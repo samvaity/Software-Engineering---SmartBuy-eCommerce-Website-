@@ -15,7 +15,11 @@ var discountEndDate = document.getElementById('disEndDate');
 		        discountStartDate.max = discountEndDate.value;
 		}, false);
 	}
-	var categories = $("#categories").text();
-	$("select").append(categories);
+	//var categories = $("#categories").text();
+	//$("select").append(categories);
+
+	$("button.cancel").click(function(){
+		window.location.href="./sellerproducts";
+	});
 
 });
