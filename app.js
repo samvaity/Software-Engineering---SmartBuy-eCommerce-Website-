@@ -58,6 +58,8 @@ app.configure(function() {
    app.engine('html', require('ejs').renderFile);
    app.use(express.session({ secret: 'smartbuy' })); 
    /*app.use(express.bodyParser({uploadDir:'/images'}));*/
+   app.use(express.session({ secret: 'smartbuy' })); 
+  /*app.use(express.bodyParser({uploadDir:'/images'}));*/
    app.use(passport.initialize());
    app.use(passport.session()); 
    app.use(flash()); 

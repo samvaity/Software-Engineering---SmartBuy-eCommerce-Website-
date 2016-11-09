@@ -17,7 +17,11 @@
         <div class="col-md-6">
         <form action="/login" method="post" id="login_form" role="form">
         	<fieldset><legend>Login Form</legend>
-        		<!-- Email -->
+            <% if (message.length > 0) { %>
+            <div class="alert alert-message"><%= message %></div>
+            <% } %>
+
+<!-- Email -->
             <div class="form-group">
                 <label for="email"><span class="req">* </span> Email Address: </label> 
                     <input class="form-control" required type="text" name="email" id = "email"  placeholder="email" onchange="email_validate(this.value);" />   
@@ -37,11 +41,12 @@
                 <a href="/auth/google" ><img src="images/g.jpg" height="30px"/> </a>
             </div>
 
-            <div class="form-group" align="middle" >
+            <div class="form-group" >
             
-            <a href="/signup">Sign up here!</a>
+            <a href="/signup" style="margin-right: 20px">Sign up here!</a>
             			<!-- <input TYPE="button" class="btn btn-success"  value="SignUp"  onClick="parent.location='/signup'"> -->
-            
+           <!--  <input TYPE="button"class="btnLogin" value="Forgot pwd"  onClick="parent.location='/forgot'"> -->
+            <a href="/forgot">Forgot Password?</a>
 			</div>
 			</fieldset>        
         </form>

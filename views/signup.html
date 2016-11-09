@@ -16,7 +16,7 @@
           <fieldset><legend class="text-center">Registration Form</legend>
 
             <form action="/signup" method="post" class="box login">
-            <% if (message.length > 0) { %>
+            <% if (message) { %>
                 <div class="alert alert-message"><%= message %></div>
             <% } %>
 <!-- Username -->
