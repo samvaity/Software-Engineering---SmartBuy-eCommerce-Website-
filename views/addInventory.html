@@ -19,8 +19,8 @@
 		</script>
 		<!--script src="http://kendo.cdn.telerik.com/2016.3.1028/js/kendo.all.min.js"></script>-->
 	</head>
-	<body>
-		<div class="container">
+	<body> <% include index.html %>
+		<div class="content-container">
 		    <form class="well form-horizontal" action=" " method="post"  id="product_form" enctype="multipart/form-data">
 		    	<!--<% if (message.length > 0) { %>-->
 						<div class="alert alert-message"><%= message %></div>
@@ -55,7 +55,7 @@
 					  		<div class="input-group quantity">
 					  			<span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
 					    		<!--<a class="input-group-addon link" id="add-quantity"><i class="glyphicon glyphicon-plus"></i></a>-->
-					  			<input name="product_quantity" placeholder="0" class="form-control" type="number" value="0" min="0">
+					  			<input name="product_quantity" placeholder="0" class="form-control" type="number" min="0">
 					  			<!--<span class="input-group-addon link" id="sub-quantity"><i class="glyphicon glyphicon-minus"></i></span>-->
 					    	</div>
 				  		</div>
@@ -74,10 +74,16 @@
 				  		<label class="col-md-4 control-label">Category</label>
 				    	<div class="col-md-5 selectContainer">
 				    		<div class="input-group">
-				    			<span id="categories" style="display: none"><%= category %></span>
+				    			<!--<span id="categories"><%= categories %></span>-->
 				        		<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
 							    <select name="product_category" class="form-control selectpicker" required>
 							      	<option value = "" >Please select your product category</option>
+								        <% categories.forEach(function(category) { %>
+								        	<% if((category["category"]["level"] != '1') && (category["category"]["name"] != null))
+     										{ %>
+								            <option value = '<%= category["category"]["name"] %>'><%= category["category"]["name"] %></option> 
+								            <% } %>
+								        <% }); %>
 								   <!-- <option value = "TV">TV</option>
 								    <option value = "Mobile">Mobile</option>
 								    <option value = "Computers">Computers</option>
@@ -112,7 +118,7 @@
 				    	<div class="col-md-4 inputGroupContainer">
 				    		<div class="input-group">
 				        		<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-				  				<input name="product_startDate" placeholder="0.00" class="form-control" type="date" id="disStartDate">
+				  				<input name="product_startDate" placeholder="0.00" class="form-control" type="date" id="sStartDate">
 				    		</div>
 				  		</div>
 					</div>
@@ -143,22 +149,25 @@
                         </div>
                     </div>
 
-					<!--<div class="form-group">
+					<div class="form-group">
 				  		<label class="col-md-4 control-label">Pictures</label>  
 				    	<div class="col-md-4 inputGroupContainer">
 				    		<div class="input-group">
 				        		<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-								    <input type="file" name="upl">-->
+								    <input type="file" name="upl">
 			    					<!--<input type="submit" value="Submit">-->
 				  				<!--<input name="product_picture" placeholder="Pictures" class="form-control" type="image">-->
-				    		<!--</div>
+				    		</div>
 				  		</div>
-					</div>-->
+					</div>
 
 					<div class="form-group">
 						<label class="col-md-4 control-label"></label>
+						<div class="col-md-2">
+						    <button type="submit" class="btn btn-warning">Save<span class="glyphicon glyphicon-floppy-save"></span></button>
+						</div>
 						<div class="col-md-4">
-						    <button type="submit" class="btn btn-warning">Save  <span class="glyphicon glyphicon-floppy-save"></span></button>
+						    <button type="reset" class="btn btn-warning cancel" onclick="./sellerproducts.html">Cancel<span class="glyphicon glyphicon-floppy-remove"></span></button>
 						</div>
 					</div>
 
