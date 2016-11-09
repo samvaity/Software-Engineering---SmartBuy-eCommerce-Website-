@@ -36,6 +36,7 @@ var http = require('http');
 var server = http.createServer(app);
 var Grid  = require('gridfs-stream');
 var multer   = require('multer');
+var bodyParser   = require('body-parser');
 
 var configDB = require('./config/database.js');
 
@@ -46,17 +47,16 @@ require('./config/passport')(passport);
 app.configure(function() {
 
    app.use(express.cookieParser());
-   app.use(express.bodyParser()); 
+   //app.use(express.bodyParser()); 
+   app.use(bodyParser.urlencoded({ extended: false }))
+   app.use(bodyParser.json());
+   app.use(multer({ dest: './uploads/'}));
    app.use(express.static(path.join(__dirname, 'public')));
    app.use('/app', express.static(path.join(__dirname, 'app')));
    app.use('/views', express.static(path.join(__dirname, 'views')));
    app.set('views', __dirname + '/views');
    app.engine('html', require('ejs').renderFile);
-<<<<<<< HEAD
    app.use(express.session({ secret: 'smartbuy' })); 
-=======
-   app.use(express.session({ secret: 'Samvaity' })); 
->>>>>>> 83560b9134357ee28ec4f85333888f5baf7fc61a
    /*app.use(express.bodyParser({uploadDir:'/images'}));*/
    app.use(passport.initialize());
    app.use(passport.session()); 
@@ -67,6 +67,7 @@ app.configure(function() {
 
 require('./app/routes.js')(app, passport,server); 
 require('./app/addInventory.js')(app, server, multer, mongoose, Grid, fs, configDB);
+require('./app/sellerproducts.js')(app, server, multer, mongoose, Grid, fs, configDB);
 
 server.listen(port);
 console.log('Listening  to  port ' + port);
