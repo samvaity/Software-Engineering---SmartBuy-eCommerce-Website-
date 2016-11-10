@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+	<head>
+		<title>New Login</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/common.css">
+		<link rel="stylesheet" type="text/css" href="css/addInventory.css">
+
+		<!--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.common.min.css"/>
+	    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.rtl.min.css"/>
+	    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.silver.min.css"/>
+	    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.mobile.all.min.css"/>-->
+
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="views/js/addInventory.js"></script> 
+		<script type="text/javascript">
+		
+		</script>
+		<!--script src="http://kendo.cdn.telerik.com/2016.3.1028/js/kendo.all.min.js"></script>-->
+	</head>
+	<body>
+		<div class="container">
+		    <form class="well form-horizontal" action=" " method="post"  id="product_form" enctype="multipart/form-data">
+		    	<!--<% if (message.length > 0) { %>-->
+						<div class="alert alert-message"><%= message %></div>
+				<!--	<% } %> -->
+				<fieldset>
+					<legend>Login</legend>
+
+					<div class="form-group">
+					  	<label class="col-md-4 control-label">Email</label>  
+					  	<div class="col-md-5 inputGroupContainer">
+					  		<div class="input-group">
+						  		<span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+						  		<input  name="product_name" placeholder="Name" class="form-control" type="text" required>
+							</div>
+					  	</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-md-4 control-label">Password</label> 
+				  		<div class="col-md-5 inputGroupContainer">
+					  		<div class="input-group">
+						  		<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+						  		<!--<textarea class="small-editor" name="product_description" id="classicEditor" placeholder="Description" required></textarea>-->
+				        		<textarea class="form-control" name="product_description" placeholder="Description" required></textarea>
+					  		</div>
+				  		</div>
+					</div>
+
+			       
+					<div class="form-group">
+						<label class="col-md-4 control-label"></label>
+						<div class="col-md-4">
+						    <button type="submit" class="btn btn-warning">Login  <span class="glyphicon glyphicon-floppy-save"></span></button>
+						</div>
+					</div>
+
+				</fieldset>
+			</form>
+		</div>
+
+	</body>
+</html>
