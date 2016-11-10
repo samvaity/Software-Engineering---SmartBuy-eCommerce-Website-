@@ -13,12 +13,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
+        <% if (error) { %>
+                <div class="alert alert-message"><%= error %></div>
+            <% } %>
           <fieldset><legend class="text-center">Registration Form</legend>
 
             <form action="/signup" method="post" class="box login">
-            <% if (error) { %>
-                <div class="alert alert-message"><%= error %></div>
-            <% } %>
+            
 <!-- Username -->
             <div class="form-group">     
                 <label for="username"><span class="req">* </span> Username: </label>
@@ -40,6 +41,16 @@
                     <input required name="pass2" type="password" class="form-control inputpass" minlength="4" maxlength="16" placeholder="Enter passsword again to validate"  id="pass2" onkeyup="checkPassword(); return false;" />
                    <span id="confirmMessage" class="confirmMessage"></span>
             </div>
+<!-- Role -->
+            <div class="form-group">
+                <label for="role"><span class="req">* </span> Role: </label>
+                 <select name="roles">
+                 <option value=" " selected> Select </option>
+                    <option value="buyer">Buyer</option>
+                    <option value="seller">Seller</option>
+                     </select>
+            </div>
+
 
 <!-- Register -->
             <div class="form-group">

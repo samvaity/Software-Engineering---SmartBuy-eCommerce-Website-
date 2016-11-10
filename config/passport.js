@@ -53,6 +53,7 @@ module.exports = function(passport) {
         passReqToCallback : true 
     },
     function(req, email, password, done) {
+        console.log("In signup");
                         console.log(req.body);
         process.nextTick(function() {
        
@@ -68,8 +69,8 @@ module.exports = function(passport) {
                         newUser.user.password = newUser.generateHash(password);
                         console.log(newUser);
 			newUser.user.name	= ''
-			newUser.user.address	= ''
-            newUser.user.role    = ''
+			//newUser.user.address	= ''
+            newUser.user.role    = req.body.roles;
             
                         newUser.save(function(err) {
                             if (err)
@@ -84,7 +85,7 @@ module.exports = function(passport) {
 		            user.user.username    = req.body.username;
                     user.user.email    = email;
                     user.user.password = user.generateHash(password);
-			        user.user.role    = ''
+			        user.user.role    =  req.body.roles;
                     user.save(function(err) {
                     if (err)
                         throw err;
