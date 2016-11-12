@@ -3,11 +3,11 @@ var bcrypt   = require('bcrypt-nodejs');
 
 var categorySchema = mongoose.Schema({
     category : {
-    	catgeoryID		  : Number,
-	    name  		 	  : String,
-	    categorylevel  	  : Number,
-		parentCategoryID  : Number
-	}
+        ID                : Number,
+        name              : String,
+        level             : Number,
+        parentCategoryID  : Number
+    }
 });
 
 categorySchema.methods.getCategories = function (callback){
@@ -28,4 +28,4 @@ categorySchema.methods.getCategories = function (callback){
 	});
 }
 
-module.exports = mongoose.model('Category', categorySchema, 'category');
+module.exports = mongoose.model('Category', categorySchema, 'categories');
