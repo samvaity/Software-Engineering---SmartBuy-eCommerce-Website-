@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-
     <title>Login Page</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-     <link rel="stylesheet" type="text/css" href="/css/login.css">
-  <script src="/controller/login.js"> </script>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+
+    <script type="text/javascript" src="views/js/mylogin.js"></script> 
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -17,8 +18,8 @@
         <div class="col-md-6">
         <form action="/login" method="post" id="login_form" role="form">
         	<fieldset><legend>Login Form</legend>
-            <% if (message.length > 0) { %>
-            <div class="alert alert-message"><%= message %></div>
+            <% if (error.length > 0) { %>
+            <div class="alert alert-message"><%= error %></div>
             <% } %>
 
 <!-- Email -->
