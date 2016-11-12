@@ -16,9 +16,7 @@ var productSchema = mongoose.Schema({
 		discountEndDate	  : Date,
 		couponsAplicable  : Boolean,
 		sellerID 		  : String,
-		noOfItemsSold 	  : Number,
-		images 			  : String
-		//img: { data: String, contentType: String, path: String, fileName: String }
+		noOfItemsSold 	  : Number
 	}
 });
 
@@ -28,8 +26,7 @@ var productSchema = mongoose.Schema({
 });
 */
 
-productSchema.methods.updateProduct = function(request, response){
-	//console.log(request.file);
+productSchema.methods.updateProduct = function(request, response, gfs){
 	this.product.name = request.body.product_name;
 	this.product.description = request.body.product_description;
 	this.product.quantity = request.body.product_quantity;
@@ -42,49 +39,19 @@ productSchema.methods.updateProduct = function(request, response){
 	this.product.couponsAplicable = request.body.product_couponsApplicable;
 	this.product.noOfItemsSold = 0;
 	this.product.sellerID = request.user.user.email;
-	this.images = '"img": '+JSON.stringify(request.file);
 
 	this.product.save(function(err) {
-                        if (err)
-                            throw err;
-                    });
-	return "success";
-	//response.redirect('/addInventory');
-
-  /*upload(request,response,function(err) {
-          if(err) {
-              return res.end("Error uploading file.");
-          }
-	var writestream = gfs.createWriteStream({
-        filename: request.files.upl.originalFilename
+		if(request.files.length > 0){
+			for(var i=0; i<request.files.length;i++){
+				var writeStream = gfs.createWriteStream({
+		            filename: request.files[i].originalname,
+		        	metadata: {"productname": request.body.product_name, "sellerID": request.user.user.email}
+		    	});
+		    	fs.createReadStream(request.files[i].path).pipe(writeStream);
+			}
+	    }
     });
-    fs.createReadStream(request.files.upl.path).pipe(writestream);
- 
-    var newfile = writestream.on('close', function (file) {
-	        // do something with `file`
-	        //console.log(file);
-	        //console.log(file.filename + ' Written To DB');
-	        //this.product.images = JSON.stringify(file);
-	        return file;
-	    });
-*/
-   // console.log(request);
-  //  this.product.images = util.inspect(writestream);
-	//this.img.contentType = request.files.upl.headers.content-type;
-    //this.img.path = request.files.upl.path;
-    //this.img.fileName = request.files.upl.originalFilename;
-
-	//this.putFile(request.files.upl.path, request.files.upl.originalFilename);
-	
-
-	//this.img.data = fs.readFileSync(request.files.upl.path);
-    //this.img.contentType = request.files.upl.headers.content-type;
-    //this.img.path = request.files.upl.path;
-    //this.img.fileName = request.files.upl.originalFilename;
-
-	//this.product.images
-	
-//});
+	return "success";
 };
 
 module.exports = mongoose.model('Product', productSchema);
