@@ -79,10 +79,7 @@
 							    <select name="product_category" class="form-control selectpicker" required>
 							      	<option value = "" >Please select your product category</option>
 								        <% categories.forEach(function(category) { %>
-								        	<% if((category["category"]["level"] != '1') && (category["category"]["name"] != null))
-     										{ %>
 								            <option value = '<%= category["category"]["name"] %>'><%= category["category"]["name"] %></option> 
-								            <% } %>
 								        <% }); %>
 								   <!-- <option value = "TV">TV</option>
 								    <option value = "Mobile">Mobile</option>
@@ -118,7 +115,7 @@
 				    	<div class="col-md-4 inputGroupContainer">
 				    		<div class="input-group">
 				        		<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-				  				<input name="product_startDate" placeholder="0.00" class="form-control" type="date" id="sStartDate">
+				  				<input name="product_startDate" placeholder="0.00" class="form-control" type="date" id="disStartDate">
 				    		</div>
 				  		</div>
 					</div>
@@ -154,7 +151,7 @@
 				    	<div class="col-md-4 inputGroupContainer">
 				    		<div class="input-group">
 				        		<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-								    <input type="file" name="upl">
+								    <input type="file" name="prodImages" multiple>
 			    					<!--<input type="submit" value="Submit">-->
 				  				<!--<input name="product_picture" placeholder="Pictures" class="form-control" type="image">-->
 				    		</div>
@@ -167,7 +164,7 @@
 						    <button type="submit" class="btn btn-warning">Save<span class="glyphicon glyphicon-floppy-save"></span></button>
 						</div>
 						<div class="col-md-4">
-						    <button type="reset" class="btn btn-warning cancel" onclick="./sellerproducts.html">Cancel<span class="glyphicon glyphicon-floppy-remove"></span></button>
+						    <button type="reset" class="btn btn-warning cancel">Cancel<span class="glyphicon glyphicon-floppy-remove"></span></button>
 						</div>
 					</div>
 
