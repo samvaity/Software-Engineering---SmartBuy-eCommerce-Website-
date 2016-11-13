@@ -1,5 +1,5 @@
 
-$(document).ready(function(){
+//$(document).ready(function(){
 /*check password*/
 function checkPassword()
 {   
@@ -36,4 +36,4 @@ function email_validate(email)
             //document.getElementById("status").innerHTML	= "<span class='valid'>Thanks, you have entered a valid Email address!</span>";	
         }
 }
-});
+//});
