@@ -3,11 +3,13 @@
 <head>
 	 <title>Registration Form</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-    	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-     	<link rel="stylesheet" type="text/css" href="/css/login.css">
-   		   <script type="text/javascript" src="views/js/mylogin.js"></script> 
-    	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    	   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/common.css">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="views/js/mylogin.js"></script> 
 </head>
 <body>
 <div class="container">
@@ -29,7 +31,7 @@
 <!-- Email -->
             <div class="form-group">
                 <label for="email"><span class="req">* </span> Email: </label> 
-                    <input class="form-control" required type="text" name="email" id = "email"  placeholder="email" onchange = "email_validate(this.value);"/>   
+                    <input class="form-control" required type="text" name="email" id = "email"  placeholder="email" onchange ="javascript:email_validate(this.value);"/>   
                     <span id="confirmEmailMessage"></span>
            </div>
 
