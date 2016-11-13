@@ -29,8 +29,9 @@ module.exports = function(app, server, multer, mongoose, Grid, fs, configDB) {
 	/* Retrieves the product to be deleted from the database and passes it to deleteProduct method in product.js model. 
 	   Upon successful product deletion renders an updated sellerproducts.html */
 	  /***** find out if app.delete can be used somehow ******/
-	app.get('/placeholder', commonserver.anypageAuth, function(request, response) { 
-		var product_id = request.param('productID');		// Fetches productID from the querystring parameter		
+	app.get('/sellerproducts/delete', commonserver.anypageAuth, function(request, response) { 
+		var product_id = request.param('productID');		// Fetches productID from the querystring parameter	
+		//var product_id = req.params.id;	
 		var newProduct = new Product();	
 		Product.findOne({"_id": mongoose.mongo.ObjectID(product_id)}, function(err, product){
 			if (err){						// Error occured while fetching product
