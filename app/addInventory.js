@@ -28,7 +28,7 @@ module.exports = function(app, server, multer, mongoose, Grid, fs, configDB) {
     app.set('gridfs',gfs);
   });
    
-	app.get('/addInventory', commonserver.auth, function(request, response) {
+	app.get('/addInventory', commonserver.anypageAuth, function(request, response) {
     Category.find({"category.level" : {$ne : 1}},{"category": 1, "category.name": 1},function(err, categories){
       var tagline = request.user.user.username;
       var tags = [
