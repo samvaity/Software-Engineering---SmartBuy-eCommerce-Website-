@@ -26,6 +26,7 @@ var productSchema = mongoose.Schema({
 });
 */
 
+/* saves the product details in collection named 'products' */
 productSchema.methods.updateProduct = function(request, response, gfs){
 	this.product.name = request.body.product_name;
 	this.product.description = request.body.product_description;
@@ -41,17 +42,35 @@ productSchema.methods.updateProduct = function(request, response, gfs){
 	this.product.sellerID = request.user.user.email;
 
 	this.product.save(function(err) {
-		if(request.files.length > 0){
-			for(var i=0; i<request.files.length;i++){
-				var writeStream = gfs.createWriteStream({
-		            filename: request.files[i].originalname,
-		        	metadata: {"productname": request.body.product_name, "sellerID": request.user.user.email}
-		    	});
-		    	fs.createReadStream(request.files[i].path).pipe(writeStream);
-			}
+		if (err){
+	        throw err;
+		}
+	    else{
+			if(request.files.length > 0){
+				for(var i=0; i<request.files.length;i++){
+					var writeStream = gfs.createWriteStream({
+			            filename: request.files[i].originalname,
+			        	metadata: {"productname": request.body.product_name, "sellerID": request.user.user.email}
+			    	});
+			    	fs.createReadStream(request.files[i].path).pipe(writeStream);
+				}
+		    }
 	    }
     });
 	return "success";
 };
+
+/* deletes the product passed in as arguement from the products collection */
+productSchema.methods.deleteProduct = function(product){
+	product.remove(function(err){
+		if (err){
+			return "error";
+		} 
+	    else{
+	    	console.log("product deleted");
+	    }
+	});
+	return "success";
+}
 
 module.exports = mongoose.model('Product', productSchema);
