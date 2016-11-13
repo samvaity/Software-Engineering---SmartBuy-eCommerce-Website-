@@ -4,7 +4,7 @@ var Category = require('../app/models/category');
 var commonserver = require('./commonserver');
 
 module.exports = function(app, server, multer, mongoose, Grid, fs, configDB) {
-	app.get('/sellerproducts', commonserver.auth, function(request, response) { 
+	app.get('/sellerproducts', commonserver.anypageAuth, function(request, response) { 
 		Product.find({"product.sellerID" : request.user.user.email}, function(err, products){
 	    	var tagline = request.user.user.username;
 	      	var tags = [
