@@ -40,7 +40,6 @@ app.configure(function() {
 
 });
 
-
 require('./controllers/routes.js')(app, passport,server); 
 
 require('./controllers/addInventory.js')(app, multer, mongoose, Grid);
@@ -50,6 +49,7 @@ require('./controllers/login.js')(app,passport);
 require('./controllers/signup.js')(app, passport,server); 
 require('./controllers/forgot.js')(app);
 require('./controllers/reset.js')(app);
+require('./app/controller/footer.js')(app);
 
 server.listen(port);
 console.log('Listening  to  port ' + port);
