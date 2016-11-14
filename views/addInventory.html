@@ -44,9 +44,7 @@
 			        	<div class="col-md-2 inputGroupContainer">
 					  		<div class="input-group quantity">
 					  			<span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
-					    		<!--<a class="input-group-addon link" id="add-quantity"><i class="glyphicon glyphicon-plus"></i></a>-->
 					  			<input name="product_quantity" placeholder="0" class="form-control" type="number" min="0">
-					  			<!--<span class="input-group-addon link" id="sub-quantity"><i class="glyphicon glyphicon-minus"></i></span>-->
 					    	</div>
 				  		</div>
 
@@ -71,10 +69,6 @@
 								        <% categories.forEach(function(category) { %>
 								            <option value = '<%= category["category"]["name"] %>'><%= category["category"]["name"] %></option> 
 								        <% }); %>
-								   <!-- <option value = "TV">TV</option>
-								    <option value = "Mobile">Mobile</option>
-								    <option value = "Computers">Computers</option>
-								    <option value = "Wearable Technology">Wearable Technology</option>-->
 							    </select>
 							</div>
 						</div>
