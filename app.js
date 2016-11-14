@@ -48,8 +48,8 @@ require('./app/controller/login.js')(app,passport);
 require('./app/controller/signup.js')(app, passport,server); 
 require('./app/controller/forgot.js')(app);
 require('./app/controller/reset.js')(app);
-
-
+require('./app/controller/footer.js')(app);
+/*require('./app/controller/productSpecs.js')(app);*/
 
 server.listen(port);
 console.log('Listening  to  port ' + port);
