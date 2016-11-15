@@ -11,7 +11,7 @@ var GOOGLE_CONSUMER_KEY = "24058135543-3dp6b2i67vsmf01np7h1bn8rjoqiqq94.apps.goo
 var GOOGLE_CONSUMER_SECRET = "ZxHzOIr4sd6Nge284x5Zi-XD";
 var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy
 
-var User = require('../app/models/user');
+var User = require('../models/user');
 
 module.exports = function(passport) {
 

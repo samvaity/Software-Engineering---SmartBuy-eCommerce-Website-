@@ -49,7 +49,7 @@ require('./controllers/login.js')(app,passport);
 require('./controllers/signup.js')(app, passport,server); 
 require('./controllers/forgot.js')(app);
 require('./controllers/reset.js')(app);
-require('./app/controller/footer.js')(app);
+require('./controllers/footer.js')(app);
 
 server.listen(port);
 console.log('Listening  to  port ' + port);

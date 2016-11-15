@@ -3,7 +3,4 @@ module.exports = function(app) {
   response.render('footer.html');
 
  	});
-
-
-
  }
