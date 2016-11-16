@@ -10,22 +10,53 @@ module.exports = function(app, passport,server) {
 	app.get('/', commonserver.auth, function(request, response) {
 		var user = request.user;
 		var tagline = user.user.username;
+    console.log(user);
 		var nextPage = "#";
-		 var tags = [
+		 var tagsForBuyer = [
         { name: 'My Account', ref:'/Account' },
         { name: 'My Orders', ref:'/Orders' },
         { name: 'Logout', ref:'/logout' }
     ];
-		response.render('index.html', {
+    var tagsForSeller = [
+        { name: 'My Account', ref:'/Account' },
+        { name: 'My Products', ref:'/Orders' },
+        { name: 'Logout', ref:'/logout' }
+    ];
+     var tagsForAdmin = [
+        { name: 'Manage Accounts', ref:'/Account' },
+        { name: 'Manage Products', ref:'/Orders' },
+        { name: 'Logout', ref:'/logout' }
+    ];
+    if(user.user.role == 'buyer' || user.user.role == ""){
+		response.render('buyerHomepage.html', {
       	user : user,
       	nextPage:nextPage,
         tagline: tagline,
-        tags:tags
+        tags:tagsForBuyer
    		 });
+  }
+    else if(user.user.role == 'seller')
+    {
+    response.render('sellerHomepage.html', {
+          user : user,
+          nextPage:nextPage,
+          tagline: tagline,
+          tags:tagsForSeller
+         });
+    }
+    else if(user.user.role == 'admin')
+    {
+    response.render('sellerHomepage.html', {
+          user : user,
+          nextPage:nextPage,
+          tagline: tagline,
+          tags:tagsForAdmin
+         });
+    }
 	});
 
 /* post for index page*/
-	app.post('/', commonserver.auth, function(request,response) {
+	/*app.post('/', commonserver.auth, function(request,response) {
 		var user = request.user;
 		var tagline = user.user.username;
 		var nextPage = "#";
@@ -41,7 +72,7 @@ module.exports = function(app, passport,server) {
         tags:tags
    		 });
 	});
-
+*/
 /*Get for my Dummy accounts page*/
 	app.get('/Account', commonserver.auth, function(request, response) {
 		var user = request.user;
