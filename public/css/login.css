@@ -25,5 +25,9 @@ span.req {
 label{
     font-family: "Helvetica";
 }
-
+.alert-message
+{
+    font-family: Roboto,Arial,sans-serif;
+    color: red;
+}
 

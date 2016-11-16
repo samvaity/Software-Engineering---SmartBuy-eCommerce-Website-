@@ -99,7 +99,17 @@ module.exports = function(app, passport,server) {
    		 });
 	});
 
-
+/* to handle 404 error pages*/
+  app.use(function(req, res) {
+     res.status(400);
+     res.render('404.html', {title: '404: Page Not Found'});
+  });
+  
+  /* to handle 500 error pages*/
+  app.use(function(error, req, res, next) {
+     res.send('500: Internal Server Error', 500);
+  });
+/*
 var io = require('socket.io').listen(server);
 
 var usernames = {};
@@ -117,7 +127,7 @@ io.sockets.on('connection', function (socket) {
     io.sockets.emit('updateusers', usernames);
     socket.broadcast.emit('updatechat', 'SERVER', socket.username + ' has disconnected');
   });
-});
+});*/
 
 };
 
