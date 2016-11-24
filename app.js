@@ -50,6 +50,9 @@ require('./controllers/signup.js')(app, passport,server);
 require('./controllers/forgot.js')(app);
 require('./controllers/reset.js')(app);
 require('./controllers/footer.js')(app);
+require('./controllers/navbar.js')(app);
+
+
 
 server.listen(port);
 console.log('Listening  to  port ' + port);
