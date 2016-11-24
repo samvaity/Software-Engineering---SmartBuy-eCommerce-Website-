@@ -92,7 +92,7 @@ module.exports = function(app, passport,server) {
 	});
 
 /*Get for Dummy search page*/
-	app.get('/search', searchAuth, function(request, response) {
+	/*app.get('/search', searchAuth, function(request, response) {
 		var user = request.user;
 		var tagline = user.user.username;
 		var nextPage = "#";
@@ -108,9 +108,9 @@ module.exports = function(app, passport,server) {
         tags:tags
    		 });
 	});
-
+*/
 /*Post for search Page*/
-		
+/*		
 	app.post('/search', searchAuth, function(request, response) {
 		console.log(request.user);
 		var user = request.user;
@@ -129,7 +129,7 @@ module.exports = function(app, passport,server) {
         tags:tags
    		 });
 	});
-
+*/
 /* to handle 404 error pages*/
   app.use(function(req, res) {
      res.status(400);

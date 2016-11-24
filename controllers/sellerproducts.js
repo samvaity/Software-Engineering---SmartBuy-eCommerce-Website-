@@ -30,7 +30,7 @@ module.exports = function(app, mongoose, Grid) {
 		        nextPage: nextPage,
 		        products: products,
 		        tags:tags,
-		  		message: request.flash('error in adding inventory') 
+		  		message: request.flash('error while retrieving products') 
 		  	});
 		});
 	});

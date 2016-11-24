@@ -33,7 +33,7 @@
 }
 
 /**** styles for left-container ****/
-.left-container { padding: 25px 0; }
+.left-container { padding-top: 25px; padding-bottom: 25px; }
 .categories{ margin-right: 2%; float: left; }
 .categories h2{ color: #fff; background: #816263; font-size: 15px; padding: 18px; font-weight: 600; margin-top: 0; text-transform: uppercase; }
 .categories { background:#9E9C9C; width: 100%; }
@@ -43,7 +43,7 @@ ul.category-list li a{ color:#FFF; text-transform:uppercase; font-size:0.85em; t
 ul.category-list li a:hover{ background:#816263; color:#fff; padding:5px 2em; transition:0.5s all; -webkit-transition:0.5s all; -o-transition:0.5s all; -moz-transition:0.5s all; -ms-transition:0.5s all; }
 /************************************/
 /**** styles for right-container ****/
-.right-container{ width:78%; float:right; background:rgba(245, 243, 243, 0.27); min-height:800px; padding:2em; }
+.right-container{ float:right; background:rgba(245, 243, 243, 0.27); min-height:800px; padding-top: 25px; padding-bottom: 25px; }
 .right-container > div{ width: 95%; margin-left: auto; margin-right: auto; }
 ul.all-products-top-list{ padding:0; float: left; }
 ul.all-products-top-list li{ display: inline-block; font-size:0.82em; color:#777; }

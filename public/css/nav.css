@@ -59,12 +59,12 @@ h1,.h1 {
   border-left: 17px solid transparent;
   position: absolute;
   top: -15px;
-  left: 228px;
+  left: 140px;
   z-index: 10;
 }
 .container {
     margin-top: 99px;
-    width: 100% !important;
+   /* width: 100% !important;*/
     padding-right: 0 !important;
     padding-left: 0 !important;
 }
@@ -75,7 +75,7 @@ h1,.h1 {
   border-left: 19px solid transparent;
   position: absolute;
   top: -17px;
-  left: 228px;
+  left: 140px;
   z-index: 8;
   
 }
