@@ -73,6 +73,7 @@ module.exports = function(app, passport,server) {
    		 });
 	});
 */
+
 /*Get for my Dummy accounts page*/
 	app.get('/Account', commonserver.auth, function(request, response) {
 		var user = request.user;

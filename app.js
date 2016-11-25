@@ -46,6 +46,8 @@ require('./controllers/addInventory.js')(app, multer, mongoose, Grid);
 require('./controllers/editInventory.js')(app, multer, mongoose, Grid);
 require('./controllers/sellerproducts.js')(app, mongoose, Grid);
 require('./controllers/login.js')(app,passport);
+require('./controllers/productSpecs.js')(app);
+require('./controllers/addComment.js')(app);
 require('./controllers/signup.js')(app, passport,server); 
 require('./controllers/forgot.js')(app);
 require('./controllers/reset.js')(app);

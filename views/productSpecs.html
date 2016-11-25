@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Product Specification Page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+<!-- <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/plugins.css"> -->
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="views/js/productSpecs.js"></script> 
+
+    <script>
+        window.SHOW_LOADING = false;
+    </script>
+</head>
+
+<body>
+            <div class="container">
+
+                <div class="product-slider-wrapper">
+
+                    <div class="swiper-container product-slider-thumbs">
+                        <div class="swiper-wrapper">
+
+
+                            <div class="swiper-slide">
+                                <img src="images/products/thumb-2.jpg" alt="">
+                            </div>
+
+                            <div class="swiper-slide">
+                               <img src="images/products/thumb-2.jpg" alt="">
+                            </div>
+
+                           <!--  <div class="swiper-slide">
+                                <img src="images/products/thumb-2.jpg" alt="">
+                            </div>
+
+                            <div class="swiper-slide">
+                             <img src="images/products/thumb-2.jpg" alt="">
+                            </div> -->
+
+
+
+                            <!-- <div class="swiper-slide">
+                               <img src="images/products/large.jpg" alt="">
+                            </div>
+
+                            <div class="swiper-slide">
+                                          <img src="images/products/large.jpg" alt="">
+                            </div>
+
+                            <div class="swiper-slide">
+                                          <img src="images/products/large.jpg" alt="">
+                            </div>
+
+                            <div class="swiper-slide">
+                                         <img src="images/products/large.jpg" alt="">
+                            </div> -->
+
+
+                        </div>
+                    </div>
+                    <!-- /.swiper-container -->
+
+                    <div class="swiper-container product-slider-main">
+                        <div class="swiper-wrapper">
+
+                            <div class="swiper-slide">
+                                <div class="easyzoom easyzoom--overlay">
+                                    <a href="./img/samples/products/product/large/product-1.jpg" title="">
+                                                  <img src="images/products/large.jpg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="easyzoom easyzoom--overlay">
+                                    <a href="./img/samples/products/product/large/product-1.jpg" title="">
+                                              <img src="images/products/large.jpg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="easyzoom easyzoom--overlay">
+                                    <a href="./img/samples/products/product/large/product-1.jpg" title="">
+                                                  <img src="images/products/large.jpg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="easyzoom easyzoom--overlay">
+                                    <a href="./img/samples/products/product/large/product-1.jpg" title="">
+                                                  <img src="images/products/large.jpg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="easyzoom easyzoom--overlay">
+                                    <a href="./img/samples/products/product/large/product-1.jpg" title="">
+                                                 <img src="images/products/large.jpg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="easyzoom easyzoom--overlay">
+                                    <a href="./img/samples/products/product/large/product-1.jpg" title="">
+                                                 <img src="images/products/large.jpg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="easyzoom easyzoom--overlay">
+                                    <a href="./img/samples/products/product/large/product-1.jpg" title="">
+                                                  <img src="images/products/large.jpg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="easyzoom easyzoom--overlay">
+                                    <a href="./img/samples/products/product/large/product-1.jpg" title="">
+                                                 <img src="images/products/large.jpg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="swiper-button-prev"><i class="fa fa-chevron-left"></i>
+                        </div>
+                        <div class="swiper-button-next"><i class="fa fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    <!-- /.swiper-container -->
+
+                </div>
+                <!-- /.product-slider-wrapper -->
+
+
+                <div class="row cols-border">
+                    <div class="col-md-6">
+                        <div class="product-details-wrapper">
+                            <h2 class="product-name">
+                    <a href="#" class="title"> <%= productName %></a>
+                    
+                </h2>
+                           
+                            <!-- /.product-status -->
+
+                            <div class="product-stars">
+                                <span class="rating">
+                        <span class="star"></span>
+                                <span class="star"></span>
+                                <span class="star"></span>
+                                <span class=""></span>
+                                <span class=""></span>
+                                </span>
+                            </div>
+                            <!-- /.product-stars -->
+
+                            <div class="product-description">
+                                <p><%= product.product.description %></p>
+                            </div>
+                            <!-- /.product-description -->
+
+
+                            <div class="product-actions-wrapper">
+                                <form action="product-quick-view.html" method="POST">
+                                    <div class="row">
+                                        
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                             <% if (product.product.quantity > 0) { %>
+                                                <label for="p_qty">Quantity<sup>*</sup>
+                                                    </label>
+                                                 <input type='number' class="form-control"  min="1" max='<%= product.product.quantity %>' id='qty' placeholder="Quantity" />
+                                                 
+                                              <% }  %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- /.form -->
+
+                                <div class="product-list-actions">
+                                    <span class="product-price">
+                            <span class="amount">$<%= product.product.price %></span>
+                                   <% if (product.product.discount > 0) { %>
+                                          <del class="amount">$<%= product.product.discount %></del>
+                                    <% } %>
+
+                                    <button class="btn btn-lg btn-primary">Add to cart</button>
+                                </div>
+                                <!-- /.product-list-actions -->
+                            </div>
+                            <!-- /.product-actions-wrapper -->
+
+                            <div class="product-meta">
+                                <span class="product-category">
+                                <span>Category:</span>
+                                <a href="#" title=""><%= product.product.category %></a>
+                                </span>
+
+                             </div>
+                            <!-- /.product-meta -->
+                        </div>
+                        <!-- /.product-details-wrapper -->
+                    </div>
+
+                    <div class="col-md-6">
+                        <div role="tabpanel" class="product-details">
+                            <nav>
+                                <ul class="nav" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="#product-description" data-toggle="tab">Specification</a>
+                                    </li>
+                                   
+                                    <li role="presentation">
+                                        <a href="#product-review" data-toggle="tab">Review <span>(2)</span></a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav -->
+                            </nav>
+                            <!-- /nav -->
+
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="product-description">
+                                    <p> <%= productSpecification %></p>
+                                </div>
+                                
+                                <div role="tabpanel" class="tab-pane" id="product-review">
+                                    <h3>Review <span>(2)</span></h3>
+
+                                    <ol class="product-review-list">
+                                     <% comments.forEach(function(comment) { %>
+                                        <li>
+                                            <h4 class="review-title"><%= comment["comment"]["title"] %></h4>
+                                            <!-- <div class="rating small">
+                                                <span class="star"></span>
+                                                <span class="star"></span>
+                                                <span class="star"></span>
+                                                <span class="star"></span>
+                                                <span class="star"></span>
+                                            </div> -->
+                                            
+                                            <div class="review-comment">
+                                                <p><%= comment["comment"]["text"] %> </p>
+                                            </div>
+
+                                            <div class="review-meta">
+                                                <span>Posted by</span>
+                                                <a href="#" class="author"><%= comment["comment"]["userEmail"] %></a>
+                                                <span>-</span>
+                                               
+                                            </div>
+                                        </li>
+                                     <% }); %>
+                                     
+                                    </ol>
+                                    <!-- /.product-review-list -->
+
+                                    <h3>Add a review</h3>
+
+                                    <form action="/addComment"  method="post">
+                                    <div>
+                                            <input type = "hidden" name="productID" value="<%= product['_id'] %>"></input>
+                                               
+                                            </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="reply-name">Name <sup>*</sup>
+                                                    </label>
+                                                    <input type="text" name="comment_username" class="form-control" id="reply-name" placeholder="Name">
+                                                </div>
+                                                <!-- /.form-group -->
+                                            </div>
+
+                                                <!-- /.form-group -->
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="comment-email">Email <sup>*</sup>
+                                                    </label>
+                                                    <input type="email" name ="comment_email" class="form-control" id="reply-email" placeholder="Email">
+                                                </div>
+                                                <!-- /.form-group -->
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="comment-title">Title <sup>*</sup>
+                                                    </label>
+                                                    <input type="email" name ="comment_title" class="form-control" id="reply-title" placeholder="Title">
+                                         </div>
+
+                                      <!-- /.form-group -->
+
+                                        <div class="form-group">
+                                            <label for="reply-text">Your review <sup>*</sup>
+                                            </label>
+                                            <textarea name="comment_text" class="form-control" id="reply-text" rows="7" placeholder="Your review"></textarea>
+                                        </div>
+                                        <!-- /.form-group -->
+
+                                        <div class="form-submit clearfix">
+                                           <!--  <div class="review-rating">
+                                                <span class="title">Your rating:</span>
+
+                                                <span class="rating small live">
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                                </span>
+
+                                            </div> -->
+
+                                            <div class="pull-right">
+                                                <button type="submit" class="submit btn btn-lg btn-default">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- /.form-submit -->
+                                    </form>
+                                    <!-- /form -->
+                                </div>
+                                <!-- /.tab-pane -->
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                </div>
+
+            </div>
+
+            <script>
+                $(function() { aweProductRender(); });
+            </script>
+
+       
+
+ <footer>
+<% include footer.html %>
+            <!-- /.footer-wrapper -->
+
+         
+            <!-- /.back-top -->
+        </footer>
+        <!-- /footer -->
+
+   
+    <!-- /#wrapper -->
+
+</body>
+
+</html>
