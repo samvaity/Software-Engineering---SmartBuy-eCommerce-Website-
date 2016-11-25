@@ -3,15 +3,11 @@
     <meta charset="utf-8">
     <title>Search Results Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/searchProduct.css">
-    <link rel="stylesheet" type="text/css" href="/css/searchPage.css">
+    <% include ./ejs/head %>
     <link rel="stylesheet" type="text/css" href="/css/productsgrid.css">
-    <link rel="stylesheet" type="text/css" href="/css/searchProductAnimate.css">
-    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
 </head>
-<body> <% include index.html %>
-<div class="page-container">
+<body> <% include header.html %>
+<div class="page-container container-fluid container content-container">
     <div class="left-container col-md-2">
         <div class="categories">
             <h2>Categories</h2>
@@ -62,6 +58,7 @@
                </div>
             </div>
             <div class="clearfix"></div>
+            <% if (products.length != 0) { %>
             <ul class="products-grid">
                 <% products.forEach(function(product) { %>
                     <li>
@@ -89,8 +86,15 @@
                     </li>     
                 <% }); %>
             </ul>
+            <% }
+            else { %>
+            <div class="no-products-found">No relevant products found</div>
+            <% } %>
         </div>
     </div>
     <div class="clearfix"></div>
 </body>
+<footer>
+  <% include footer.html %>
+</footer>
 </html>

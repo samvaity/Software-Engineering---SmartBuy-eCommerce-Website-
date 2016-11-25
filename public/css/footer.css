@@ -72,7 +72,7 @@
     margin-left: -50px;
     margin-top: -28px;
     text-align: center;
-    z-index: 1005
+    z-index: 1005;
     font-weight:100;
     font-size:17px;
 }
@@ -122,7 +122,7 @@
  }
 
 .footer .back-top small, .footer .back-top span {
-    font-family: Montserrat,Arial,sans-serif;
+    font-family: "Montserrat,Arial,sans-serif";
     color: #898989;
 }
 .footer-wrapper {

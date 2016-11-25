@@ -36,6 +36,7 @@ module.exports = function(app, multer, mongoose, Grid) {
   				categories: categories,
           tagline: tagline,
           nextPage:nextPage,
+          searchtext: "",
           tags:tags,
   				message: request.flash('error in adding inventory') 
       });

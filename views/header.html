@@ -1,0 +1,102 @@
+<section>
+  
+    <div class="topContent">
+        <fieldset class="dropdown">
+          <br><label class="webTitle">SmartBuy</label>
+        </fieldset>
+    </div>
+    <div class="container">
+      <nav class="navbar navbar-default"> 
+        <div class="collapse navbar-collapse js-navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown mega-dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+              <ul class="dropdown-menu mega-dropdown-menu row">
+                <li class="col-sm-3">
+                  <ul>
+                    <li class="dropdown-header">TV's</li>
+                    <li><a href="#">4K ultra HD TV</a></li>
+                    <li><a href="#">Smart TV</a></li>
+                    <li><a href="#">Oled/LED TV</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Computers/Laptops</li>
+                    <li><a href="#">Good Typography</a></li>
+                  </ul>
+                </li>
+                <li class="col-sm-3">
+                  <ul>
+                    <li class="dropdown-header">Cell Phones</li>
+                    <li><a href="#">Easy to customize</a></li>
+                    <li><a href="#">Glyphicons</a></li>
+                    <li><a href="#">Pull Right Elements</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Video Games & Audio</li>
+                    <li><a href="#">Coloured Headers</a></li>
+                    <li><a href="#">Primary Buttons & Default</a></li>
+                    <li><a href="#">Calls to action</a></li>
+                  </ul>
+                </li>
+                <li class="col-sm-3">
+                  <ul>
+                    <li class="dropdown-header">Cameras</li>
+                    <li><a href="#">Default Navbar</a></li>
+                    <li><a href="#">Lovely Fonts</a></li>
+                    <li><a href="#">Responsive Dropdown </a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Wearable Devices</li>
+                    <li><a href="#">Easy to customize</a></li>
+                    <li><a href="#">Glyphicons</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <form action="/search" method="post" >
+                <div class="col-sm-6 col-sm-offset-3">
+                  <div id="imaginary_container"> 
+                    <div class="input-group stylish-input-group" style="margin-top: -4px;">
+                    <% if (searchtext != null) { %>
+                      <input type="text" class="form-control" name="search_text" placeholder="Search" value="<%= searchtext %>"/>
+                      <% } 
+                      else { %>
+                      <input type="text" class="form-control" name="search_text" placeholder="Search" />
+                      <% } %>
+                      <span class="input-group-addon">
+                        <button type="submit">
+                          <span class="glyphicon glyphicon-search"></span>
+                        </button> 
+                      </span> 
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav" style="float: right;">
+           <!-- class="dropdown mega-dropdown" -->
+            <li>
+              <% if(tags.length>0) { %>
+                <a href='<%= nextPage %>' class="dropdown-toggle" data-toggle="dropdown" ><%= tagline %> <span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                <ul class="dropdown-menu mega-dropdown-menu row">
+                  <li>
+                    <ul>
+                      <% tags.forEach(function(tags) { %>
+                        <li><a href='<%= tags.ref %>'><%= tags.name %></a></li> 
+                        <li class="divider"></li>
+                      <% }); %>
+                    </ul>
+                  </li>
+                </ul>
+              <% } else { %>
+                <a href='<%= nextPage %>' ><%= tagline %></a>
+              <% } %>
+            </li>
+          </ul>             
+        </div>
+      </nav>
+    </div>
+  
+</section>
+
