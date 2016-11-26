@@ -1,98 +1,265 @@
-<html lang="en">
+<!DOCTYPE html>
+<html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Search Results Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <% include ./ejs/head %>
-    <link rel="stylesheet" type="text/css" href="/css/productsgrid.css">
+    <link rel="stylesheet" type="text/css" href="css/productsgrid.css">
+    <link rel="stylesheet" type="text/css" href="css/searchResults.css">
 </head>
 <body> <% include header.html %>
-<div class="page-container container-fluid container content-container">
-    <div class="left-container col-md-2">
-        <div class="categories">
-            <h2>Categories</h2>
-            <ul class="category-list">
-                <li><a href=""> Category 1 </a></li>
-                <li><a href=""> Category 2 </a></li>
-                <li><a href=""> Category 3 </a></li>
-                <li><a href=""> Category 4 </a></li>
-                <li><a href=""> Category 5 </a></li>
-                <li><a href=""> Category 6 </a></li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="right-container all-products col-md-10">
-        <div class="add-product"><div class="mask"><a class="info" href="/addInventory">Add a new product</a></div></div>
-        <!--<% if (message.length > 0) { %>-->
-                        <div class="alert alert-message"><%= message %></div>
-                <!--    <% } %> -->
-        <div class="pagination-sort">
-            <div class="sort">
-               <div class="sort-by">
-                    <label>Sort By</label>
-                    <select>
-                        <option value=""> Position </option>
-                        <option value=""> Name </option>
-                        <option value=""> Price </option>
-                    </select>
-                    <a href="" class="v-middle glyphicon glyphicon-arrow-up"></a>
+    <div class="page-container container-fluid container content-container list-page-bootstrap-container">
+    <div class="container-fluid ">
+        <div class="results-header">
+            <div class="row breadcrumb-row">
+                <div class="col-xs-12">
+                    <nav class="breadcrumb-navigation" role="navigation" aria-label="Breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class=""><a href="/">SmartBuy</a></li>
+                            <li class="active"><a href="#">All Categories</a></li>
+                        </ol>
+                    </nav>
                 </div>
+                <div class="clearfix"></div>
             </div>
-            <ul class="pagination">
-                <li>Page:</li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-            </ul>
-            <div class="clearfix"></div>       
-        </div>
-        <div class="products-grid-container">
-            <div class="itemsinpage pages">
-                <div class="limiter visible-desktop">
-                    <label>Show</label>
-                    <select>
-                        <option value="" selected="selected"> 9 </option>
-                        <option value=""> 15 </option>
-                        <option value=""> 30 </option>
-                    </select> per page        
-               </div>
+            
+            <div class="row results-title">
+                <div class="col-sm-12">
+                    <h1 class="result-for">
+                        <% if (searchtext != null) { %>
+                            "<%= searchtext %>" 
+                        <% } %>
+                    </h1>
+                </div>
+                <div class="clearfix"></div>
             </div>
             <div class="clearfix"></div>
-            <% if (products.length != 0) { %>
-            <ul class="products-grid">
-                <% products.forEach(function(product) { %>
-                    <li>
-                        <a class="product-image" href=""></a>
-                        <div class="product">
-                            <a class="productcontainer-image" href="">
-                                <div class="view view-first">
-                                    <div class="inner_content clearfix">
-                                        <div class="product_image">
-                                            <img src="/images/emptyimageplaceholder.jpg" class="img-responsive" alt="">
-                                            <div class="mask edit-mask"><a class="info">Edit</a></div>
-                                            <div class="mask delete-mask"><a class="info" href="/sellerproducts/delete?productID=<%= product['_id'] %>" onclick='return confirm("Are you sure you want to delete <%= product["product"]["name"] %> ?")'>Delete</a></div>
-                                            <div class="product_container">
-                                                <div class="cart-left"><p class="title"><%= product["product"]["name"] %></p></div>
-                                                <div class="clearfix"></div>
-                                            </div>     
-                                        </div>
+        </div>
+        <div class="row">
+            <div class="left-container col-sm-3 search-filters">
+                <nav class="filters" role="navigation" aria-label="Secondary">
+                    <h2 class="sr-only">Filters</h2>
+                    <ul class="filter-list" role="group" aria-label="Filters: Selecting a filter checkbox will refresh the page to update the results.">
+                        <li id="brand_filter" data-name="Brand" data-id="brand_filter" class="filter-item">
+                            <div class="filter-title"> <h3 class="title">Sellers</h3> </div>
+                            <div class="filter-content">
+                                <ul class="filter-values">
+                                    <!--<li class="filter-value" data-track="Wireless" data-value="Wireless" data-count="35" data-query-path="features_filter=Features~Wireless">
+                                        <span class="value-checkbox">
+                                            <input type="checkbox" id="features_filter-0" autocomplete="off">
+                                        </span>
+                                        <span class="value-content">
+                                            <label for="features_filter-0">Wireless</label>
+                                            <span class="result-count">(35)</span>
+                                        </span>
+                                    </li>
+                                    <li class="filter-value" data-track="Bluetooth Built-In" data-value="Bluetooth Built-In" data-count="35" data-query-path="features_filter=Features~Bluetooth Built-In">
+                                        <span class="value-checkbox">
+                                            <input type="checkbox" id="features_filter-1" autocomplete="off">
+                                        </span>
+                                        <span class="value-content">
+                                            <label for="features_filter-1">Bluetooth Built-In</label>
+                                            <span class="result-count">(35)</span>
+                                        </span>
+                                    </li>-->
+                                    <% if (sellers.length != 0) { %>
+                                    <% sellers.forEach(function(seller) { %>
+                                        <li class="filter-value" data-track='<%= seller["user"]["username"] %>' data-value='<%= seller["user"]["username"] %>' data-count="35" data-query-path='features_filter=<%= seller["user"]["username"] %>'>
+                                            <span class="value-checkbox">
+                                                <input type="checkbox" id="features_filter-1" autocomplete="off">
+                                            </span>
+                                            <span class="value-content">
+                                                <label for="features_filter-1"><%= seller["user"]["username"] %></label>
+                                               <!-- <span class="result-count">(35)</span>-->
+                                            </span>
+                                        </li>
+                                    <% }); %>
+                                    <% } %>
+                                </ul>
+                            </div>
+                        </li>
+                        <li id="price-filter" data-name="Price" data-id="price-filter" class="filter-item">
+                            <div class="filter-title">  <h3 class="title ">Price</h3> </div>
+                            <div class="filter-content">
+                                <ul class="filter-values">
+                                    <li class="filter-value" data-track="$50 - $99.99" data-value="$50 - $99.99" data-count="8" data-query-path="price-filter=Price~$50 - $99.99">
+                                        <span class="value-checkbox">
+                                            <input type="checkbox" id="price-filter-0" autocomplete="off">
+                                        </span>
+                                        <span class="value-content">
+                                            <label for="price-filter-0">$50 - $99.99</label>
+                                            <span class="result-count">(8)</span>
+                                        </span>
+                                    </li>
+                                    <li class="filter-value" data-track="$100 - $149.99" data-value="$100 - $149.99" data-count="6" data-query-path="price-filter=Price~$100 - $149.99">
+                                        <span class="value-checkbox">
+                                            <input type="checkbox" id="price-filter-1" autocomplete="off">
+                                        </span>
+                                        <span class="value-content">
+                                            <label for="price-filter-1">$100 - $149.99</label>
+                                            <span class="result-count">(6)</span>
+                                        </span>
+                                    </li>
+                                    <li class="filter-value" data-track="$150 - $199.99" data-value="$150 - $199.99" data-count="11" data-query-path="price-filter=Price~$150 - $199.99">
+                                        <span class="value-checkbox">
+                                            <input type="checkbox" id="price-filter-2" autocomplete="off">
+                                        </span>
+                                        <span class="value-content">
+                                            <label for="price-filter-2">$150 - $199.99</label>
+                                            <span class="result-count">(11)</span>
+                                        </span>
+                                    </li>
+                                    <li class="filter-value" data-track="$200 - $499.99" data-value="$200 - $499.99" data-count="10" data-query-path="price-filter=Price~$200 - $499.99">
+                                        <span class="value-checkbox">
+                                            <input type="checkbox" id="price-filter-3" autocomplete="off">
+                                        </span>
+                                        <span class="value-content">
+                                            <label for="price-filter-3">$200 - $499.99</label>
+                                            <span class="result-count">(10)</span>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="right-container all-products col-sm-9 search-filter-results">
+                <main class="page-results" id="page-results" role="main" aria-labelledby="page-results-heading">
+                    <h2 class="sr-only" id="page-results-heading">Results</h2>
+                    <div class="main-results" id="main-results" role="group" tabindex="-1" aria-labelledby="main-results-heading">
+                        <div class="list-control-bar list-header-controls">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="sort-by">
+                                        <label for="sort-by-select">Sort by:</label> 
+                                        <span class="sort-by-select">
+                                            <select id="sort-by-select">
+                                                <option value="" selected="">Best Match</option>
+                                                <option value="-bestsellingsort skuidsaas">Best Selling</option>
+                                                <option value="+currentprice skuidsaas">Price Low to High</option>
+                                                <option value="-currentprice skuidsaas">Price High to Low</option>
+                                                <option value="customerrating numberofreviewssaas">Customer Rating</option>
+                                                <option value="-displaydate skuidsaas">New Arrivals</option><option value="+brand skuidsaas">Brand A-Z</option>
+                                                <option value="-brand skuidsaas">Brand Z-A</option>
+                                            </select>
+                                        </span>
                                     </div>
                                 </div>
-                            </a>
-                            <div class="product-details">
-                                <%= product["product"]["description"] %>
+                                <div class="col-sm-5"></div>
+                                <div class="col-sm-3">
+                                    <div class="results-display-picker">
+                                        <label>View:</label> 
+                                        <button class="btn btn-sm display-list-view" aria-pressed="false" data-track="PLPListView">
+                                            <span class="glyphicon glyphicon-th-list"></span>
+                                            List
+                                        </button>
+                                        <button class="btn btn-sm display-grid-view" aria-pressed="true" data-track="PLPGridView">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                            Grid
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div> 
                             </div>
+                            <div class="clearfix"></div> 
                         </div>
-                    </li>     
-                <% }); %>
-            </ul>
-            <% }
-            else { %>
-            <div class="no-products-found">No relevant products found</div>
-            <% } %>
+                        <div class="row applied-filters-container">
+                            <div class="col-sm-12">
+                                <div class="applied-filter-content">
+                                    <h4 aria-label="Applied Filters:">Filters:</h4>
+                                    <ul class="applied-filters">
+                                        <li class="applied-filter-value" data-filter-id="brand_filter" data-value="Beats by Dr. Dre" data-count="35" data-query-path="brand_filter=Brand~Beats by Dr. Dre">
+                                            <span class="filter-copy">Beats by Dr. Dre</span>
+                                            <a href="#" class="remove">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="clear-all" href="#" title="Clear all filters" aria-label="Clear all filters">Clear all</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div> 
+                        </div>
+                        <div class="row products-grid-container list-items">
+                            <% if (products.length != 0) { %>
+                                <% products.forEach(function(product) { %>
+                                <div class="col-sm-4 owl-item active list-item">
+                                    <div class="product product-grid">
+                                        <div class="product-media">
+                                            <div class="product-thumbnail">
+                                                <a href="product-fullwidth.html" title="">
+                                                    <img src="/images/emptyimageplaceholder.jpg" alt="" class="">
+                                                    <img src="/images/emptyimageplaceholder.jpg" alt="" class="current">
+                                                </a>
+                                            </div>
+                                            <!-- /.product-thumbnail -->
+                                            <div class="product-hover">
+                                                <div class="product-actions">
+                                                    <a href="#" class="awe-button product-add-cart" data-toggle="tooltip" title="" data-original-title="Add to cart">
+                                                        <i class="icon icon-shopping-bag"></i>
+                                                    </a>
+                                                    <a href="#" class="awe-button product-quick-whistlist" data-toggle="tooltip" title="" data-original-title="Add to wishlist">
+                                                        <i class="icon icon-star"></i>
+                                                    </a>
+                                                    <a href="product-quick-view.html" class="awe-button product-quick-view" data-toggle="tooltip" title="" data-original-title="Quickview">
+                                                        <i class="icon icon-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!-- /.product-hover -->
+                                        </div>
+                                        <!-- /.product-media -->
+                                        <div class="product-body">
+                                            <h2 class="product-name">
+                                                <a href="#" title='<%= product["product"]["name"] %>'><%= product["product"]["name"] %></a>
+                                            </h2>
+                                            <!-- /.product-product -->
+                                            <div class="product-category product-description">
+                                                <span><%= product["product"]["description"] %></span>
+                                            </div>
+                                            <!-- /.product-category -->
+                                            <div class="product-price">
+                                                <span class="amount"><%= product["product"]["price"] %></span>
+                                            </div>
+                                            <!-- /.product-price -->
+                                        </div>
+                                        <!-- /.product-body -->
+                                    </div>
+                                </div>
+                              <% }); %>
+                            <% }
+                            else { %>
+                                <div class="col-sm-12 no-products-found">No relevant products found</div>
+                            <% } %>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="pagination pull-right">
+                            <ul>
+                                <li><a href="#">Prev</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">Next</a></li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </main>
+            </div>
+            <div class="clearfix"></div>
         </div>
-    </div>
-    <div class="clearfix"></div>
+        <div class="clearfix"></div>
+        </div>
+    </div>  
+  
 </body>
 <footer>
   <% include footer.html %>
