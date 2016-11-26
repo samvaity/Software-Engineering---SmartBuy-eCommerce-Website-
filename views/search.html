@@ -9,6 +9,7 @@
     <% include ./ejs/head %>
     <link rel="stylesheet" type="text/css" href="css/productsgrid.css">
     <link rel="stylesheet" type="text/css" href="css/searchResults.css">
+    <script type="text/javascript" src="views/js/search.js"></script>
 </head>
 <body> <% include header.html %>
     <div class="page-container container-fluid container content-container list-page-bootstrap-container">
@@ -69,7 +70,9 @@
                                     <% sellers.forEach(function(seller) { %>
                                         <li class="filter-value" data-track='<%= seller["user"]["username"] %>' data-value='<%= seller["user"]["username"] %>' data-count="35" data-query-path='features_filter=<%= seller["user"]["username"] %>'>
                                             <span class="value-checkbox">
-                                                <input type="checkbox" id="features_filter-1" autocomplete="off">
+                                                <form class="filter-checkbox" action="/search" method="post">
+                                                    <input type="checkbox" id="features_filter-1" autocomplete="off">
+                                                </form>
                                             </span>
                                             <span class="value-content">
                                                 <label for="features_filter-1"><%= seller["user"]["username"] %></label>

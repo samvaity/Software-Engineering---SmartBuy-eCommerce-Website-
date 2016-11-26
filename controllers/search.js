@@ -34,7 +34,7 @@ module.exports = function(app, mongoose, Grid) {
 			var productSubQuery = [];
 			for(var i = 0; i < sellerbrands.length; i++) {
 				if(sellerbrands[i].user.username.toLowerCase().indexOf(searchtext.toLowerCase()) != -1){
-					productSubQuery.push({"product.sellerID": sellers[i].user.email});
+					productSubQuery.push({"product.sellerID": sellerbrands[i].user.email});
 				}
 			}
 
