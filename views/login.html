@@ -1,61 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Login Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/common.css">
-        <link rel="stylesheet" type="text/css" href="css/login.css">
+   <head>
+      <meta charset="utf-8">
+      <title>Login Page</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="css/common.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript" src="js/jquery.min.js"></script>
+      <script type="text/javascript" src="views/js/mylogin.js"></script> 
+   </head>
+   <body >
+       <div class="container content-container">
+         <div class="col-md-4 col-md-offset-4 row-md-4" >
+            <form action="/login" class="well form-horizontal" method="post" id="login_form" role="form">
+               <fieldset>
+                  <legend style="text-align: center;">Login </legend>
+                  <% if (error.length > 0) { %>
+                  <p class="alert alert-message"><%= error %></p>
+                  <% } %>
+                  <!-- Email -->
+                  <div class="form-group">
+                     <label class="col-md-1 control-label">Email</label>  
+                  </div>
+                  <div class="input-group input-group">
+                     <span class="input-group-addon">
+                     <span class="glyphicon glyphicon-user"></span>
+                     </span>
+                     <input class="form-control" type="text" placeholder="Email" required name="email" id = "email"   placeholder="Email" onchange="email_validate(this.value);">
+                  </div>
 
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="views/js/mylogin.js"></script> 
-</head>
-<body>
-<div class="container">
-	<!-- <div class="row"> -->
-        <div class="col-md-6">
-        <form action="/login" method="post" id="login_form" role="form">
-        	<fieldset><legend>Login Form</legend>
-            <% if (error.length > 0) { %>
-            <div class="alert alert-message"><%= error %></div>
-            <% } %>
+                  <!-- Password -->
+                  <div class="form-group">
+                     <label class="col-md-1 control-label">Password</label>  
+                  </div>
+                  <div class="input-group input-group">
+                     <span class="input-group-addon">
+                     <span class="glyphicon glyphicon-lock"></span>
+                     </span>
+                     <input required name="password" type="password" class="form-control inputpass" placeholder="Password" minlength="4" maxlength="16"  id="pass1">
+                  </div>
+                  <!-- 
+                     <div class="form-group">
+                                 <label class="col-md-1 control-label">Email</label>  
+                                 
+                     </div>
+                     <div class="form-group">
+                                
+                                 
+                     
+                     <div class="col-md-10 inputGroupContainer">
+                                     <div class="input-group">
+                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                         <input  class="form-control" type="text" required name="email" id = "email"   placeholder="Email" onchange="email_validate(this.value);">
+                                     </div>
+                                 </div>
+                     </div> -->
+                  <!--    <div class="form-group">
+                     <div class="input-group">
+                                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                         <label for="email"><span class="req">* </span> Email Address: </label> 
+                              <input class="form-control" required type="text" name="email" id = "email"  placeholder="email" onchange="email_validate(this.value);" /> 
+                                      </div>
+                            
+                                  <div class="status" id="status"></div>
+                      </div> -->
+                  <!-- Password -->
+                  <!--  <div class="form-group">
+                     <label for="password"><span class="req">* </span> Password: </label>
+                         <input required name="password" type="password" class="form-control inputpass" placeholder="password" minlength="4" maxlength="16"  id="pass1" />
+                     </div> -->
 
-<!-- Email -->
-            <div class="form-group">
-                <label for="email"><span class="req">* </span> Email Address: </label> 
-                    <input class="form-control" required type="text" name="email" id = "email"  placeholder="email" onchange="email_validate(this.value);" />   
-                        <div class="status" id="status"></div>
-            </div>
-<!-- Password -->
-             <div class="form-group">
-                <label for="password"><span class="req">* </span> Password: </label>
-                    <input required name="password" type="password" class="form-control inputpass" placeholder="password" minlength="4" maxlength="16"  id="pass1" />
-             </div>
-
-
-<!-- Login Button -->
-            <div class="form-group">
-                <input class="btn btn-success" type="submit" name="submit_reg"  value="Login">
-                <a href="/auth/facebook" ><span></span><img src="images/f.jpg" height="30px"/> </a>
-                <a href="/auth/google" ><img src="images/g.jpg" height="30px"/> </a>
-            </div>
-
-            <div class="form-group" >
-            
-            <a href="/signup" style="margin-right: 20px">Sign up here!</a>
-            			<!-- <input TYPE="button" class="btn btn-success"  value="SignUp"  onClick="parent.location='/signup'"> -->
-           <!--  <input TYPE="button"class="btnLogin" value="Forgot pwd"  onClick="parent.location='/forgot'"> -->
-            <a href="/forgot">Forgot Password?</a>
-			</div>
-			</fieldset>        
-        </form>
-        
-			</div>
-<!-- 		</div> -->
-</div>
-
-</body>
+                  <!-- Login Button/Social Login -->
+                  <div class="form-group">
+                  </div>
+                  <div class="form-group">
+                     <div class="col-md-12">
+                        <input class="btn btn-block btn btn-success" type="submit" name="submit_reg"  value="Login"/>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <div class="col-md-12">
+                        <a  href="/auth/google" class="btn btn-block btn-social btn-google">
+                        <span class="fa fa-google"></span> Sign in with Google
+                        </a>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <div class="col-md-12">
+                        <a  href="/auth/facebook" class="btn btn-block btn-social btn-facebook">
+                        <span class="fa fa-facebook"></span> Sign in with Facebook
+                        </a>
+                     </div>
+                  </div>
+                  <!-- 
+                     <a href="/auth/facebook" ><span></span><img src="images/f.jpg" height="30px"/> </a>
+                     <a href="/auth/google" ><img src="images/g.jpg" height="30px"/> </a>
+                     -->
+                  <div class="form-group" >
+                     <div class="col-md-6" >
+                        <a href="/signup" style="text-decoration: none;">Sign up here!</a>
+                     </div>
+                     <!-- <input TYPE="button" class="btn btn-success"  value="SignUp"  onClick="parent.location='/signup'"> -->
+                     <!--  <input TYPE="button"class="btnLogin" value="Forgot pwd"  onClick="parent.location='/forgot'"> -->
+                     <a href="/forgot" style="text-decoration: none;">Forgot Password?</a>
+                  </div>
+               </fieldset>
+            </form>
+         </div>
+         <!--       </div> -->
+      </div>
+   </body>
 </html>
