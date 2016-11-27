@@ -26,3 +26,18 @@ module.exports.splAuth =  function (req, res, next) {
   if (!req.isAuthenticated()) { return next(); }
 		res.redirect('/');
 }
+
+/* functions for header bar */
+module.exports.getTags = function() {
+  var tags = [
+    { name: 'My Account', ref:'/Account' },
+    { name: 'My Orders', ref:'/Orders' },
+    { name: 'Logout', ref:'/logout' }
+  ];
+  return tags;
+}
+module.exports.getTagLine = function(user) {
+  var tagline = user.user.username;
+  return tagline;
+}
+/******************************/

@@ -1,16 +1,17 @@
 <!doctype html>
-<html>
+<html lang="en">
 	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Add Inventory</title>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/common.css">
 		<link rel="stylesheet" type="text/css" href="css/addInventory.css">
 		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="views/js/addInventory.js"></script> 
 	</head>
 	<body> <% include index.html %>
-		<div class="content-container">
+		<div class="container content-container">
 		    <form class="well form-horizontal" action=" " method="post"  id="product_form" enctype="multipart/form-data">
 		    	<!--<% if (message.length > 0) { %>-->
 						<div class="alert alert-message"><%= message %></div>
