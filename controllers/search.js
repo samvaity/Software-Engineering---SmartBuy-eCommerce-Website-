@@ -17,6 +17,8 @@ module.exports = function(app, mongoose, Grid) {
 			        nextPage: "#",
 			        products: products,
 			        searchtext: "",
+			        sellerfiltersapplied: "",
+			        pricefiltersapplied: "",
 			        tags: commonserver.getTags(),
 			        sellers: sellerbrands,
 			  		message: request.flash('error while loading data') 
@@ -27,32 +29,105 @@ module.exports = function(app, mongoose, Grid) {
 
 	// Retrieves data relevant to the search query and passes it to the view
 	app.post('/search', commonserver.anypageAuth, function(request, response) {
+		console.log(request.body);
 		var searchtext = request.body.search_text;
+		var sellerBrandsFilter = request.body.seller;
+		var sellerfiltersapplied = (request.body.sellername) ?  request.body.sellername : "";
+		var priceFilters = (request.body.price) ? request.body.price : "";
 
 		/* gets all seller brands, to be dispplayed in refinement panel */
 		User.find({"user.role": "seller"}, function(err, sellerbrands){
 			var productSubQuery = [];
-			for(var i = 0; i < sellerbrands.length; i++) {
-				if(sellerbrands[i].user.username.toLowerCase().indexOf(searchtext.toLowerCase()) != -1){
-					productSubQuery.push({"product.sellerID": sellerbrands[i].user.email});
+			if(sellerbrands && searchtext){
+				for(var i = 0; i < sellerbrands.length; i++) {
+					if((sellerbrands[i].user.username).toLowerCase().indexOf(searchtext.toLowerCase()) != -1){
+						productSubQuery.push({"product.sellerID": sellerbrands[i].user.email});
+					}
 				}
 			}
-
 			productSubQuery.push({"product.name" : {$regex : searchtext, $options:"$i"}});
 			productSubQuery.push({"product.category" : {$regex : searchtext, $options:"$i"}});
 			productSubQuery.push({"product.description" : {$regex : searchtext, $options:"$i"}});
 
+			var productFieldsRetrieve = {"product.name" : 1, "product.category" : 1, "product.description" : 1,
+										"product.price" : 1, "product.quantity" : 1, "product.sellerID" : 1}
 			var productMainQuery = {$or: productSubQuery};
 			/* search for the entered text in product.name, product.category, product.description, seller name fields.
-			$options:$i makes the search case insensitive */
+				$options:$i makes the search case insensitive */
 			/* Checks is the search text contains a seller/brandname. 
-		   If yes, get that sellers products from 'products' collection */
-			Product.find(productMainQuery, function(err, products){
+		   		If yes, get that sellers products from 'products' collection */
+			Product.find(productMainQuery,productFieldsRetrieve, function(err, products){
+				var finalproducts = [];
+				// when any of the filter's are selected
+				if((sellerBrandsFilter || priceFilters) && products){	
+					// when any of the sellers are added as filters
+					if(sellerBrandsFilter){
+						for(var j = 0; j < products.length; j++) {
+							var found = sellerBrandsFilter.indexOf(products[j]['product']['sellerID']);
+							if(found > -1){
+								if(priceFilters){
+									if(Array.isArray(priceFilters)){
+										//multiple price filters are applied
+										for(var k = 0; k < priceFilters.length; k++){
+											var priceLowerBound = parseFloat(priceFilters[k].split(" - ")[0].substring(1));
+											var priceUpperBound = parseFloat(priceFilters[k].split(" - ")[1].substring(1));
+											var productPrice = parseFloat(products[j]['product']['price']);
+											if(productPrice && (priceLowerBound <= productPrice) && (productPrice <= priceUpperBound)){
+												finalproducts.push(products[j]);
+											}
+										}
+									}
+									else{	//only one price filter is applied
+										var priceLowerBound = parseFloat(priceFilters.split(" - ")[0].substring(1));
+										var priceUpperBound = parseFloat(priceFilters.split(" - ")[1].substring(1));
+										var productPrice = parseFloat(products[j]['product']['price']);
+										if(productPrice && (priceLowerBound <= productPrice) && (productPrice <= priceUpperBound)){
+											finalproducts.push(products[j]);
+										}
+									}
+								}
+								else{
+									finalproducts.push(products[j]);
+								}
+							}
+						}
+					}
+					// when any of the prices are added as filters
+					else if(priceFilters){
+						for(var j = 0; j < products.length; j++) {
+							if(Array.isArray(priceFilters)){
+								//multiple price filters are applied
+								for(var k = 0; k < priceFilters.length; k++){
+									var priceLowerBound = parseFloat(priceFilters[k].split(" - ")[0].substring(1));
+									var priceUpperBound = parseFloat(priceFilters[k].split(" - ")[1].substring(1));
+									var productPrice = parseFloat(products[j]['product']['price']);
+									if(productPrice && (priceLowerBound <= productPrice) && (productPrice <= priceUpperBound)){
+										finalproducts.push(products[j]);
+									}
+								}
+							}
+							else{	//only one price filter is applied
+								var priceLowerBound = parseFloat(priceFilters.split(" - ")[0].substring(1));
+								var priceUpperBound = parseFloat(priceFilters.split(" - ")[1].substring(1));
+								var productPrice = parseFloat(products[j]['product']['price']);
+								if(productPrice && (priceLowerBound <= productPrice) && (productPrice <= priceUpperBound)){
+									finalproducts.push(products[j]);
+								}
+							}
+						}
+					}
+				}
+				// when filters are not selected
+				else{
+					finalproducts = products;
+				}
 				response.render('search.html', { 
 	            	user : request.user,
 			      	nextPage:"#",
-			      	products: products,
+			      	products: finalproducts,
 			      	searchtext: searchtext,
+			      	sellerfiltersapplied: sellerfiltersapplied,
+			      	pricefiltersapplied: priceFilters,
 			        tagline: commonserver.getTagLine(request.user),
 			        tags:commonserver.getTags(),
 			        sellers:sellerbrands,
@@ -60,37 +135,5 @@ module.exports = function(app, mongoose, Grid) {
 	          	});
 			});
 		});
-
-		/* search for the entered text in product.name, product.category, product.description, seller name fields.
-			$options:$i makes the search case insensitive */
-
-		/* Checks is the search text contains a seller/brandname. 
-		   If yes, get that sellers products from 'products' collection */	
-		/*var searchQuery = {"user.username": {$regex : searchtext, $options:"$i"}};
-		User.find(searchQuery, function(err, sellers){
-			var productSubQuery = [];
-			if(sellers.length != 0){
-				for(var i = 0; i < sellers.length; i++) {
-					productSubQuery.push({"product.sellerID": sellers[i].user.email});
-				}
-			}
-			productSubQuery.push({"product.name" : {$regex : searchtext, $options:"$i"}});
-			productSubQuery.push({"product.category" : {$regex : searchtext, $options:"$i"}});
-			productSubQuery.push({"product.description" : {$regex : searchtext, $options:"$i"}});
-
-			var productMainQuery = {$or: productSubQuery};
-
-			Product.find(productMainQuery, function(err, products){
-				response.render('search.html', { 
-	            	user : request.user,
-			      	nextPage:"#",
-			      	products: products,
-			      	searchtext: searchtext,
-			        tagline: commonserver.getTagLine(request.user),
-			        tags:commonserver.getTags(),
-	            	message: ''
-	          	});
-	   		});
-		});*/
 	});
 }

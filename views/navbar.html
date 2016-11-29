@@ -277,8 +277,15 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                     </a>
 
                                     <div class="menubar-search-form" id="menubar-search-form">
-                                        <form action="index.html" method="GET">
-                                            <input type="text" name="s" class="form-control" placeholder="Search your entry here...">
+                                        <form action="/search" method="post">
+                                            <!--<input type="text" name="s" class="form-control" placeholder="Search your entry here...">-->
+                                            <% if (searchtext != null) { %>
+                                            <input type="text" class="form-control" name="search_text" placeholder="Search your entry here..."  value="<%= searchtext %>"/>
+                                            <% } 
+                                            else { %>
+                                            <input type="text" class="form-control" name="search_text" placeholder="Search your entry here..." />
+                                            <% } %>
+                                            <!--<input type="text" class="form-control" name="search_text"  placeholder="Search your entry here..." >-->
                                             <div class="menubar-search-buttons">
                                                 <button type="submit" class="btn btn-sm btn-white">Search</button>
                                                 <button type="button" class="btn btn-sm btn-white" id="close-search-form">

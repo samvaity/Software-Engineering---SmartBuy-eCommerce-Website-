@@ -11,11 +11,12 @@
     <link rel="stylesheet" type="text/css" href="css/searchResults.css">
     <script type="text/javascript" src="views/js/search.js"></script>
 </head>
-<body> <% include header.html %>
+<body> <% include navbar.html %>
     <div class="page-container container-fluid container content-container list-page-bootstrap-container">
+    <form class="filter-checkbox" action="/search" method="post">
     <div class="container-fluid ">
         <div class="results-header">
-            <div class="row breadcrumb-row">
+            <!--<div class="row breadcrumb-row">
                 <div class="col-xs-12">
                     <nav class="breadcrumb-navigation" role="navigation" aria-label="Breadcrumb">
                         <ol class="breadcrumb">
@@ -25,15 +26,16 @@
                     </nav>
                 </div>
                 <div class="clearfix"></div>
-            </div>
+            </div>-->   
             
             <div class="row results-title">
                 <div class="col-sm-12">
-                    <h1 class="result-for">
+                    <h1 class="result-for" name="search_text" value="<%= searchtext %>">
                         <% if (searchtext != null) { %>
-                            "<%= searchtext %>" 
+                            "<%= searchtext %>"
                         <% } %>
                     </h1>
+                    <input type="text" value="<%= searchtext %>" name="search_text" class="hide">
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -43,11 +45,13 @@
             <div class="left-container col-sm-3 search-filters">
                 <nav class="filters" role="navigation" aria-label="Secondary">
                     <h2 class="sr-only">Filters</h2>
+                    <!--<form class="filter-checkbox" action="/search" method="post">-->
                     <ul class="filter-list" role="group" aria-label="Filters: Selecting a filter checkbox will refresh the page to update the results.">
                         <li id="brand_filter" data-name="Brand" data-id="brand_filter" class="filter-item">
                             <div class="filter-title"> <h3 class="title">Sellers</h3> </div>
                             <div class="filter-content">
-                                <ul class="filter-values">
+                                
+                                <ul class="filter-values" name="sellers">
                                     <!--<li class="filter-value" data-track="Wireless" data-value="Wireless" data-count="35" data-query-path="features_filter=Features~Wireless">
                                         <span class="value-checkbox">
                                             <input type="checkbox" id="features_filter-0" autocomplete="off">
@@ -70,13 +74,12 @@
                                     <% sellers.forEach(function(seller) { %>
                                         <li class="filter-value" data-track='<%= seller["user"]["username"] %>' data-value='<%= seller["user"]["username"] %>' data-count="35" data-query-path='features_filter=<%= seller["user"]["username"] %>'>
                                             <span class="value-checkbox">
-                                                <form class="filter-checkbox" action="/search" method="post">
-                                                    <input type="checkbox" id="features_filter-1" autocomplete="off">
-                                                </form>
+                                                <input type="checkbox" id="sellerbrand_filter" class="sellerbrand_filter" autocomplete="off" value='<%= seller["user"]["email"] %>' name='seller' <% if(sellerfiltersapplied.indexOf(seller["user"]["username"]) > -1){ %> checked="checked" <% } %>  >
+                                                <input type="text" class="hide seller_name" name="sellername" <% if(sellerfiltersapplied.indexOf(seller["user"]["username"]) > -1){ %> value = '<%= seller["user"]["username"] %>' <% } %>>
+                                                <input type="submit" name="filterselected" class="brand-submit hide" value='<%= seller["user"]["username"] %>'>
                                             </span>
                                             <span class="value-content">
                                                 <label for="features_filter-1"><%= seller["user"]["username"] %></label>
-                                               <!-- <span class="result-count">(35)</span>-->
                                             </span>
                                         </li>
                                     <% }); %>
@@ -88,46 +91,65 @@
                             <div class="filter-title">  <h3 class="title ">Price</h3> </div>
                             <div class="filter-content">
                                 <ul class="filter-values">
-                                    <li class="filter-value" data-track="$50 - $99.99" data-value="$50 - $99.99" data-count="8" data-query-path="price-filter=Price~$50 - $99.99">
+                                    <li class="filter-value" data-track="$0 - $49.99" data-value="$0 - $49.99" data-count="8" data-query-path="price-filter=Price~$0 - $49.99">
                                         <span class="value-checkbox">
-                                            <input type="checkbox" id="price-filter-0" autocomplete="off">
+                                            <input type="checkbox" id="price-filter-0" autocomplete="off" name="price" value="$0 - $49.99" class="price_filter" <% if(pricefiltersapplied && (pricefiltersapplied.indexOf('$0 - $49.99') > -1)) { %> checked="checked" <% } %> >
+                                            <input type="submit" name="filterselected" class="price-submit hide" value='$0 - $49.99'>
                                         </span>
                                         <span class="value-content">
-                                            <label for="price-filter-0">$50 - $99.99</label>
-                                            <span class="result-count">(8)</span>
+                                            <label for="price-filter-0">$0 - $49.99</label>
+                                        </span>
+                                    </li>
+                                    <li class="filter-value" data-track="$50 - $99.99" data-value="$50 - $99.99" data-count="8" data-query-path="price-filter=Price~$50 - $99.99">
+                                        <span class="value-checkbox">
+                                            <input type="checkbox" id="price-filter-1" autocomplete="off" name="price" value="$50 - $99.99" class="price_filter" <% if(pricefiltersapplied && (pricefiltersapplied.indexOf('$50 - $99.99') > -1)) { %> checked="checked" <% } %> >
+                                            <input type="submit" name="filterselected" class="price-submit hide" value='$50 - $99.99'>
+                                        </span>
+                                        <span class="value-content">
+                                            <label for="price-filter-1">$50 - $99.99</label>
                                         </span>
                                     </li>
                                     <li class="filter-value" data-track="$100 - $149.99" data-value="$100 - $149.99" data-count="6" data-query-path="price-filter=Price~$100 - $149.99">
                                         <span class="value-checkbox">
-                                            <input type="checkbox" id="price-filter-1" autocomplete="off">
+                                            <input type="checkbox" id="price-filter-2" autocomplete="off" name="price" value="$100 - $149.99" class="price_filter" <% if(pricefiltersapplied && (pricefiltersapplied.indexOf('$100 - $149.99') > -1)) { %> checked="checked" <% } %> >
+                                            <input type="submit" name="filterselected" class="price-submit hide" value='$100 - $149.99'>
                                         </span>
                                         <span class="value-content">
-                                            <label for="price-filter-1">$100 - $149.99</label>
-                                            <span class="result-count">(6)</span>
+                                            <label for="price-filter-2">$100 - $149.99</label>
                                         </span>
                                     </li>
                                     <li class="filter-value" data-track="$150 - $199.99" data-value="$150 - $199.99" data-count="11" data-query-path="price-filter=Price~$150 - $199.99">
                                         <span class="value-checkbox">
-                                            <input type="checkbox" id="price-filter-2" autocomplete="off">
+                                            <input type="checkbox" id="price-filter-3" autocomplete="off" name="price" value="$150 - $199.99" class="price_filter" <% if(pricefiltersapplied && (pricefiltersapplied.indexOf('$150 - $199.99') > -1)) { %> checked="checked" <% } %> >
+                                            <input type="submit" name="filterselected" class="price-submit hide" value='$150 - $199.99'>
                                         </span>
                                         <span class="value-content">
-                                            <label for="price-filter-2">$150 - $199.99</label>
-                                            <span class="result-count">(11)</span>
+                                            <label for="price-filter-3">$150 - $199.99</label>
                                         </span>
                                     </li>
                                     <li class="filter-value" data-track="$200 - $499.99" data-value="$200 - $499.99" data-count="10" data-query-path="price-filter=Price~$200 - $499.99">
                                         <span class="value-checkbox">
-                                            <input type="checkbox" id="price-filter-3" autocomplete="off">
+                                            <input type="checkbox" id="price-filter-4" autocomplete="off" name="price" value="$200 - $499.99" class="price_filter" <% if(pricefiltersapplied && (pricefiltersapplied.indexOf('$200 - $499.99') > -1)) { %> checked="checked" <% } %> >
+                                            <input type="submit" name="filterselected" class="price-submit hide" value='$200 - $499.99'>
                                         </span>
                                         <span class="value-content">
-                                            <label for="price-filter-3">$200 - $499.99</label>
-                                            <span class="result-count">(10)</span>
+                                            <label for="price-filter-4">$200 - $499.99</label>
+                                        </span>
+                                    </li>
+                                    <li class="filter-value" data-track="$500 - Up" data-value="$500 - Up" data-count="10" data-query-path="price-filter=Price~$500 - Up">
+                                        <span class="value-checkbox">
+                                            <input type="checkbox" id="price-filter-5" autocomplete="off" name="price" value="$500 - Up" class="price_filter" <% if(pricefiltersapplied && (pricefiltersapplied.indexOf('$500 - Up') > -1)) { %> checked="checked" <% } %> >
+                                            <input type="submit" name="filterselected" class="price-submit hide" value='$500 - Up'>
+                                        </span>
+                                        <span class="value-content">
+                                            <label for="price-filter-5">$500 - Up</label>
                                         </span>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                     </ul>
+                    <!--</form>-->
                 </nav>
             </div>
             
@@ -176,15 +198,48 @@
                                 <div class="applied-filter-content">
                                     <h4 aria-label="Applied Filters:">Filters:</h4>
                                     <ul class="applied-filters">
-                                        <li class="applied-filter-value" data-filter-id="brand_filter" data-value="Beats by Dr. Dre" data-count="35" data-query-path="brand_filter=Brand~Beats by Dr. Dre">
-                                            <span class="filter-copy">Beats by Dr. Dre</span>
-                                            <a href="#" class="remove">
-                                                <span class="glyphicon glyphicon-remove"></span>
-                                            </a>
-                                        </li>
+                                        <% if (sellerfiltersapplied.length != 0) { %>
+                                        <% sellerfiltersapplied.forEach(function(filter) { 
+                                            if(filter.length != 0) { %>
+                                            <li class="applied-filter-value" data-filter-id="brand_filter" >
+                                                <span class="filter-copy"><%= filter %></span>
+                                                <a href="#" class="remove">
+                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                </a>
+                                            </li>
+                                        <% } }); } %>                                       
+
+                                        <% if (pricefiltersapplied.length != 0) { %>
+                                            <% if (Array.isArray(pricefiltersapplied)){ %>
+                                                <% pricefiltersapplied.forEach(function(pricefilter) { 
+                                                    if(pricefilter.length != 0) {%>
+                                                <li class="applied-filter-value" data-filter-id="brand_filter" data-value="Beats by Dr. Dre" data-count="35" data-query-path="brand_filter=Brand~Beats by Dr. Dre">
+                                                    <span class="filter-copy"><%= pricefilter %></span>
+                                                    <a class="remove">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </a>
+                                                </li>
+                                                <% } }); %>
+                                            <% } 
+                                            else{ %>
+                                                <li class="applied-filter-value" data-filter-id="price_filter" >
+                                                    <span class="filter-copy"><%= pricefiltersapplied %></span>
+                                                    <a class="remove">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </a>
+                                                </li>
+                                            <% } %>
+                                        <% } %>
+                                        <% if ( (!pricefiltersapplied) && (sellerfiltersapplied == "" || (sellerfiltersapplied && sellerfiltersapplied.every(function(v) { return v === ''; }))) )  { %>
                                         <li>
-                                            <a class="clear-all" href="#" title="Clear all filters" aria-label="Clear all filters">Clear all</a>
+                                            <span class="clear-all" aria-label="No Filters applied">No Filters applied</span>
                                         </li>
+                                        <% } 
+                                        else { %>
+                                        <li>
+                                            <a class="clear-all" title="Clear all filters" aria-label="Clear all filters">Clear all</a>
+                                        </li>
+                                        <% } %>
                                     </ul>
                                 </div>
                             </div>
@@ -224,12 +279,12 @@
                                                 <a href="#" title='<%= product["product"]["name"] %>'><%= product["product"]["name"] %></a>
                                             </h2>
                                             <!-- /.product-product -->
-                                            <div class="product-category product-description">
+                                            <div class="product-category">
                                                 <span><%= product["product"]["description"] %></span>
                                             </div>
                                             <!-- /.product-category -->
                                             <div class="product-price">
-                                                <span class="amount"><%= product["product"]["price"] %></span>
+                                                <span class="amount">$<%= product["product"]["price"] %></span>
                                             </div>
                                             <!-- /.product-price -->
                                         </div>
@@ -261,6 +316,7 @@
         </div>
         <div class="clearfix"></div>
         </div>
+        </form>
     </div>  
   
 </body>
