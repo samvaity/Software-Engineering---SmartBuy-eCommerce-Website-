@@ -1,68 +1,116 @@
 <!doctype html>
 <html>
-<head>
-	 <title>Registration Form</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    	   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/common.css">
-        <link rel="stylesheet" type="text/css" href="css/login.css">
-
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="views/js/mylogin.js"></script> 
-</head>
-<body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-        <% if (error) { %>
-                <div class="alert alert-message"><%= error %></div>
-            <% } %>
-          <fieldset><legend class="text-center">Registration Form</legend>
-
-            <form action="/signup" method="post" class="box login">
-            
-<!-- Username -->
-            <div class="form-group">     
-                <label for="username"><span class="req">* </span> Username: </label>
-                    <input class="form-control" type="text" name="username" id = "txt" placeholder="Username" required /> 
+   <head>
+      <title>Registration Form</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="css/common.css">
+      <!-- <link rel="stylesheet" type="text/css" href="css/login.css"> -->
+      <script type="text/javascript" src="js/jquery.min.js"></script>
+      <script type="text/javascript" src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="views/js/mylogin.js"></script> 
+   </head>
+   <body>
+      <div class="container">
+         <div class="row">
+            <div class="col-md-6">
+               <% if (error) { %>
+               <p class="alert alert-message"><%= error %></p>
+               <% } %>
+               <form action="/signup"  class="well form-horizontal" method="post" class="box login">
+               <fieldset>
+                  <legend class="text-center">Registration Form</legend>
+                  
+                     <!-- Username -->
+                     <div class="form-group">
+                        <label class="col-md-1 control-label" >Username</label>    
+                        <!-- <label for="username"><span class="req">* </span> Username: </label> -->
+                     </div>
+                     <div class="input-group input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-user"></span>
+                        </span>
+                        <input class="form-control" type="text" required name="username" id = "txt" placeholder="Username" required ">
+                     </div>
+                     <!-- <input class="form-control" type="text" name="username" id = "txt" placeholder="Username" required />  -->
+                     <!-- Email -->
+                     <div class="form-group">
+                        <label class="col-md-1 control-label">Email</label>  
+                     </div>
+                     <div class="input-group input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                        </span>
+                        <input class="form-control" type="text" placeholder="Email" required name="email" id = "email"   placeholder="Email" onchange="email_validate(this.value);">
+                     </div>
+                     <!-- 
+                        <div class="form-group">
+                           <label for="email"><span class="req">* </span> Email: </label> 
+                           <input class="form-control" required type="text" name="email" id = "email"  placeholder="email" onchange ="javascript:email_validate(this.value);"/> 
+                           <span id="confirmEmailMessage"></span>
+                        </div> -->
+                     <!-- Password -->
+                     <div class="form-group">
+                        <label class="col-md-1 control-label">Password</label>  
+                     </div>
+                     <div class="input-group input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input required name="password" type="password" required class="form-control inputpass" placeholder="Password" minlength="4" maxlength="16"  id="pass1">
+                     </div>
+                     <div class="form-group">
+                        <label class="col-md-1 control-label">Confirm Password</label>  
+                     </div>
+                     <div class="input-group input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input required name="pass2" type="password" class="form-control inputpass" placeholder="Password"  minlength="4" maxlength="16" required placeholder="Enter passsword again to validate"  id="pass2" onkeyup="checkPassword(); return false;" >
+                     </div>
+                     <!--  <div class="form-group">
+                        <label for="password"><span class="req">* </span> Password: </label>
+                        <input required name="password" type="password" class="form-control inputpass" placeholder="password" minlength="4" maxlength="16"  id="pass1" />
+                        <label for="pass2"><span class="req">* </span> Password Confirm: </label>
+                        <input required name="pass2" type="password" class="form-control inputpass" minlength="4" maxlength="16" placeholder="Enter passsword again to validate"  id="pass2" onkeyup="checkPassword(); return false;" />
+                        <span id="confirmMessage" class="confirmMessage"></span>
+                        </div> -->
+                     <!-- Role -->
+                     <!--   <div class="form-group">
+                        </div>
+                        
+                        <div class="form-group col-md-3">
+                        <label for="role" req >Roles</label>
+                        <select class="form-control" id="sel1">
+                        <option value="buyer">Buyer</option>
+                              <option value="seller">Seller</option>
+                        </select>
+                        </div> -->
+                     <div class="form-group">
+                     </div>
+                     <div class="form-group col-md-3" required>
+                        <label for="role" req >Role</label>
+                        <select required class="form-control" name="roles">
+                           <option value=""> Select </option>
+                           <option value="buyer">Buyer</option>
+                           <option value="seller">Seller</option>
+                        </select>
+                     </div>
+                     <!-- Register -->
+                     <div class="form-group">
+                     </div>
+                     <div class="form-group">
+                        <div class="col-md-12">
+                           <input class="btn btn-block btn btn-success" type="submit" value="SignUp" tabindex="1"/>
+                        </div>
+                     </div>
+                     <!--  <div class="form-group">
+                        <input class="btn btn-success" type="submit" style="margin-left:30%" value="SignUp" tabindex="1">
+                        </div> -->
+               </fieldset>
+               </form>
             </div>
-
-<!-- Email -->
-            <div class="form-group">
-                <label for="email"><span class="req">* </span> Email: </label> 
-                    <input class="form-control" required type="text" name="email" id = "email"  placeholder="email" onchange ="javascript:email_validate(this.value);"/>   
-                    <span id="confirmEmailMessage"></span>
-           </div>
-
-<!-- Password -->
-            <div class="form-group">
-                <label for="password"><span class="req">* </span> Password: </label>
-                    <input required name="password" type="password" class="form-control inputpass" placeholder="password" minlength="4" maxlength="16"  id="pass1" />
-                <label for="pass2"><span class="req">* </span> Password Confirm: </label>
-                    <input required name="pass2" type="password" class="form-control inputpass" minlength="4" maxlength="16" placeholder="Enter passsword again to validate"  id="pass2" onkeyup="checkPassword(); return false;" />
-                   <span id="confirmMessage" class="confirmMessage"></span>
-            </div>
-<!-- Role -->
-            <div class="form-group">
-                <label for="role"><span class="req">* </span> Role: </label>
-                 <select name="roles">
-                 <option value=" " selected> Select </option>
-                    <option value="buyer">Buyer</option>
-                    <option value="seller">Seller</option>
-                     </select>
-            </div>
-
-
-<!-- Register -->
-            <div class="form-group">
-                     <input class="btn btn-success" type="submit" style="margin-left:30%" value="SignUp" tabindex="1">
-            </div>
-
-            </fieldset>
-            </form>
-        </div>
-    </div>
-</div>
-</body>
+         </div>
+      </div>
+   </body>
 </html>
