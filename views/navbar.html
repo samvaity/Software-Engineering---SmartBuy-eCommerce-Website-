@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html class="no-js" lang="">
 
@@ -55,31 +54,40 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                         <li>
                                             <div class="container-fluid">
                                                 <div class="header-account">
-                                                    <div class="header-account-avatar">
+                                                    <!--<div class="header-account-avatar">
                                                         <a href="#" title="">
                                                             <img src="images/samples/avatars/customers/12.jpg" alt="" class="img-circle">
                                                         </a>
-                                                    </div>
-
+                                                    </div>-->
+													<% if(tags.length>0) { %>
                                                     <div class="header-account-username">
-                                                        <h4><a href="#">xyz</a></h4>
+                                                        <h4><a href="<%= nextPage %>"><%= tagline %></a></h4>
                                                     </div>
+													<ul>
+                      <% tags.forEach(function(tags) { %>
+                        <li><a href='<%= tags.ref %>'><%= tags.name %></a></li> 
+                        
+                      <% }); %>
+                    </ul>
+					<% } else { %>
+                <a href='<%= nextPage %>' ><%= tagline %></a>
+              <% } %>
 
-                                                    <ul>
+                                                    <!--<ul>
                                                         <li><a href="#">Invite Friends</a>
                                                         </li>
                                                         <li><a href="#">Account Infomation</a>
                                                         </li>
                                                         <li><a href="#">Logout</a>
                                                         </li>
-                                                    </ul>
+                                                    </ul>-->
                                                 </div>
                                             </div>
                                         </li>
                                     </ul>
                                 </li>
 
-                                <li class="menubar-wishlist">
+                                <!--<li class="menubar-wishlist">
                                     <a href="#" title="" class="awemenu-icon">
                                         <i class="icon icon-star"></i>
                                         <span class="awe-hidden-text">Wishlist</span>
@@ -174,7 +182,7 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                             </div>
                                         </li>
                                     </ul>
-                                </li>
+                                </li>-->
 
                                 <li class="menubar-cart">
                                     <a href="#" title="" class="awemenu-icon menu-shopping-cart">
