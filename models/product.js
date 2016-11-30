@@ -54,17 +54,30 @@ productSchema.methods.updateProduct = function(request, response, gfs, redirectT
 	        throw err;
 		}
 	    else{
-			if(request.files.length > 0){		// images are attached
-				for(var i=0; i<request.files.length;i++){
+			if(request.files){		// images are attached
+				var prodLargeImages = (request.files.prodImagesLarge) ? request.files.prodImagesLarge : "";
+				var prodThumbnailImages = (request.files.prodImagesThumbnail) ? request.files.prodImagesThumbnail : "";
+				var totalImages = parseInt(prodLargeImages.length) + parseInt(prodThumbnailImages.length);
+			
+				var imagessaved = 0;
+				for(var i=0; i<prodLargeImages.length;i++){
 					var writeStream = gfs.createWriteStream({
-			            filename: request.files[i].originalname,
-			        	metadata: {"productname": request.body.product_name, "sellerID": request.user.user.email}
+			            filename: prodLargeImages[i].originalname,
+			        	metadata: {"productname": request.body.product_name, "sellerID": request.user.user.email, "imagetype": "largeimage"}
 			    	});
-			    	fs.createReadStream(request.files[i].path).pipe(writeStream);
-
-			    	if(i == request.files.length-1){ // once all images are created redirect to the url passed in 'redirectTo' arguement
-			    		response.redirect(redirectTo);
-			    	}
+			    	fs.createReadStream(prodLargeImages[i].path).pipe(writeStream);
+			    	imagessaved++;
+				}
+				for(var i=0; i<prodThumbnailImages.length;i++){
+					var writeStream = gfs.createWriteStream({
+			            filename: prodThumbnailImages[i].originalname,
+			        	metadata: {"productname": request.body.product_name, "sellerID": request.user.user.email, "imagetype": "thumbnailimage"}
+			    	});
+			    	fs.createReadStream(prodThumbnailImages[i].path).pipe(writeStream);
+			    	imagessaved++;
+				}
+				if(imagessaved == totalImages){ // once all images are created redirect to the url passed in 'redirectTo' arguement
+					response.redirect(redirectTo);
 				}
 		    }
 		    else{								// images not attached
@@ -81,7 +94,6 @@ productSchema.methods.deleteProduct = function(request, response, product, gfs, 
 			throw err;
 		} 
 	    else{
-	    	console.log("product deleted");
 			gfs.files.find({$and: [{'metadata.productname': product.product.name}, {'metadata.sellerID': product.product.sellerID}]}).toArray(function (err, images) {
 			    if (err) { throw (err); }		// error occured while fetching images
 			    else if(images.length == 0){ 	// no images found for the product

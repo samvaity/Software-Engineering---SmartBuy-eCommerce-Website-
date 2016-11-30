@@ -1,3 +1,15 @@
+/* form styles */
+.well{
+	background-color: white!important;
+	width: 98.7%;
+}
+.alert-message{
+	color: red;
+	padding: 0!important;
+}
+.btn-warning{
+	margin-top: 10px;
+}
 /* styles for rich text editor */
 table.small-editor
 {
@@ -11,11 +23,16 @@ table.small-editor iframe.k-content
 .content-container button span {
 	margin:10%;
 }
+
 .content-container button{
 	/*background: #374148!important;
 	border-color: #374148!important; */
-	background: #816263;
-	border-color: #816263;
+	/*background: #816263;
+	border-color: #816263;*/
+	background-color: #ffa200;
+	border-radius: 4px;
+	border-color: #ffa200;
 }
-.content-container button:hover{ background: #816263; border-color: #816263; }
+/*
+.content-container button:hover{ background: #816263; border-color: #816263; }*/
 .content-container button.cancel {padding-top: 5px;}

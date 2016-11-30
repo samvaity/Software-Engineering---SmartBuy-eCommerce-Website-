@@ -1,7 +1,9 @@
 //window.onload=function(){
 $(document).ready(function(){
-var discountStartDate = document.getElementById('disStartDate');
-var discountEndDate = document.getElementById('disEndDate');
+
+	// Discount Start and End Date functionality
+	var discountStartDate = document.getElementById('disStartDate');
+	var discountEndDate = document.getElementById('disEndDate');
 
 	if(discountStartDate){
 		discountStartDate.addEventListener('change', function() {
@@ -20,6 +22,5 @@ var discountEndDate = document.getElementById('disEndDate');
 
 	$("button.cancel").click(function(){
 		window.location.href="./sellerproducts";
-	});
-
+	});	
 });

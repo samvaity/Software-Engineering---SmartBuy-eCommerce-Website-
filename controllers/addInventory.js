@@ -15,7 +15,12 @@ module.exports = function(app, multer, mongoose, Grid) {
       callback(null, file.fieldname + '-' + Date.now());
     }
   });
-  var upload = multer({ storage : storage}).array('prodImages');
+  //var upload = multer({ storage : storage}).array('prodImages');
+  var upload = multer({ storage : storage}).fields([{
+           name: 'prodImagesLarge'
+         }, {
+           name: 'prodImagesThumbnail'
+         }]);
   var gfs;
   conn.once('open', function() {
     gfs = Grid(conn.db);
@@ -24,21 +29,14 @@ module.exports = function(app, multer, mongoose, Grid) {
    
 	app.get('/addInventory', commonserver.anypageAuth, function(request, response) {
     Category.find({"category.level" : {$ne : 1}},{"category": 1, "category.name": 1},function(err, categories){
-      var tagline = request.user.user.username;
-      var tags = [
-        { name: 'My Account', ref:'/Account' },
-        { name: 'My Orders', ref:'/Orders' },
-        { name: 'Logout', ref:'/logout' }
-      ];
-      var nextPage = "#";
         response.render('addInventory.html', { 
   				user: request.user,
   				categories: categories,
-          tagline: tagline,
-          nextPage:nextPage,
+          tagline: commonserver.getTagLine(request.user),
+          nextPage:"#",
           searchtext: "",
-          tags:tags,
-  				message: request.flash('error in adding inventory') 
+          tags:commonserver.getTags(),
+  				message: request.flash('*Error in adding inventory') 
       });
     });
 	});
@@ -49,21 +47,14 @@ module.exports = function(app, multer, mongoose, Grid) {
       if (err) { console.log('error'); return done(err);}
       if (product) {
         Category.find({"category.level" : {$ne : 1}},{"category": 1, "category.name": 1}, function(err, categories){
-          // needed to display user and his options.. to be moved to a common page later
-          var tagline = req.user.user.username;
-          var tags = [
-            { name: 'My Account', ref:'/Account' },
-            { name: 'My Orders', ref:'/Orders' },
-            { name: 'Logout', ref:'/logout' }
-          ];
-          var nextPage = "#";
           res.render('addInventory.html', { 
             user: req.user,
             categories: categories,
-            tagline: tagline,
-            nextPage:nextPage,
-            tags:tags,
-            message: 'Product already exists. Please add a new product.',
+            tagline: commonserver.getTagLine(req.user),
+            nextPage:"#",
+            tags:commonserver.getTags(),
+            searchtext: "",
+            message: '*Product with the same name already exists in your inventory. Please add a product with another name.',
           });
         });
       } 
