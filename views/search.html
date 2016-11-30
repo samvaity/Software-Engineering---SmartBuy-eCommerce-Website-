@@ -27,7 +27,13 @@
                 </div>
                 <div class="clearfix"></div>
             </div>-->   
-            
+            <div class="row results-title">
+                <div class="col-sm-12">
+                    <h1 class="result-for">
+                        Search results for 
+                    </h1>
+                </div>
+            </div>
             <div class="row results-title">
                 <div class="col-sm-12">
                     <h1 class="result-for" name="search_text" value="<%= searchtext %>">
@@ -175,8 +181,8 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-sm-5"></div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-8"></div>
+                                <!--<div class="col-sm-3">
                                     <div class="results-display-picker">
                                         <label>View:</label> 
                                         <button class="btn btn-sm display-list-view" aria-pressed="false" data-track="PLPListView">
@@ -188,7 +194,7 @@
                                             Grid
                                         </button>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="clearfix"></div> 
                             </div>
                             <div class="clearfix"></div> 
@@ -196,7 +202,7 @@
                         <div class="row applied-filters-container">
                             <div class="col-sm-12">
                                 <div class="applied-filter-content">
-                                    <h4 aria-label="Applied Filters:">Filters:</h4>
+                                    <h4 aria-label="Applied Filters:">Applied Filters:</h4>
                                     <ul class="applied-filters">
                                         <% if (sellerfiltersapplied.length != 0) { %>
                                         <% sellerfiltersapplied.forEach(function(filter) { 
@@ -232,7 +238,7 @@
                                         <% } %>
                                         <% if ( (!pricefiltersapplied) && (sellerfiltersapplied == "" || (sellerfiltersapplied && sellerfiltersapplied.every(function(v) { return v === ''; }))) )  { %>
                                         <li>
-                                            <span class="clear-all" aria-label="No Filters applied">No Filters applied</span>
+                                            <span class="clear-all" aria-label="No Filters applied">No filters applied</span>
                                         </li>
                                         <% } 
                                         else { %>
@@ -299,14 +305,38 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="pagination pull-right">
-                            <ul>
-                                <li><a href="#">Prev</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">Next</a></li>
-                            </ul>
+                            <% if (pageCount > 1) { 
+                                var page; %>  
+                                <ul class="pagination">  
+                                  <% if (currentPage > 1) { 
+                                        page = 1;  %>
+                                      <li><a class="next-page" value='1'>&laquo;</a></li>
+                                  <% } %>
+                                  <% var i = 1;
+                                  if (currentPage > 5) {
+                                  i = +currentPage - 4;
+                                  } %>
+                                  <% if (i !== 1) { %>
+                                      <li class="disabled"><a href="#">...</a></li>
+                                  <% } %>
+                                  <% for (i; i<=pageCount; i++) { %>
+                                    <% if (currentPage == i) { %>
+                                        <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+                                    <% } else { 
+                                        page = i; %>
+                                        <li><a class="next-page" value='<%= i %>'><%= i %></a></li>
+                                    <% } %>
+                                    <% if (i == (+currentPage + 4)) { %>
+                                        <li class="disabled"><a href="#">...</a></li>
+                                    <% break; } %>
+                                  <% } %>
+                                  <% if (currentPage != pageCount) { 
+                                        page = pageCount; %>
+                                      <li><a class="next-page" value='<%= pageCount %>'>&raquo;</a></li>
+                                  <% } %>
+                                </ul>
+                                <input type="submit" name="page" class="page-to-go hide"> 
+                            <% } %> 
                         </div>
                         <div class="clearfix"></div>
                     </div>

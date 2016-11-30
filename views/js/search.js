@@ -30,6 +30,12 @@ $(document).ready(function(){
     $('.sellerbrand_filter').change();
   });
 
+  // for pagination. change pages on click of page numbers of forward backward arrows 
+  $('a.next-page').click(function(){
+    // set the value attribute of input type 'submit' (used to make a POST request), from the value on anchor tag
+    $(this).parent().parent().parent().find('input.page-to-go').val($(this).attr('value')).click();
+  });
+
   /* Add filters to search results. Passes selected filter values to server via sellerBrandFilter array */
  /* var checkboxValue = [];
   var sellerBrandFilter = [];
@@ -59,9 +65,3 @@ $(document).ready(function(){
   });*/
 
 });
-/*
- function removeFilter(productName){
-    alert(productName);
-    $("")
-  }
-  */

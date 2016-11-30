@@ -6,16 +6,46 @@ var commonserver = require('./commonserver');
 module.exports = function(app, mongoose, Grid) {
 
 	// *** app.get Not needed for search because fnctionality will be done by post. TO BE REMOVED later. ***/
-	// Retrieves all products data and passes it to the view
+	// Retrieves all products (whose quantity is greater than zero) data and passes it to the view
 	app.get('/search', commonserver.anypageAuth, function(request, response) { 
+		
 		/* gets all seller brands, to be dispplayed in refinement panel */
 		User.find({"user.role": "seller"}, function(err, sellerbrands){
-			Product.find(function(err, products){
+			Product.find({ "product.quantity": { $gt: 0 }}, function(err, products){
+
+				/********** for pagination ******************/
+			    var totalProducts = products.length,
+			        pageSize = 15,
+			        pageCount = Math.ceil(totalProducts/pageSize),
+			        currentPage = 1,
+			        productsArrays = [], 
+			        productsList = [];
+
+				//split list into groups
+			    while (products.length > 0) {
+			        productsArrays.push(products.splice(0, pageSize));
+			    }
+
+			    //set current page if specifed as get variable (eg: /?page=2)
+			    if (typeof request.body.page !== 'undefined') {
+			        currentPage = +request.body.page;
+			    }
+
+			    //show list of students from group
+			    productsList = productsArrays[+currentPage - 1];
+			    /********************************************/
+
 			    response.render('search.html', { 
+			    	//for pagination
+			        pageSize: pageSize,
+			        totalProducts: totalProducts,
+			        pageCount: pageCount,
+			        currentPage: currentPage,
+			        products: productsList,
+
 			    	user: request.user,
 			        tagline: commonserver.getTagLine(request.user),
 			        nextPage: "#",
-			        products: products,
 			        searchtext: "",
 			        sellerfiltersapplied: "",
 			        pricefiltersapplied: "",
@@ -29,11 +59,11 @@ module.exports = function(app, mongoose, Grid) {
 
 	// Retrieves data relevant to the search query and passes it to the view
 	app.post('/search', commonserver.anypageAuth, function(request, response) {
-		console.log(request.body);
 		var searchtext = request.body.search_text;
 		var sellerBrandsFilter = request.body.seller;
 		var sellerfiltersapplied = (request.body.sellername) ?  request.body.sellername : "";
 		var priceFilters = (request.body.price) ? request.body.price : "";
+		var pagenumber = request.body.page;
 
 		/* gets all seller brands, to be dispplayed in refinement panel */
 		User.find({"user.role": "seller"}, function(err, sellerbrands){
@@ -51,7 +81,7 @@ module.exports = function(app, mongoose, Grid) {
 
 			var productFieldsRetrieve = {"product.name" : 1, "product.category" : 1, "product.description" : 1,
 										"product.price" : 1, "product.quantity" : 1, "product.sellerID" : 1}
-			var productMainQuery = {$or: productSubQuery};
+			var productMainQuery = {$and: [{"product.quantity": { $gt: 0 }}, {$or: productSubQuery}]};
 			/* search for the entered text in product.name, product.category, product.description, seller name fields.
 				$options:$i makes the search case insensitive */
 			/* Checks is the search text contains a seller/brandname. 
@@ -101,7 +131,8 @@ module.exports = function(app, mongoose, Grid) {
 									var priceLowerBound = parseFloat(priceFilters[k].split(" - ")[0].substring(1));
 									var priceUpperBound = parseFloat(priceFilters[k].split(" - ")[1].substring(1));
 									var productPrice = parseFloat(products[j]['product']['price']);
-									if(productPrice && (priceLowerBound <= productPrice) && (productPrice <= priceUpperBound)){
+									var condition = (priceUpperBound) ? ((priceLowerBound <= productPrice) && (productPrice <= priceUpperBound)) : (priceLowerBound <= productPrice);
+									if((productPrice != null) && condition){
 										finalproducts.push(products[j]);
 									}
 								}
@@ -110,7 +141,8 @@ module.exports = function(app, mongoose, Grid) {
 								var priceLowerBound = parseFloat(priceFilters.split(" - ")[0].substring(1));
 								var priceUpperBound = parseFloat(priceFilters.split(" - ")[1].substring(1));
 								var productPrice = parseFloat(products[j]['product']['price']);
-								if(productPrice && (priceLowerBound <= productPrice) && (productPrice <= priceUpperBound)){
+								var condition = (priceUpperBound) ? ((priceLowerBound <= productPrice) && (productPrice <= priceUpperBound)) : (priceLowerBound <= productPrice);
+								if((productPrice != null) && condition){
 									finalproducts.push(products[j]);
 								}
 							}
@@ -121,10 +153,38 @@ module.exports = function(app, mongoose, Grid) {
 				else{
 					finalproducts = products;
 				}
+				/********** for pagination ******************/
+			    var totalProducts = finalproducts.length,
+		        pageSize = 15,
+		        pageCount = Math.ceil(totalProducts/pageSize),
+		        currentPage = 1,
+		        productsArrays = [], 
+		        productsList = [];
+
+				//split list into groups
+			    while (finalproducts.length > 0) {
+			        productsArrays.push(finalproducts.splice(0, pageSize));
+			    }
+			    //set current page if specifed as get variable (eg: /?page=2)
+			    if (typeof request.body.page !== 'undefined') {
+			        currentPage = +request.body.page;
+			    }
+			    //show list of students from group
+			    if(productsArrays.length > 0){
+			    	productsList = productsArrays[+currentPage - 1];
+			    }
+			    /********************************************/
+
 				response.render('search.html', { 
+					//for pagination
+			        pageSize: pageSize,
+			        totalProducts: totalProducts,
+			        pageCount: pageCount,
+			        currentPage: currentPage,
+			        products: productsList,
+
 	            	user : request.user,
 			      	nextPage:"#",
-			      	products: finalproducts,
 			      	searchtext: searchtext,
 			      	sellerfiltersapplied: sellerfiltersapplied,
 			      	pricefiltersapplied: priceFilters,
