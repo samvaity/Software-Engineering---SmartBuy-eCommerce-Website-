@@ -170,14 +170,14 @@
                                         <label for="sort-by-select">Sort by:</label> 
                                         <span class="sort-by-select">
                                             <select id="sort-by-select">
-                                                <option value="" selected="">Best Match</option>
-                                                <option value="-bestsellingsort skuidsaas">Best Selling</option>
-                                                <option value="+currentprice skuidsaas">Price Low to High</option>
-                                                <option value="-currentprice skuidsaas">Price High to Low</option>
-                                                <option value="customerrating numberofreviewssaas">Customer Rating</option>
-                                                <option value="-displaydate skuidsaas">New Arrivals</option><option value="+brand skuidsaas">Brand A-Z</option>
-                                                <option value="-brand skuidsaas">Brand Z-A</option>
+                                                <option value="" selected=""></option>
+                                                <option value="product.price" <% if(appliedsortby === "product.price") { %> selected <% } %> >Price Low to High</option>
+                                                <option value="-product.price" <% if(appliedsortby === "-product.price") { %> selected <% } %> >Price High to Low</option>
+                                                <option value="product.name" <% if(appliedsortby === "product.name") { %> selected <% } %> >Product Name A-Z</option>
+                                                <option value="-product.name" <% if(appliedsortby === "-product.name") { %> selected <% } %> >Product Name Z-A</option>
                                             </select>
+                                            <input type="text" name="sortby" class=" hide sort-by-hidden-field" <% if(appliedsortby) { %> value="<%= appliedsortby %>" <% } %>  />
+                                            <input type="submit" name="sortby-submit" class=" sortby-submit hide"  />
                                         </span>
                                     </div>
                                 </div>

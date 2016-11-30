@@ -2,17 +2,22 @@ var Product = require('../models/product');
 var User = require('../models/user');
 var Category = require('../models/category');
 var commonserver = require('./commonserver');
+var sortBy = require('sort-by');
 
 module.exports = function(app, mongoose, Grid) {
 
 	// *** app.get Not needed for search because fnctionality will be done by post. TO BE REMOVED later. ***/
 	// Retrieves all products (whose quantity is greater than zero) data and passes it to the view
 	app.get('/search', commonserver.anypageAuth, function(request, response) { 
-		
+
 		/* gets all seller brands, to be dispplayed in refinement panel */
 		User.find({"user.role": "seller"}, function(err, sellerbrands){
 			Product.find({ "product.quantity": { $gt: 0 }}, function(err, products){
-
+				// Apply sorting on retrieved data
+				if(request.body.sortby){
+					products.sort(sortBy(request.body.sortby));
+				}
+				
 				/********** for pagination ******************/
 			    var totalProducts = products.length,
 			        pageSize = 15,
@@ -42,7 +47,7 @@ module.exports = function(app, mongoose, Grid) {
 			        pageCount: pageCount,
 			        currentPage: currentPage,
 			        products: productsList,
-
+			        appliedsortby: request.body.sortby,
 			    	user: request.user,
 			        tagline: commonserver.getTagLine(request.user),
 			        nextPage: "#",
@@ -64,7 +69,8 @@ module.exports = function(app, mongoose, Grid) {
 		var sellerfiltersapplied = (request.body.sellername) ?  request.body.sellername : "";
 		var priceFilters = (request.body.price) ? request.body.price : "";
 		var pagenumber = request.body.page;
-
+		var sortby = request.body.sortby; 
+		
 		/* gets all seller brands, to be dispplayed in refinement panel */
 		User.find({"user.role": "seller"}, function(err, sellerbrands){
 			var productSubQuery = [];
@@ -87,6 +93,10 @@ module.exports = function(app, mongoose, Grid) {
 			/* Checks is the search text contains a seller/brandname. 
 		   		If yes, get that sellers products from 'products' collection */
 			Product.find(productMainQuery,productFieldsRetrieve, function(err, products){
+				// Apply sorting on retrieved data
+				if(sortby){
+					products.sort(sortBy(sortby));
+				}
 				var finalproducts = [];
 				// when any of the filter's are selected
 				if((sellerBrandsFilter || priceFilters) && products){	
@@ -182,7 +192,7 @@ module.exports = function(app, mongoose, Grid) {
 			        pageCount: pageCount,
 			        currentPage: currentPage,
 			        products: productsList,
-
+			        appliedsortby: sortby,
 	            	user : request.user,
 			      	nextPage:"#",
 			      	searchtext: searchtext,

@@ -36,32 +36,11 @@ $(document).ready(function(){
     $(this).parent().parent().parent().find('input.page-to-go').val($(this).attr('value')).click();
   });
 
-  /* Add filters to search results. Passes selected filter values to server via sellerBrandFilter array */
- /* var checkboxValue = [];
-  var sellerBrandFilter = [];
-  var search_text = $.trim($('.results-title h1').text()).replace(/^"(.*)"$/, '$1');
-  $('.sellerbrand_filter').change(function (event) {
-    event.preventDefault();
-    if ($(this).is(":checked")){
-      // If brand is selected, adds its value to sellerBrandFilter array
-      sellerBrandFilter.push($(this).val());
-    }
-    else{
-      // If brand is un-selected, removes it from sellerBrandFilter array
-      var removeitem = $(this).val();
-      sellerBrandFilter = jQuery.grep(sellerBrandFilter, function(value) {
-        return value != removeitem;
-      });
-    }
-
-    // makes a post request to /search with the selected filters and search text
-    $.ajax({
-      url:'/search',type:'post',
-      data:{sellerBrandsFilter:sellerBrandFilter, search_text:search_text},
-      success:function(response){
-        console.log("ajax : " + response);
-      }
-    });
-  });*/
-
+  // for sorting functionality
+  $('select#sort-by-select').on('change', function (e) {
+    var optionSelected = $("option:selected", this);
+    var valueSelected = this.value;
+    $('input.sort-by-hidden-field').val(valueSelected);
+    $('input.sortby-submit').click();
+  });
 });
