@@ -16,7 +16,8 @@ var productSchema = mongoose.Schema({
 		discountEndDate	  : Date,
 		couponsAplicable  : Boolean,
 		sellerID 		  : String,
-		noOfItemsSold 	  : Number
+		noOfItemsSold 	  : Number,
+		imagepath         : String
 	}
 });
 

@@ -164,7 +164,7 @@
                     <div class="main-results" id="main-results" role="group" tabindex="-1" aria-labelledby="main-results-heading">
                         <div class="list-control-bar list-header-controls">
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <div class="sort-by">
                                         <label for="sort-by-select">Sort by:</label> 
                                         <span class="sort-by-select">
@@ -180,7 +180,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-sm-8"></div>
+                                <div class="col-sm-6"></div>
                                 <!--<div class="col-sm-3">
                                     <div class="results-display-picker">
                                         <label>View:</label> 
@@ -258,8 +258,8 @@
                                         <div class="product-media">
                                             <div class="product-thumbnail">
                                                 <a href="product-fullwidth.html" title="">
-                                                    <img src="/images/emptyimageplaceholder.jpg" alt="" class="">
-                                                    <img src="/images/emptyimageplaceholder.jpg" alt="" class="current">
+                                                    <img <% if(product["product"]["imagepath"]) { %> src='<%= product["product"]["imagepath"] %>' <% } else { %> src='/images/emptyimageplaceholder.jpg' <% } %> alt="" class="">
+                                                    <img <% if(product["product"]["imagepath"]) { %> src='<%= product["product"]["imagepath"] %>' <% } else { %> src='/images/emptyimageplaceholder.jpg' <% } %> alt="" class="current">
                                                 </a>
                                             </div>
                                             <!-- /.product-thumbnail -->
@@ -284,7 +284,7 @@
                                                 <a href="#" title='<%= product["product"]["name"] %>'><%= product["product"]["name"] %></a>
                                             </h2>
                                             <!-- /.product-product -->
-                                            <div class="product-category">
+                                            <div class="product-category prod_desc crop" title='<%= product["product"]["description"] %>'>
                                                 <span><%= product["product"]["description"] %></span>
                                             </div>
                                             <!-- /.product-category -->

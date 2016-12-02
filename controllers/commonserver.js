@@ -2,7 +2,6 @@
 (server side only)*/
 
 /* This function will check if the user is logged in, if not, then redirect to login page */
-
 module.exports.anypageAuth = function (req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login')
