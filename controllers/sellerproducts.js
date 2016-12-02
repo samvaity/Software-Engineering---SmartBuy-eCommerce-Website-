@@ -16,22 +16,27 @@ module.exports = function(app, mongoose, Grid) {
 
 	/* Retrieves all products belonging to the logged in user/seller and renders them on sellerproducts.html */
 	app.get('/sellerproducts', commonserver.anypageAuth, function(request, response) { 
-		Product.find({"product.sellerID" : request.user.user.email}, function(err, products){
-	    	var tagline = request.user.user.username;
-	      	var tags = [
-	        	{ name: 'My Account', ref:'/Account' },
-	        	{ name: 'My Orders', ref:'/Orders' },
-	        	{ name: 'Logout', ref:'/logout' }
-	    	];
-			var nextPage = "#";
-		    response.render('sellerproducts.html', { 
-		  		user: request.user,
-		        tagline: tagline,
-		        nextPage: nextPage,
-		        products: products,
-		        tags:tags,
-		  		message: request.flash('error while retrieving products') 
-		  	});
+		/* Filter out products based on category passed in query string */
+		var categoryname = request.param('categoryname');
+		var productquery = [];
+		productquery.push({"product.sellerID" : request.user.user.email});
+		if(categoryname){
+			productquery.push({"product.category" : categoryname});
+		}
+		Category.find({"category.level" : {$ne : 1}},{"category": 1, "category.name": 1}, function(err, categories){
+			Product.find({$and: productquery}, function(err, products){
+				var nextPage = "#";
+			    response.render('sellerproducts.html', { 
+			    	user: request.user,
+		        	tagline: commonserver.getTagLine(request.user),
+		        	nextPage: nextPage,
+		        	categories: categories,
+		        	searchtext: '',
+		        	tags: commonserver.getTags(),
+			        products: products,
+			  		message: request.flash('error while retrieving products') 
+			  	});
+			});
 		});
 	});
 

@@ -47,7 +47,12 @@ productSchema.methods.updateProduct = function(request, response, gfs, redirectT
 	else{
 		this.product.couponsAplicable = null;
 	}
-	this.product.noOfItemsSold = 0;
+	if(request.body.noOfItemsSold){
+		this.product.noOfItemsSold = request.body.noOfItemsSold
+	}
+	else{
+		this.product.noOfItemsSold = 0;
+	}
 	this.product.sellerID = request.user.user.email;
 
 	this.product.save(function(err) {

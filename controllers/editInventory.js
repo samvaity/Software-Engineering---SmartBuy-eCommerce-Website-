@@ -67,8 +67,8 @@ module.exports = function(app, multer, mongoose, Grid) {
         res.redirect('/sellerproducts');
       }
       else { 
-        var newProduct = new Product();
-        newProduct.updateProduct(req, res, gfs, '/sellerproducts');
+        //var newProduct = new Product();
+        product.updateProduct(req, res, gfs, '/sellerproducts');
       }
     });
   });

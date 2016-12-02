@@ -1,102 +1,114 @@
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Seller's All Product Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/searchProduct.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
     <link rel="stylesheet" type="text/css" href="/css/common.css">
-    <link rel="stylesheet" type="text/css" href="/css/searchPage.css">
-    <link rel="stylesheet" type="text/css" href="/css/productsgridold.css">
-    <link rel="stylesheet" type="text/css" href="/css/searchProductAnimate.css">
-    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/sellerproducts.css">
 </head>
-<body> <% include index.html %>
-<div class="page-container container content-container">
-    <div class="left-container col-md-2">
-        <div class="categories">
-            <h2>Categories</h2>
-            <ul class="category-list">
-                <li><a href=""> Category 1 </a></li>
-                <li><a href=""> Category 2 </a></li>
-                <li><a href=""> Category 3 </a></li>
-                <li><a href=""> Category 4 </a></li>
-                <li><a href=""> Category 5 </a></li>
-                <li><a href=""> Category 6 </a></li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="right-container all-products col-md-10">
-        <div class="add-product"><div class="mask"><a class="info" href="/addInventory">Add a new product</a></div></div>
-        <!--<% if (message.length > 0) { %>-->
-                        <div class="alert alert-message"><%= message %></div>
+<body> <% include navbar.html %>
+    <div class="page-container container-fluid container content-container ">
+        <div class="row">
+            <div class="left-container col-sm-3 search-filters">
+                <nav class="filters categories" role="navigation" aria-label="Secondary">
+                    <h2 class="sr-only">Filters</h2>
+                    <ul class="filter-list" role="group" aria-label="Filters: Selecting a filter checkbox will refresh the page to update the results.">
+                        <li id="brand_filter" data-name="Brand" data-id="brand_filter" class="filter-item">
+                            <div class="filter-title"> <h3 class="title">CATEGORIES</h3> </div>
+                            <div class="filter-content">                    
+                                <ul class="filter-values category-list" name="categories">
+                                    <% categories.forEach(function(category) { %>
+                                    <li><a href="/sellerproducts?categoryname=<%= category['category']['name'] %>"> <%= category['category']['name'] %> </a></li>
+                                    <% }); %>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="right-container all-products col-sm-9">
+                <div class="right-top-container row">
+                   <!-- <div class="add-product col-sm-9">
+                        <div class="mask">
+                            <div class="button-div">
+                                <a class="info" href="/addInventory">Add a new product</a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>-->
+                    <!--<div class="add-product col-sm-6">
+                        <div class="mask">
+                            <div class="button-div">
+                                <a class="info" href="/addInventory">Add a new product</a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>-->
+                </div>
+                
+                <!--<% if (message.length > 0) { %>-->
+                    <div class="alert alert-message"><%= message %></div>
                 <!--    <% } %> -->
-        <div class="pagination-sort">
-            <div class="sort">
-               <div class="sort-by">
-                    <label>Sort By</label>
-                    <select>
-                        <option value=""> Position </option>
-                        <option value=""> Name </option>
-                        <option value=""> Price </option>
-                    </select>
-                    <a href="" class="v-middle glyphicon glyphicon-arrow-up"></a>
+                <div class="products-grid-container">
+                    <div class="products-grid">
+                        <div class="products-grid-top-bar row">
+                            <div class="table-header col-sm-8">
+                                <label>
+                                Products in your inventory
+                                </label>
+                            </div>
+                            <div class="addInventory-button col-sm-4">
+                                <div class="add-product">
+                                    <div class="mask">
+                                        <div class="button-div">
+                                            <a class="info" href="/addInventory">Add a new product</a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <table>
+                            <!--<caption>Products in your inventory</caption>-->
+                            <thead>
+                                <tr>
+                                    <th scope="col">Product</th>
+                                    <th scope="col" style="width: 50%;">Description</th>
+                                    <th scope="col" style="width: 10%;">Edit</th>
+                                    <th scope="col" style="width: 10%;">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% products.forEach(function(product) { %>
+                                <tr>
+                                    <td data-label="Product" ><a href="#" title='<%= product["product"]["name"] %>'><%= product["product"]["name"] %></a></td>
+                                    <td data-label="Description" title='<%= product["product"]["description"] %>'><%= product["product"]["description"] %></td>
+                                    <td data-label="Edit">
+                                        <a class="info edit-delete" href="/editInventory?productID=<%= product['_id'] %>">Edit</a>
+                                    </td>
+                                    <td data-label="Delete">
+                                        <a class="info edit-delete" href="/sellerproducts/delete?productID=<%= product['_id'] %>" onclick='return confirm("Are you sure you want to delete <%= product["product"]["name"] %> ?")'>Delete</a>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <ul class="pagination">
-                <li>Page:</li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-            </ul>
-            <div class="clearfix"></div>       
-        </div>
-        <div class="products-grid-container">
-            <div class="itemsinpage pages">
-                <div class="limiter visible-desktop">
-                    <label>Show</label>
-                    <select>
-                        <option value="" selected="selected"> 9 </option>
-                        <option value=""> 15 </option>
-                        <option value=""> 30 </option>
-                    </select> per page        
-               </div>
-            </div>
             <div class="clearfix"></div>
-            <ul class="products-grid">
-                <% products.forEach(function(product) { %>
-                    <li>
-                        <a class="product-image" href=""></a>
-                        <div class="product">
-                            <a class="productcontainer-image" href="/productSpecs?productID=<%= product['_id'] %>">
-                                <div class="view view-first">
-                                    <div class="inner_content clearfix">
-                                        <div class="product_image">
-                                            <img src="/images/emptyimageplaceholder.jpg" class="img-responsive" alt="">
-                                            <div class="mask edit-mask"><a class="info" href="/editInventory?productID=<%= product['_id'] %>">Edit</a></div>
-                                            <div class="mask delete-mask"><a class="info" href="/sellerproducts/delete?productID=<%= product['_id'] %>" onclick='return confirm("Are you sure you want to delete <%= product["product"]["name"] %> ?")'>Delete</a></div>
-                                            <div class="product_container">
-                                                <div class="cart-left"><p class="title"><%= product["product"]["name"] %></p></div>
-                                                <div class="clearfix"></div>
-                                            </div>     
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="product-details">
-                                <%= product["product"]["description"] %>
-                            </div>
-                        </div>
-                    </li>     
-                <% }); %>
-            </ul>
         </div>
+        <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
 </body>
-<footer>
-   
+<footer> 
   <% include footer.html %>
-
 </footer>
 </html>

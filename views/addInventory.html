@@ -69,7 +69,10 @@
 								    <select name="product_category" class="form-control selectpicker" required>
 								      	<option value = "" >Please select your product category</option>
 									        <% categories.forEach(function(category) { %>
-									            <option value = '<%= category["category"]["name"] %>'><%= category["category"]["name"] %></option> 
+									            <option value = '<%= category["category"]["name"] %>' 
+									            <% if(category["category"]["level"] == 1) {
+									            %> disabled = "disabled" <%
+									            } %> ><%= category["category"]["name"] %></option> 
 									        <% }); %>
 								    </select>
 								</div>

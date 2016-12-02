@@ -7,3 +7,6 @@
 .content-container{
 	margin-top: 2%!important;
 }
+a{
+	cursor: pointer;
+}

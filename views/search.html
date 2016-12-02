@@ -50,31 +50,12 @@
             <div class="left-container col-sm-3 search-filters">
                 <nav class="filters" role="navigation" aria-label="Secondary">
                     <h2 class="sr-only">Filters</h2>
-                    <!--<form class="filter-checkbox" action="/search" method="post">-->
                     <ul class="filter-list" role="group" aria-label="Filters: Selecting a filter checkbox will refresh the page to update the results.">
                         <li id="brand_filter" data-name="Brand" data-id="brand_filter" class="filter-item">
                             <div class="filter-title"> <h3 class="title">Sellers</h3> </div>
                             <div class="filter-content">
                                 
                                 <ul class="filter-values" name="sellers">
-                                    <!--<li class="filter-value" data-track="Wireless" data-value="Wireless" data-count="35" data-query-path="features_filter=Features~Wireless">
-                                        <span class="value-checkbox">
-                                            <input type="checkbox" id="features_filter-0" autocomplete="off">
-                                        </span>
-                                        <span class="value-content">
-                                            <label for="features_filter-0">Wireless</label>
-                                            <span class="result-count">(35)</span>
-                                        </span>
-                                    </li>
-                                    <li class="filter-value" data-track="Bluetooth Built-In" data-value="Bluetooth Built-In" data-count="35" data-query-path="features_filter=Features~Bluetooth Built-In">
-                                        <span class="value-checkbox">
-                                            <input type="checkbox" id="features_filter-1" autocomplete="off">
-                                        </span>
-                                        <span class="value-content">
-                                            <label for="features_filter-1">Bluetooth Built-In</label>
-                                            <span class="result-count">(35)</span>
-                                        </span>
-                                    </li>-->
                                     <% if (sellers.length != 0) { %>
                                     <% sellers.forEach(function(seller) { %>
                                         <li class="filter-value" data-track='<%= seller["user"]["username"] %>' data-value='<%= seller["user"]["username"] %>' data-count="35" data-query-path='features_filter=<%= seller["user"]["username"] %>'>
@@ -154,7 +135,6 @@
                             </div>
                         </li>
                     </ul>
-                    <!--</form>-->
                 </nav>
             </div>
             

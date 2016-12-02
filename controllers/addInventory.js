@@ -29,6 +29,7 @@ module.exports = function(app, multer, mongoose, Grid) {
    
 	app.get('/addInventory', commonserver.anypageAuth, function(request, response) {
     Category.find({"category.level" : {$ne : 1}},{"category": 1, "category.name": 1},function(err, categories){
+      //Category.find({},{},{'group': 'category.parentCategoryID'}, function(err, categories){
         response.render('addInventory.html', { 
   				user: request.user,
   				categories: categories,

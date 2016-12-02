@@ -41,7 +41,6 @@ app.configure(function() {
 });
 
 require('./controllers/routes.js')(app, passport,server); 
-
 require('./controllers/addInventory.js')(app, multer, mongoose, Grid);
 require('./controllers/editInventory.js')(app, multer, mongoose, Grid);
 require('./controllers/sellerproducts.js')(app, mongoose, Grid);
