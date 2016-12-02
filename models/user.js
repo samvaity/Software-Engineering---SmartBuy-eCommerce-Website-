@@ -9,7 +9,7 @@ var userSchema = mongoose.Schema({
 	role			: String,
 	address      		: String,
 	resetPasswordToken	: String,
-  	resetPasswordExpires	: Date
+  	resetPasswordExpires	: Date,
   	
   	payment_cardNumbe	: Number,
         payment_name        	: String,
