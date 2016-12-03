@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>SmartBuy &middot; Homepage</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/pluginsnavbar.css"> 
+
+    <link rel="stylesheet" href="css/stylesnavbar.css">
+	
+	<script src="js/jquery.min.js"></script>
+	
+<script src="js/jquery-ui.min.js"></script>   
+
+    <script src="js/vendornavbar.js"></script>
+
+
+
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
+/></noscript>
+</head>
+
+<body>
+
+
+    <div id="wrapper" class="main-wrapper ">
+
+
+        <header id="header" class="awe-menubar-header">
+            <nav class="awemenu-nav headroom" data-responsive-width="1200">
+                <div class="container">
+                    <div class="awemenu-container">
+
+                        <div class="navbar-header">
+                            <ul class="navbar-icons">
+
+
+                                <li class="menubar-account">
+                                    <a href="#" title="" class="awemenu-icon">
+                                        <i class="icon icon-user-circle"></i>
+                                        <span class="awe-hidden-text">Account</span>
+                                    </a>
+
+                                    <ul class="submenu megamenu">
+                                        <li>
+                                            <div class="container-fluid">
+                                                <div class="header-account">
+                                                    <!--<div class="header-account-avatar">
+                                                        <a href="#" title="">
+                                                            <img src="images/samples/avatars/customers/12.jpg" alt="" class="img-circle">
+                                                        </a>
+                                                    </div>-->
+													<% if(tags.length>0) { %>
+                                                    <div class="header-account-username">
+                                                        <h4><a href="<%= nextPage %>"><%= tagline %></a></h4>
+                                                    </div>
+													<ul>
+                      <% tags.forEach(function(tags) { %>
+                        <li><a href='<%= tags.ref %>'><%= tags.name %></a></li> 
+                        
+                      <% }); %>
+                    </ul>
+					<% } else { %>
+                <a href='<%= nextPage %>' ><%= tagline %></a>
+              <% } %>
+
+                                                    <!--<ul>
+                                                        <li><a href="#">Invite Friends</a>
+                                                        </li>
+                                                        <li><a href="#">Account Infomation</a>
+                                                        </li>
+                                                        <li><a href="#">Logout</a>
+                                                        </li>
+                                                    </ul>-->
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!--<li class="menubar-wishlist">
+                                    <a href="#" title="" class="awemenu-icon">
+                                        <i class="icon icon-star"></i>
+                                        <span class="awe-hidden-text">Wishlist</span>
+                                    </a>
+
+                                    <ul class="submenu megamenu">
+                                        <li>
+                                            <div class="container-fluid">
+                                                <ul class="whishlist">
+
+                                                    <li>
+                                                        <div class="whishlist-item">
+                                                            <div class="product-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/products/cart/12.jpg" alt="">
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="product-body">
+                                                                <div class="whishlist-name">
+                                                                    <h3><a href="#" title="">abc</a></h3>
+                                                                </div>
+
+                                                                <div class="whishlist-price">
+                                                                    <span>Price:</span>
+                                                                    <strong>$120</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <a href="#" title="" class="remove">
+                                                            <i class="icon icon-remove"></i>
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="whishlist-item">
+                                                            <div class="product-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/products/cart/12.jpg" alt="">
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="product-body">
+                                                                <div class="whishlist-name">
+                                                                    <h3><a href="#" title="">abc
+
+                                                                <div class="whishlist-price">
+                                                                    <span>Price:</span>
+                                                                    <strong>$120</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <a href="#" title="" class="remove">
+                                                            <i class="icon icon-remove"></i>
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="whishlist-item">
+                                                            <div class="product-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/products/cart/13.jpg" alt="">
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="product-body">
+                                                                <div class="whishlist-name">
+                                                                    <h3><a href="#" title="">abc</a></h3>
+                                                                </div>
+
+                                                                <div class="whishlist-price">
+                                                                    <span>Price:</span>
+                                                                    <strong>$120</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <a href="#" title="" class="remove">
+                                                            <i class="icon icon-remove"></i>
+                                                        </a>
+                                                    </li>
+
+                                                </ul>
+
+                                                <hr>
+
+                                                <div class="whishlist-action">
+                                                    <a href="#" title="" class="btn btn-dark btn-lg btn-outline btn-block">View Wishlist</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>-->
+
+                                <li class="menubar-cart">
+                                    <a href="#" title="" class="awemenu-icon menu-shopping-cart">
+                                        <i class="icon icon-shopping-bag"></i>
+                                        <span class="awe-hidden-text">Cart</span>
+
+                                        <span class="cart-number">2</span>
+                                    </a>
+
+                                    <ul class="submenu megamenu">
+                                        <li>
+                                            <div class="container-fluid">
+
+                                                <ul class="whishlist">
+
+                                                    <li>
+                                                        <div class="whishlist-item">
+                                                            <div class="product-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/products/cart/11.jpg" alt="">
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="product-body">
+                                                                <div class="whishlist-name">
+                                                                    <h3><a href="#" title="">abc</a></h3>
+                                                                </div>
+
+                                                                <div class="whishlist-price">
+                                                                    <span>Price:</span>
+                                                                    <strong>$120</strong>
+                                                                </div>
+
+                                                                <div class="whishlist-quantity">
+                                                                    <span>Quantity:</span>
+                                                                    <span>1</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <a href="#" title="" class="remove">
+                                                            <i class="icon icon-remove"></i>
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="whishlist-item">
+                                                            <div class="product-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/products/cart/12.jpg" alt="">
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="product-body">
+                                                                <div class="whishlist-name">
+                                                                    <h3><a href="#" title="">abc</a></h3>
+                                                                </div>
+
+                                                                <div class="whishlist-price">
+                                                                    <span>Price:</span>
+                                                                    <strong>$120</strong>
+                                                                </div>
+
+                                                                <div class="whishlist-quantity">
+                                                                    <span>Quantity:</span>
+                                                                    <span>1</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <a href="#" title="" class="remove">
+                                                            <i class="icon icon-remove"></i>
+                                                        </a>
+                                                    </li>
+
+                                                </ul>
+
+                                                <div class="menu-cart-total">
+                                                    <span>Total</span>
+                                                    <span class="price">$180</span>
+                                                </div>
+
+                                                <div class="cart-action">
+                                                    <a href="#" title="" class="btn btn-lg btn-dark btn-outline btn-block">View cart</a>
+                                                    <a href="#" title="" class="btn btn-lg btn-primary btn-block">Proceed To Checkout</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                            </ul>
+
+                            <ul class="navbar-search">
+                                <li>
+                                    <a href="#" title="" class="awemenu-icon awe-menubar-search" id="open-search-form">
+                                        <span class="sr-only">Search</span>
+                                        <span class="icon icon-search"></span>
+                                    </a>
+
+                                    <div class="menubar-search-form" id="menubar-search-form">
+                                        <form action="/search" method="post">
+                                            <!--<input type="text" name="s" class="form-control" placeholder="Search your entry here...">-->
+                                            <% if (searchtext != null) { %>
+                                            <input type="text" class="form-control" name="search_text" placeholder="Search your entry here..."  value="<%= searchtext %>"/>
+                                            <% } 
+                                            else { %>
+                                            <input type="text" class="form-control" name="search_text" placeholder="Search your entry here..." />
+                                            <% } %>
+                                            <!--<input type="text" class="form-control" name="search_text"  placeholder="Search your entry here..." >-->
+                                            <div class="menubar-search-buttons">
+                                                <button type="submit" class="btn btn-sm btn-white">Search</button>
+                                                <button type="button" class="btn btn-sm btn-white" id="close-search-form">
+                                                    <span class="icon icon-remove"></span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.menubar-search-form -->
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <div class="awe-logo">
+                            <a href="index.html" title="">
+                                <img src="images/capture1.png" alt="">
+                            </a>
+                        </div>
+                        <!-- /.awe-logo -->
+
+
+                        <ul class="awemenu awemenu-right">
+                            <li class="awemenu-item">
+                                <a href="#" title="">
+                                    <span>TV's</span>
+                                </a>
+
+                                <ul class="awemenu-submenu awemenu-megamenu" data-width="75%" data-animation="fadeup">
+                                    <li class="awemenu-megamenu-item">
+                                        <div class="container-fluid">
+                                            <div class="awemenu-megamenu-wrapper">
+
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <h2 class="upper">TV's</h2>
+
+                                                        <ul class="super">
+                                                            <li><a href="#" title="">Smart TV</a>
+                                                            </li>
+                                                            <li><a href="#" title="">Curved TV</a>
+                                                            </li>
+															<li><a href="#" title="">LED's</a>
+                                                            </li>
+															<!--<li><a href="#" title="">4K TV</a>
+                                                            </li>-->
+															<li><a href="#" title="">OLED's</a>
+                                                            </li>
+                                                        </ul> 
+                                                    </div>
+
+                                                    <!--<div class="col-lg-3">
+                                                        <ul class="sublist">
+                                                            <li><a href="#" title="">4k TV</a>
+                                                            </li>
+                                                            
+                                                        </ul>
+                                                    </div>-->
+
+                                                    <div class="col-lg-3">
+                                                        
+                                                    </div> 
+
+                                                    <div class="col-lg-3">
+                                                        <div class="awe-media inline margin-bottom-25">
+                                                            <div class="awe-media-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/menu/trending-shop1.jpg" alt="">
+                                                                </a>
+                                                            </div>
+                                                            <h4 class="awe-media-title medium upper center">
+                                                            <!--<a href="#" title="">The trend shop</a>-->
+                                                        </h4>
+                                                        </div>
+                                                        <h4> 
+														</h4>
+														<br/>
+														
+														<div class="awe-media inline margin-bottom-25">
+                                                            <div class="awe-media-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/menu/new-arrrival1.jpg" alt="">
+                                                                </a>
+                                                            </div>
+                                                            <h4 class="awe-media-title medium upper center">
+                                                            <!--<a href="#" title="">The trend shop</a>-->
+                                                        </h4>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                                <div class="bottom-link">
+                                                    <a href="#" class="btn btn-lg btn-dark btn-outline">
+                                                        <span>Shop All TV's</span>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="awemenu-item">
+                                <a href="#" title="">
+                                    <span>Computers</span>
+                                </a>
+
+                                <ul class="awemenu-submenu awemenu-megamenu" data-width="75%" data-animation="fadeup">
+                                    <li class="awemenu-megamenu-item">
+                                        <div class="container-fluid">
+                                            <div class="awemenu-megamenu-wrapper">
+
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <h2 class="upper">Computers</h2>
+
+                                                        <ul class="super">
+                                                            <li><a href="#" title="">Laptops</a>
+                                                            </li>
+                                                            <li><a href="#" title="">Desktops</a>
+                                                            </li>
+															<li><a href="#" title="">Accessories</a>
+                                                            </li>
+                                                            <li><a href="#" title="">Tablets</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                    
+
+                                                    <div class="col-lg-3">
+                                                        <!--<div class="sublist">
+                                                            <p>Shop Size</p>
+                                                            <ul class="numbers-list">
+                                                                
+                                                            </ul>
+                                                        </div>-->
+                                                    </div>
+
+                                                    <div class="col-lg-3">
+                                                        <div class="awe-media inline margin-bottom-25">
+                                                            <div class="awe-media-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/menu/trend-pc1.jpg" alt="">
+                                                                </a>
+                                                            </div>
+                                                            <h4 class="awe-media-title medium upper center">
+                                                            <!--<a href="#" title="">Hot trend PC's</a>-->
+                                                        </h4>
+                                                        </div>
+
+                                                        <div class="awe-media inline">
+                                                            <div class="awe-media-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/menu/new-arrivals1.jpg" alt="">
+                                                                </a>
+                                                            </div>
+                                                            <h4 class="awe-media-title medium upper center">
+                                                            <!--<a href="#" title="">New arrivals</a>-->
+                                                        </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="bottom-link">
+                                                    <a href="#" class="btn btn-lg btn-dark btn-outline">
+                                                        <span>Shop All Computers</span>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="awemenu-item">
+                                <a href="#" title="">
+                                    <span>Cameras</span>
+                                </a>
+
+                                <ul class="awemenu-submenu awemenu-megamenu" data-width="75%" data-animation="fadeup">
+                                    <li class="awemenu-megamenu-item">
+                                        <div class="container-fluid">
+                                            <div class="awemenu-megamenu-wrapper">
+
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <h2 class="upper">Cameras</h2>
+
+                                                        <ul class="super">
+                                                            <li><a href="#" title="">DSLR</a>
+                                                            </li>
+                                                            <li><a href="#" title="">Mirrorless</a>
+                                                            </li>
+															<li><a href="#" title="">Instant print</a>
+                                                            </li>
+															<li><a href="#" title="">Point and shoot</a>
+                                                            </li>
+															<li><a href="#" title="">Accessories</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                    
+
+                                                    <div class="col-lg-3">
+                                                        <ul class="sublist">
+                                                            <!--<<li><a href="#" title="">DSLR</a>
+                                                            </li>
+                                                            -->
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="col-lg-3">
+                                                        <div class="awe-media inline margin-bottom-25">
+                                                            <div class="awe-media-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/menu/trending-accessories1.jpg" alt="">
+                                                                </a>
+                                                            </div>
+                                                            <h4 class="awe-media-title medium upper center">
+                                                            <!--<a href="#" title="">Hot Trend Accessories</a>-->
+                                                        </h4>
+                                                        </div>
+
+                                                        <div class="awe-media inline">
+                                                            <div class="awe-media-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/menu/new-arrivalss1.jpg" alt="">
+                                                                </a>
+                                                            </div>
+                                                            <h4 class="awe-media-title medium upper center">
+                                                            <!--<a href="#" title="">New Arrivals </a>-->
+                                                        </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="bottom-link">
+                                                    <a href="#" class="btn btn-lg btn-dark btn-outline">
+                                                        <span>Shop All Cameras</span>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+
+                            <li class="awemenu-item">
+                                <a href="#" title="">
+                                    <span>Cell phones</span>
+                                </a>
+
+                                <ul class="awemenu-submenu awemenu-megamenu" data-width="100%" data-animation="fadeup">
+                                    <li class="awemenu-megamenu-item">
+                                        <div class="container-fluid">
+                                            <div class="awemenu-megamenu-wrapper">
+
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <h2 class="upper">Cell phones</h2>
+														<ul class="super">
+                                                            <li><a href="#" title="">Android</a>
+                                                            </li>
+															<li><a href="#" title="">iOS</a>
+                                                            </li>
+															<li><a href="#" title="">BlackBerry</a>
+                                                            </li>
+															<li><a href="#" title="">Windows</a>
+                                                            </li>
+															<li><a href="#" title="">Bada</a>
+                                                            </li>
+															<li><a href="#" title="">webOS</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                    
+                                                    <div class="col-lg-3">
+                                                        <div class="sublist">
+                                                            <p>Brand</p>
+                                                            <ul class="numbers-list">
+                                                                <li><a href="#" title="">A</a>
+                                                                </li>
+                                                                <li><a href="#" title="">B</a>
+                                                                </li>
+                                                                <li><a href="#" title="">C</a>
+                                                                </li>
+                                                                <li><a href="#" title="">D</a>
+                                                                </li>
+                                                                <li><a href="#" title="">E</a>
+                                                                </li>
+                                                                <li><a href="#" title="">F</a>
+                                                                </li>
+                                                                <li><a href="#" title="">G</a>
+                                                                </li>
+                                                                <li><a href="#" title="">H</a>
+                                                                </li>
+                                                                <li><a href="#" title="">I</a>
+                                                                </li>
+                                                                <li><a href="#" title="">J</a>
+                                                                </li>
+                                                                <li><a href="#" title="">K</a>
+                                                                </li>
+                                                                <li><a href="#" title="">L</a>
+                                                                </li>
+                                                                <li><a href="#" title="">M</a>
+                                                                </li>
+                                                                <li><a href="#" title="">N</a>
+                                                                </li>
+                                                                <li><a href="#" title="">O</a>
+                                                                </li>
+                                                                <li><a href="#" title="">P</a>
+                                                                </li>
+                                                                <li><a href="#" title="">Q</a>
+                                                                </li>
+                                                                <li><a href="#" title="">R</a>
+                                                                </li>
+                                                                <li><a href="#" title="">S</a>
+                                                                </li>
+                                                                <li><a href="#" title="">T</a>
+                                                                </li>
+                                                                <li><a href="#" title="">U</a>
+                                                                </li>
+                                                                <li><a href="#" title="">V</a>
+                                                                </li>
+                                                                <li><a href="#" title="">W</a>
+                                                                </li>
+                                                                <li><a href="#" title="">X</a>
+                                                                </li>
+                                                                <li><a href="#" title="">Y</a>
+                                                                </li>
+                                                                <li><a href="#" title="">Z</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+													<div class="col-lg-3">
+                                                        <ul class="sublist">
+                                                            <!--<li><a href="#" title="">DSLR</a>
+                                                            </li>
+                                                            -->
+                                                        </ul>
+                                                    </div>
+                                                    
+													<div class="col-lg-3">
+                                                        <div class="awe-media inline margin-bottom-25">
+                                                            <div class="awe-media-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/menu/cellphone-acc1.jpg" alt="">
+                                                                </a>
+                                                            </div>
+                                                            <h4 class="awe-media-title medium upper center">
+                                                            <!--<a href="#" title="">Accessories</a>-->
+                                                        </h4>
+                                                        </div>
+
+                                                        <div class="awe-media inline">
+                                                            <div class="awe-media-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/menu/new-arrivalls1.jpg" alt="">
+                                                                </a>
+                                                            </div>
+                                                            <h4 class="awe-media-title medium upper center">
+                                                            <!--<a href="#" title="">New arrivals</a>-->
+                                                        </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="bottom-link">
+                                                    <a href="#" class="btn btn-lg btn-dark btn-outline">
+                                                        <span>Shop All cell phones</span>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="awemenu-item">
+                                <a href="#" title="">
+                                    <span>Wearable</span>
+                                </a>
+
+                                <ul class="awemenu-submenu awemenu-megamenu" data-width="75%" data-animation="fadeup">
+                                    <li class="awemenu-megamenu-item">
+                                        <div class="container-fluid">
+                                            <div class="awemenu-megamenu-wrapper">
+
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <h2 class="upper">Wearable devices</h2>
+
+                                                        <ul class="super">
+                                                            <li><a href="#" title="">Smart glass</a>
+                                                            </li>
+                                                            <li><a href="#" title="">Smart watch</a>
+                                                            </li>
+															<li><a href="#" title="">Smart band</a>
+                                                            </li>
+															<li><a href="#" title="">Accessories</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                    
+
+                                                    <div class="col-lg-3">
+                                                        <ul class="sublist">
+                                                            <!--<li><a href="#" title="">DSLR</a>
+                                                            </li>
+                                                            <li><a href="#" title="">Mirrorless</a>
+                                                            </li>
+															<li><a href="#" title="">Instant print</a>
+                                                            </li>
+															<li><a href="#" title="">Point and shoot</a>
+                                                            </li>
+															<li><a href="#" title="">Accessories</a>
+                                                            </li>-->
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="col-lg-3">
+                                                        <div class="awe-media inline margin-bottom-25">
+                                                            <div class="awe-media-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/menu/trend-wear1.jpg" alt="">
+                                                                </a>
+                                                            </div>
+                                                            <h4 class="awe-media-title medium upper center">
+                                                            <!--<a href="#" title="">Hot Trend Accessories</a>-->
+                                                        </h4>
+                                                        </div>
+
+                                                        <div class="awe-media inline">
+                                                            <div class="awe-media-image">
+                                                                <a href="#" title="">
+                                                                    <img src="images/samples/menu/new-arrival1.jpg" alt="">
+                                                                </a>
+                                                            </div>
+                                                            <h4 class="awe-media-title medium upper center">
+                                                            <!--<a href="#" title="">New Arrivals </a>-->
+                                                        </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="bottom-link">
+                                                    <a href="#" class="btn btn-lg btn-dark btn-outline">
+                                                        <span>Shop All Wearable devices</span>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            
+
+                        </ul>
+                        <!-- /.awemenu -->
+                    </div>
+                </div>
+                <!-- /.container -->
+
+            </nav>
+            <!-- /.awe-menubar -->
+        </header>
+        <!-- /.awe-menubar-header -->
+
+   <div id="main">
+
+            <section>
+
+
+
+
+
+                <div class="main-slider-wrapper">
+                    <div class="main-slider owl-carousel owl-carousel-inset">
+
+                        <div class="main-slider-item">
+                            <div class="main-slider-image">
+                                <img src="images/samples/sliders/1.jpg" alt="">
+                            </div>
+
+                            <div class="main-slider-text">
+                                <div class="fp-table">
+                                    <div class="fp-table-cell center">
+                                        <div class="container">
+                                            <br>
+											<br>
+											<br>
+											<br>
+											<br>
+											<br>
+											<br>
+											<h2 >Televisions</h2>
+                                            
+											<br>
+
+                                            <div class="button">
+                                                <a href="#" class="btn btn-lg btn-primary margin-right-15">Shop now</a>
+                                             
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="main-slider-item">
+                            <div class="main-slider-image">
+                                <img src="images/samples/sliders/2.jpg" alt="">
+                            </div>
+
+                            <div class="main-slider-text">
+                                <div class="fp-table">
+                                    <div class="fp-table-cell center">
+                                        <div class="container">
+                                            <br>
+											<br>
+											<br>
+											<br>
+											<br>
+											<br>
+											<h2 >Computers</h2>
+                                            
+											<br>
+                                            <div class="button">
+                                                <a href="#" class="btn btn-lg btn-primary margin-right-15">Shop now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="main-slider-item">
+                            <div class="main-slider-image">
+                                <img src="images/samples/sliders/3.jpg" alt="">
+                            </div>
+
+                            <div class="main-slider-text">
+                                <div class="fp-table">
+                                    <div class="fp-table-cell center">
+                                        <div class="container">
+                                            <br>
+											<br>
+											<br>
+											<br>
+											<br>
+											<br>
+											<h2 >Cameras</h2>
+                                            
+											<br>
+
+                                            <div class="dots-color center margin-bottom-35">
+                                                <span class="orange"></span>
+                                                <span class="blue"></span>
+                                                <span class="green"></span>
+                                                <span class="red"></span>
+                                                <span class="black"></span>
+                                            </div>
+
+                                            <div class="button">
+                                                <a href="#" class="btn btn-lg btn-primary">Shop now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="main-slider-item">
+                            <div class="main-slider-image">
+                                <img src="images/samples/sliders/4.jpg" alt="">
+                            </div>
+
+                            <div class="main-slider-text">
+
+                                <div class="fp-table">
+                                    <div class="fp-table-cell center">
+                                        <div class="container">
+                                            <br>
+											<br>
+											<br>
+											<br>
+											<br>
+											<br>
+											<h2 >Cell phones</h2>
+                                            
+											<br>
+
+                                            <div class="button">
+                                                <a href="#" class="btn btn-lg btn-primary margin-right-15">Shop now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+						<div class="main-slider-item">
+                            <div class="main-slider-image">
+                                <img src="images/samples/sliders/5.jpg" alt="">
+                            </div>
+
+                            <div class="main-slider-text">
+
+                                <div class="fp-table">
+                                    <div class="fp-table-cell center">
+                                        <div class="container">
+                                            <br>
+											<br>
+											<br>
+											<br>
+											<br>
+											<br>
+											<h2 >Wearable</h2>
+                                            
+											<br> 
+
+                                            <div class="button">
+                                                <a href="#" class="btn btn-lg btn-primary margin-right-15">Shop now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <script>
+                    $(function() {  aweMainSlider(); });
+                </script>
+
+            </section>
+            <!-- /section -->
+
+ 
+    <!-- /.login-popup -->
+
+    
+
+
+</body>
+
+</html>
