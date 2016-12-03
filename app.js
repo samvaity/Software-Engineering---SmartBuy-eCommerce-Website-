@@ -54,6 +54,8 @@ require('./controllers/forgot.js')(app);
 require('./controllers/reset.js')(app);
 require('./controllers/footer.js')(app);
 require('./controllers/navbar.js')(app);
+require('./controllers/shoppingCart.js')(app);
+require('./controllers/addToCart.js')(app);
 /*require('./controllers/webhome.js')(app);*/
 require('./controllers/accountManagement.js')(app);
 
