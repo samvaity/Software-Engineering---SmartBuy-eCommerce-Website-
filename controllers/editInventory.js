@@ -45,10 +45,11 @@ module.exports = function(app, multer, mongoose, Grid) {
               response.render('editInventory.html', { 
                 user: request.user,
                 categories: categories,
-                tagline: tagline,
+                tagline: commonserver.getTagLine(request.user),
                 nextPage: nextPage,
-                tags: tags,
+                tags: commonserver.getTags(),
                 product: product, 
+                searchtext: "",
                 message: request.flash('error in adding inventory') 
               });
             }
