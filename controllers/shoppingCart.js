@@ -7,6 +7,7 @@ module.exports = function(app) {
 
         app.get('/Orders', commonserver.anypageAuth, function(request, response) {
                     //console.log(request);
+                    console.log("is it come")
                     Cart.find({"cart.userEmail": request.user.user.email}, function(err, orders) {
                     		if (err){           // Error occured while fetching categories
 					        throw err;
