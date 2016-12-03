@@ -11,7 +11,7 @@ module.exports = function(app) {
 	        tagline: commonserver.getTagLine(request.user),
 	        nextPage: "#",
 	        searchtext: "",
-	        tags: commonserver.getTags(),
+	        tags: commonserver.getTags(request.user),
 	  		message: request.flash('error while loading data') 
 	  	});
         });
