@@ -35,6 +35,7 @@ module.exports = function(app, mongoose, Grid) {
 	    	productsList = productsArrays[+currentPage - 1];
 		}
 	    /********************************************/
+	   
 	    response.render('search.html', { 
 	    	//for pagination
 	        pageSize: pageSize,

@@ -58,7 +58,7 @@ require('./controllers/shoppingCart.js')(app);
 require('./controllers/addToCart.js')(app);
 /*require('./controllers/webhome.js')(app);*/
 require('./controllers/accountManagement.js')(app);
-
+require('./controllers/checkout.js')(app);
 
 
 server.listen(port);
