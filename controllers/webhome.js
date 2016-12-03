@@ -1,4 +1,4 @@
-var commonserver = require('./commonserver');
+/*var commonserver = require('./commonserver');
 module.exports = function(app) {
 
 
@@ -16,3 +16,4 @@ module.exports = function(app) {
 	  	});
         });
 		}
+*/

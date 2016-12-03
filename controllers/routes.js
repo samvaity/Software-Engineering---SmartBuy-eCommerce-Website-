@@ -10,16 +10,17 @@ module.exports = function(app, passport,server) {
 	app.get('/', commonserver.auth, function(request, response) {
 		var user = request.user;
 		var tagline = user.user.username;
-    console.log(user);
+    //console.log(user);
 		var nextPage = "#";
 		 var tagsForBuyer = [
         { name: 'My Account', ref:'/Account' },
         { name: 'My Orders', ref:'/Orders' },
         { name: 'Logout', ref:'/logout' }
     ];
+
     var tagsForSeller = [
         { name: 'My Account', ref:'/Account' },
-        { name: 'My Products', ref:'/Orders' },
+        { name: 'My Products', ref:'/sellerproducts' },
         { name: 'Logout', ref:'/logout' }
     ];
      var tagsForAdmin = [
@@ -32,6 +33,7 @@ module.exports = function(app, passport,server) {
       	user : user,
       	nextPage:nextPage,
         tagline: tagline,
+        searchtext: "",
         tags:tagsForBuyer
    		 });
   }
@@ -41,6 +43,7 @@ module.exports = function(app, passport,server) {
           user : user,
           nextPage:nextPage,
           tagline: tagline,
+          searchtext: "",
           tags:tagsForSeller
          });
     }
@@ -50,6 +53,7 @@ module.exports = function(app, passport,server) {
           user : user,
           nextPage:nextPage,
           tagline: tagline,
+          searchtext: "",
           tags:tagsForAdmin
          });
     }
