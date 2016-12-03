@@ -35,6 +35,7 @@ module.exports = function(app, mongoose, Grid) {
 	    	productsList = productsArrays[+currentPage - 1];
 		}
 	    /********************************************/
+	    
 	    response.render('search.html', { 
 	    	//for pagination
 	        pageSize: pageSize,
@@ -49,7 +50,7 @@ module.exports = function(app, mongoose, Grid) {
 	        searchtext: searchtext,
 	        sellerfiltersapplied: sellerfiltersapplied,
 	        pricefiltersapplied: priceFilters,
-	        tags: commonserver.getTags(),
+	        tags: commonserver.getTags(request.user),
 	        sellers: sellerbrands,
 	  		message: message 
 	  	});
@@ -57,7 +58,7 @@ module.exports = function(app, mongoose, Grid) {
 
 	// *** app.get Not needed for search because fnctionality will be done by post. TO BE REMOVED later. ***/
 	// Retrieves all products (whose quantity is greater than zero) data and passes it to the view
-	app.get('/search', commonserver.anypageAuth, function(request, response) { 
+	app.get('/search', function(request, response) { 
 		var retproducts;
 		var sortby = request.body.sortby; 
 		/* gets all seller brands, to be dispplayed in refinement panel */

@@ -50,14 +50,14 @@ module.exports = function(app, mongoose, Grid) {
 	        searchtext: searchtext,
 	        sellerfiltersapplied: sellerfiltersapplied,
 	        pricefiltersapplied: priceFilters,
-	        tags: commonserver.getTags(),
+	        tags: commonserver.getTags(request.user),
 	        sellers: sellerbrands,
 	  		message: message 
 	  	});
 	}
 
 	// Retrieves data relevant to the search query and passes it to the view
-	app.post('/search', commonserver.anypageAuth, function(request, response) {
+	app.post('/search', function(request, response) {
 		var searchtext = request.body.search_text;
 		var sellerBrandsFilter = request.body.seller;
 		var sellerfiltersapplied = (request.body.sellername) ?  request.body.sellername : "";

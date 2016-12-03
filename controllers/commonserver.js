@@ -18,7 +18,6 @@ module.exports.auth = function (req, res, next) {
 			nextPage: nextPage,
 			tags:tags
 		});
- 
 }
 
 module.exports.splAuth =  function (req, res, next) {
@@ -27,16 +26,27 @@ module.exports.splAuth =  function (req, res, next) {
 }
 
 /* functions for header bar */
-module.exports.getTags = function() {
-  var tags = [
-    { name: 'My Account', ref:'/Account' },
-    { name: 'My Orders', ref:'/Orders' },
-    { name: 'Logout', ref:'/logout' }
-  ];
-  return tags;
+module.exports.getTags = function(user) {
+  var tags = "";
+  if(user){
+    tags = [
+      { name: 'My Account', ref:'/Account' },
+      { name: 'My Orders', ref:'/Orders' },
+      { name: 'Logout', ref:'/logout' }
+    ];
+    return tags;
+  } 
+  else{
+    tags = [
+      { name: 'Login', ref:'/login' }];
+    return tags;
+  }
 }
 module.exports.getTagLine = function(user) {
-  var tagline = user.user.username;
+  var tagline = "";
+  if(user) {
+    tagline = user.user.username;
+  }  
   return tagline;
 }
 /******************************/
