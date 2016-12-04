@@ -242,9 +242,9 @@
                                     <div class="product product-grid">
                                         <div class="product-media">
                                             <div class="product-thumbnail">
-                                                <a href="product-fullwidth.html" title="">
-                                                    <img <% if(product["product"]["imagepath"]) { %> src='<%= product["product"]["imagepath"] %>' <% } else { %> src='/images/emptyimageplaceholder.jpg' <% } %> alt="" class="">
-                                                    <img <% if(product["product"]["imagepath"]) { %> src='<%= product["product"]["imagepath"] %>' <% } else { %> src='/images/emptyimageplaceholder.jpg' <% } %> alt="" class="current">
+                                                <a href='/productSpecs?productID=<%= product["_id"] %>' title="">
+                                                    <img <% if(product["product"]["imagepath"]) { %> src='<%= product["product"]["imagepath"] %>' <% } else { %> src='/images/emptyimageplaceholder.jpg' <% } %> alt="" class="" >
+                                                    <img <% if(product["product"]["imagepath"]) { %> src='<%= product["product"]["imagepath"] %>' <% } else { %> src='/images/emptyimageplaceholder.jpg' <% } %> alt="" class="current" >
                                                 </a>
                                             </div>
                                             <!-- /.product-thumbnail -->
@@ -256,7 +256,7 @@
                                                     <!--<a href="#" class="awe-button product-quick-whistlist" data-toggle="tooltip" title="" data-original-title="Add to wishlist">
                                                         <i class="icon icon-star"></i>
                                                     </a>-->
-                                                    <a href="product-quick-view.html" class="awe-button product-quick-view" data-toggle="tooltip" title="" data-original-title="Quickview">
+                                                    <a href='/productSpecs?productID=<%= product["_id"] %>'  class="awe-button product-quick-view" data-toggle="tooltip" title="" data-original-title="Quickview">
                                                         <i class="icon icon-eye"></i>
                                                     </a>
                                                 </div>
@@ -266,7 +266,7 @@
                                         <!-- /.product-media -->
                                         <div class="product-body">
                                             <h2 class="product-name">
-                                                <a href="#" title='<%= product["product"]["name"] %>'><%= product["product"]["name"] %></a>
+                                                <a href='/productSpecs?productID=<%= product["_id"] %>' title='<%= product["product"]["name"] %>' ><%= product["product"]["name"] %></a>
                                             </h2>
                                             <!-- /.product-product -->
                                             <div class="product-category prod_desc crop" title='<%= product["product"]["description"] %>'>
