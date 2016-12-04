@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
     
-var commentSchema = mongoose.Schema({
+var cartSchema = mongoose.Schema({
     cart         : 
     {
 	userEmail    : String,
@@ -14,4 +14,24 @@ var commentSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Cart', commentSchema);
+cartSchema.methods.deleteCart = function(request, response, orders,  redirectTo){
+	console.log(orders[0])
+	var ordersCounter = orders.length;
+	orders.forEach(function(cart){	
+		cart.remove(function(err){
+		if (err){ console.log("error in deleting cart"); } 
+		else { 
+		    ordersCounter--; 
+			console.log("cart deleted successfully"); 
+			if(ordersCounter == 0) { res.render('shoppingCart.html',{});
+
+        if (req.session.state) {
+            res.json({state: req.session.state});
+        } }
+			} 
+		});
+	});
+
+}
+
+module.exports = mongoose.model('Cart', cartSchema);

@@ -21,7 +21,7 @@ module.exports = function(app) {
 					          { name: 'Logout', ref:'/logout' }
 					        ];
 					        var nextPage = "#";
-
+                            console.log(user.role)
 					        if(orders != null){
 							           console.log(orders[0]);
                                         // No error in fetching cart

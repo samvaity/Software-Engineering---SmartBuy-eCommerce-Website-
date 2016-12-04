@@ -20,7 +20,7 @@
       </script>
    </head>
    <body><div> <% include navbar.html %></div>
-      <div class="container">
+     <section> <div class="container">
          <div class="row cols-border">
             <div class="col-md-6">
                <div class="product-details-wrapper">
@@ -30,7 +30,7 @@
                </div>
 
                 <div role="tabpanel" class="tab-pane" id="product-review">
-                        <h3>Items <span></span></h3>
+                        <% if (orders.length > 0) { %> <h3>Items <span></span></h3>  <% } %> 
                         <ol class="product-review-list">
                         <% orders.forEach(function(order) { %>
                         
@@ -53,15 +53,21 @@
                             <% }); %> 
                         </ol>
                   </div>
-                  <div class="product-list-actions">
-                   <a href="/checkout" >
-                   <button  class="btn btn-lg btn-primary">Proceed to checkout</button>
-                   </a>
+                  <% if (orders.length > 0) { %>
+                      <div class="product-list-actions">
+                      <a href="/checkout" >
+                      <button  class="btn btn-lg btn-primary">Proceed to checkout</button>
+                      </a>
+                      </div>
+                 <% } %> 
+                  <div>
+                  <h3>No Items in Cart <span></span></h3>
                   </div>
 
             </div>
         </div>
       </div>
+      </section>
       <footer>
          <% include footer.html %>
       </footer>

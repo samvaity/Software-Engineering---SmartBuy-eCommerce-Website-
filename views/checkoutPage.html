@@ -20,222 +20,241 @@
       </script>
    </head>
    <body>
-    <div> <% include navbar.html %></div> 
-    <section>
-       <div class="container">
+      <div> <% include navbar.html %></div>
+      <section>
+         <div class="container">
          <div class="row cols-border">
-            <div class="product-details-wrapper">
-                  <h2 class="product-name">
-                     <a href="#" class="title"> Checkout Details</a>
-                  </h2>
-                
-               <div class="col-md-8">
-           
-                  <div role="tabpanel" class="product-details">
-                     <nav>
-                        <ul class="nav" role="tablist">
-                           <li role="presentation" class="active">
-                              <a href="#product-description" data-toggle="tab">Shipment Details</a>
-                           </li>
-                           <li role="presentation">
-                              <a href="#product-review" data-toggle="tab">Payment Details <span></span></a>
-                           </li>
-                        </ul>
-                     </nav>
-                    
-
-                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="product-description">
-                        <div ><h3 style="font-size: 20px!important;text-transform: uppercase;">Add Shipment Address</h3></div>
-                        <form action="/addShippingAddress"  method="post">
-                           <div class="row">
-                              <div class="col-md-5">
-                                 <div class="form-group">
-                                    <label for="shipping_username">Name <sup>*</sup></label>
-                                    <input type="text" required name="shipping_username" class="form-control" id="shipping_username" placeholder="Name">
-                                 </div>
-                              </div>
-                              
-                          
-                              <div class="col-md-5">
-                                 <div class="form-group">
-                                    <label for="shipping_email">Email <sup>*</sup></label>
-                                    <input type="email" required name ="shipping_email" class="form-control" id="shipping_email" placeholder="Email">
-                                 </div>
-                              </div>
-                           </div>
-                           
-                           <div class="row">
-                              <div class="col-md-10">
-                                 <div class="form-group">
-                                    <label for="shipping_address1">Address <sup>*</sup>
-                                    </label>
-                                    <input type="text" required name ="shipping_address1" class="form-control" id="shipping_address1" placeholder="Address">
-                                 </div>
-                              </div>
-                           </div>
-
-                           <div class="row"> 
-                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                       <label for="shipping_city">City<sup>*</sup></label>
-                                       <input type="text" name="shipping_city" required class="form-control" placeholder="City" id="shipping_city" rows="7" placeholder="City">
-                                    </div>
-                                 </div>
-                     
-
-                              <div class="col-md-3">
-                                 <div class="form-group">
-                                    <label for="shipping_State">State<sup>*</sup></label>
-                                    <input type="text" name="shipping_State" required class="form-control" placeholder="State" id="shipping_State" rows="7" >
-                                 </div>
-                              </div>
-
-                              <div class="col-md-3">
-                                 <div class="form-group">
-                                    <label for="shipping_PC">Postal Code<sup>*</sup></label>
-                                    <input type="text" name="shipping_PC" required class="form-control" placeholder="Postal Code" id="shipping_PC" rows="7" >
-                                 </div>
-                              </div>
-
-                           </div>
-
-
-                   <!-- Submit button -->
-                   
+         <div class="product-details-wrapper">
+         <h2 class="product-name">
+            <a href="#" class="title"> Checkout Details</a>
+         </h2>
+         <div class="col-md-8">
+            <div role="tabpanel" class="product-details">
+               <nav>
+                  <ul class="nav" role="tablist">
+                     <li role="presentation" class="active">
+                        <a href="#product-description" data-toggle="tab">Shipment Details</a>
+                     </li>
+                     <li role="presentation">
+                        <a href="#product-review" data-toggle="tab">Payment Details <span></span></a>
+                     </li>
+                     <li role="presentation">
+                        <a href="#product-infomation" data-toggle="tab">Review Items <span></span></a>
+                     </li>
+                  </ul>
+               </nav>
+               <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="product-description">
+                     <div >
+                        <h3 style="font-size: 20px!important;text-transform: uppercase;">Add Shipment Address</h3>
+                     </div>
+                     <form action="/addShippingAddress"  method="post">
                         <div class="row">
-
-   <div class="col-md-3">
-      <div class="form-group">
-                        <div class="form-submit clearfix ">
-                           <div style="align-content:center;" class="pull-middle">
-                            <button type="submit"  class="submit btn btn-lg btn-primary">Save</button>
+                           <div class="col-md-5">
+                              <div class="form-group">
+                                 <label for="shipping_username">Name <sup>*</sup></label>
+                                 <input type="text" required name="shipping_username" class="form-control" id="shipping_username" placeholder="Name">
+                              </div>
+                           </div>
+                           <div class="col-md-5">
+                              <div class="form-group">
+                                 <label for="shipping_email">Email <sup>*</sup></label>
+                                 <input type="email" required name ="shipping_email" class="form-control" id="shipping_email" placeholder="Email">
+                              </div>
                            </div>
                         </div>
-</div>
-</div>
-
- 
-   <div class="col-md-3">
-      <div class="form-group">
-                         <div class="form-submit clearfix ">
-                           <div style="align-content:center;" class="pull-middle">
-                            <button type="submit"  class="submit btn btn-lg btn-primary">Cancel</button>
+                        <div class="row">
+                           <div class="col-md-10">
+                              <div class="form-group">
+                                 <label for="shipping_address1">Address <sup>*</sup>
+                                 </label>
+                                 <input type="text" required name ="shipping_address1" class="form-control" id="shipping_address1" placeholder="Address">
+                              </div>
                            </div>
                         </div>
-                        </div>
-                        </div>
-                        
-                     
-                      </div>
-                                      
-                      </div>
-                     <!-- tab content -->
-                 
-                     </form>
-                    
-                        
-                        <div role="tabpanel" class="tab-pane" id="product-review">
-                            <h3  style="font-size: 20px!important;"">Add Payment Method</h3>
-                        <form action="/addPaymentMathod"  method="post">
-                           <div class="row">
-                               <div class="col-md-6">
-                                 <div class="form-group">
-                                    <label for="payment_cardHoldersName">Cardholder's Name<sup>*</sup></label>
-                                    <input type="text" required name="payment_cardHoldersName" class="form-control" id="payment_cardHoldersName" placeholder="Cardholder's Name">
-                                 </div>
+                        <div class="row">
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label for="shipping_city">City<sup>*</sup></label>
+                                 <input type="text" name="shipping_city" required class="form-control" placeholder="City" id="shipping_city" rows="7" placeholder="City">
                               </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label for="shipping_State">State<sup>*</sup></label>
+                                 <input type="text" name="shipping_State" required class="form-control" placeholder="State" id="shipping_State" rows="7" >
                               </div>
-                              
-                              <div class="row">
-                                 <div class="col-md-6">
-                                     <label for="payment_cardNumber">Credit Card Number <sup>*</sup></label>
-                                          <div class="input-group">
-                                              <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-credit-card"></span></span>
-                                             <input type="text" class="form-control" required name="payment_cardNumber" class="form-control" id="payment_cardNumber" placeholder="Credit Card Number" aria-describedby="basic-addon1">
-                                           </div>
-                                 </div>
-                              </div>    
-
-                              <div class="row">
-                                 <div class="col-md-2">
-                                    <div class="form-group">
-                                       <label for="payment_CVV">CVV<sup>*</sup></label>
-                                       <input type="text" name="payment_CVV" required class="form-control" placeholder="CVV" id="payment_CVV" rows="7" min="3" maxlength="3">
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label for="shipping_PC">Postal Code<sup>*</sup></label>
+                                 <input type="text" name="shipping_PC" required class="form-control" placeholder="Postal Code" id="shipping_PC" rows="7" >
+                              </div>
+                           </div>
+                        </div>
+                        <!-- Submit button -->
+                        <div class="row">
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <div class="form-submit clearfix ">
+                                    <div style="align-content:center;" class="pull-middle">
+                                       <button type="submit"  class="submit btn btn-lg btn-primary">Save</button>
                                     </div>
                                  </div>
-   <div class="col-md-3">
-      <div class="form-group">
-         <label for="shipping_State">Expiry Month<sup>*</sup></label>
-         <select class="form-control" name='expireMM' id='expireMM'>
-            <option value=''>Month</option>
-            <option value='01'>January</option>
-            <option value='02'>February</option>
-            <option value='03'>March</option>
-            <option value='04'>April</option>
-            <option value='05'>May</option>
-            <option value='06'>June</option>
-            <option value='07'>July</option>
-            <option value='08'>August</option>
-            <option value='09'>September</option>
-            <option value='10'>October</option>
-            <option value='11'>November</option>
-            <option value='12'>December</option>
-         </select>
-      </div>
-   </div>
-   
-   <div class="col-md-3">
-      <div class="form-group">
-         <label for="shipping_State">Expiry Year<sup>*</sup></label>
-         <select name='expireYY' class="form-control" id='expireYY'>
-            <option value=''>Year</option>
-            <option value='16'>2016</option>
-            <option value='17'>2017</option>
-            <option value='18'>2018</option>
-         </select>
-      </div>
-   </div>
- 
-</div>                         
-
-              <!-- Submit button -->
-              <div class="row">
-
-   <div class="col-md-3">
-      <div class="form-group">
-                        <div class="form-submit clearfix ">
-                           <div style="align-content:center;" class="pull-middle">
-                            <button type="submit"  class="submit btn btn-lg btn-primary">Save</button>
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <div class="form-submit clearfix ">
+                                    <div style="align-content:center;" class="pull-middle">
+                                       <button type="submit"  class="submit btn btn-lg btn-primary">Cancel</button>
+                                    </div>
+                                 </div>
+                              </div>
                            </div>
                         </div>
-</div>
-</div>
-
- 
-   <div class="col-md-3">
-      <div class="form-group">
-                         <div class="form-submit clearfix ">
-                           <div style="align-content:center;" class="pull-middle">
-                            <button type="submit"  class="submit btn btn-lg btn-primary">Cancel</button>
+                  </div>
+                  <!-- tab content -->
+                  </form>
+                  <div role="tabpanel" class="tab-pane" id="product-review">
+                     <h3  style="font-size: 20px!important;"">Add Payment Method</h3>
+                     <form action="/addPaymentMathod"  method="post">
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label for="payment_cardHoldersName">Cardholder's Name<sup>*</sup></label>
+                                 <input type="text" required name="payment_cardHoldersName" class="form-control" id="payment_cardHoldersName" placeholder="Cardholder's Name">
+                              </div>
                            </div>
                         </div>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <label for="payment_cardNumber">Credit Card Number <sup>*</sup></label>
+                              <div class="input-group">
+                                 <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-credit-card"></span></span>
+                                 <input type="text" class="form-control" required name="payment_cardNumber" class="form-control" id="payment_cardNumber" placeholder="Credit Card Number" aria-describedby="basic-addon1">
+                              </div>
+                           </div>
                         </div>
+                        <div class="row">
+                           <div class="col-md-2">
+                              <div class="form-group">
+                                 <label for="payment_CVV">CVV<sup>*</sup></label>
+                                 <input type="text" name="payment_CVV" required class="form-control" placeholder="CVV" id="payment_CVV" rows="7" min="3" maxlength="3">
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label for="shipping_State">Expiry Month<sup>*</sup></label>
+                                 <select class="form-control" name='expireMM' id='expireMM'>
+                                    <option value=''>Month</option>
+                                    <option value='01'>January</option>
+                                    <option value='02'>February</option>
+                                    <option value='03'>March</option>
+                                    <option value='04'>April</option>
+                                    <option value='05'>May</option>
+                                    <option value='06'>June</option>
+                                    <option value='07'>July</option>
+                                    <option value='08'>August</option>
+                                    <option value='09'>September</option>
+                                    <option value='10'>October</option>
+                                    <option value='11'>November</option>
+                                    <option value='12'>December</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label for="shipping_State">Expiry Year<sup>*</sup></label>
+                                 <select name='expireYY' class="form-control" id='expireYY'>
+                                    <option value=''>Year</option>
+                                    <option value='16'>2016</option>
+                                    <option value='17'>2017</option>
+                                    <option value='18'>2018</option>
+                                 </select>
+                              </div>
+                           </div>
                         </div>
+                        <!-- Submit button -->
+                        <div class="row">
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <div class="form-submit clearfix ">
+                                    <div style="align-content:center;" class="pull-middle">
+                                       <button type="submit"  class="submit btn btn-lg btn-primary">Save</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <div class="form-submit clearfix ">
+                                    <div style="align-content:center;" class="pull-middle">
+                                       <button type="submit"  class="submit btn btn-lg btn-primary">Cancel</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                  </div>
+                  <!-- tab panel -->
+                  </form>
+                  <div role="tabpanel" class="tab-pane" id="product-infomation">
+                      <h3>Items <span></span></h3>
+                        <ol class="product-review-list">
+                        <% orders.forEach(function(order) { %>
                         
-                     
-                      </div>
-               </div>
-                     <!-- tab panel -->
-                 
-                     </form>
-                        </div>
-               
+                           <div>
+                              <input type="hidden" name="cartID" value="<%= order['_id'] %>"></input>
+                           </div>
+
+                         <div style="float: right; clear: left;"> <img src="./img/samples/products/product/tiny/thumb-1.jpg" style="te" alt=""></div>
+                           <li>
+                              <h4 class="review-title"><%= order["cart"]["productName"] %></h4>
+                              
+                              <div class="review-comment">
+                                 
+                              </div>
+                              <div class="review-meta">
+                                 <span>Quantity - </span>
+                                 <a href="#" class="author"><%= order["cart"]["quantity"]%></a>
+                              </div>
+                              <div class="review-meta">
+                                 <span>Price - </span>
+                                 <a href="#" class="author"> <%= order["cart"]["productPrice"]%> </a>
+                              </div>
+                           </li>
+                            <% }); %> 
+                        </ol>
+                         <% if (orders.length > 0) { %>
+                         <div class="row">
+                           <div class="col-md-5">
+                              <div class="form-group">
+                                 <label for="cart_totalPrice">Cart total Price :<span>Not working yet</span> </label>
+                              </div>
+                            </div>
+                             
+                             <div class="col-md-3">
+                              <div class="form-group">
+                                 <div class="product-list-actions">
+                   <a href="/checkout/deletCart" >
+                   <button  class="btn btn-lg btn-primary" onclick='return confirm("Order has been placed!! Order ID :  <%= Math.floor(Math.random() * 200000000) %> ")'>Place your order</button>
+                   </a>
+                  </div>
+                              </div>
+                           </div>
+                          </div>
+                          <% } %> 
+                          <div>
+                  <h3>No Items in Cart to Review<span></span></h3>
+                  </div>
                   </div>
                </div>
-</section>
+            </div>
+         </div>
+      </section>
    </body>
    <footer>
       <% include footer.html %>
    </footer>
-   </html>
+</html>
