@@ -88,7 +88,7 @@
                             <tbody>
                                 <% products.forEach(function(product) { %>
                                 <tr>
-                                    <td data-label="Product" ><a href="#" title='<%= product["product"]["name"] %>'><%= product["product"]["name"] %></a></td>
+                                    <td data-label="Product" ><a href='/productSpecs?productID=<%= product["_id"] %>' title='<%= product["product"]["name"] %>'><%= product["product"]["name"] %></a></td>
                                     <td data-label="Description" title='<%= product["product"]["description"] %>'><%= product["product"]["description"] %></td>
                                     <td data-label="Edit">
                                         <a class="info edit-delete" href="/editInventory?productID=<%= product['_id'] %>">Edit</a>

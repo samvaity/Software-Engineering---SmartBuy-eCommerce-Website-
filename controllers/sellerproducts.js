@@ -32,7 +32,7 @@ module.exports = function(app, mongoose, Grid) {
 		        	nextPage: nextPage,
 		        	categories: categories,
 		        	searchtext: '',
-		        	tags: commonserver.getTags(),
+		        	tags: commonserver.getTags(request.user),
 			        products: products,
 			  		message: request.flash('error while retrieving products') 
 			  	});
