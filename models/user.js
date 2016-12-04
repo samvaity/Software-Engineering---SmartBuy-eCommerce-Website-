@@ -22,7 +22,16 @@ var userSchema = mongoose.Schema({
     address_city        	: String, 
     address_state       	: String, 
     address_country     	: String,
-    address_postCode    	: Number
+    address_postCode    	: Number,
+
+    shippingName : String,
+    shippingAddress : String,
+    shippingState : String,
+    shipingCountry: String,
+    shippingCity:String,
+    shippingUsername: String,
+    shippingPostalCode: String,
+    shippingEmail : String
 
     }
 });
@@ -51,6 +60,31 @@ userSchema.methods.updateUserProfile = function(request, response){
         });
 	
 };
+
+
+userSchema.methods.updateShippingDetails= function(request, response){
+console.log("calling the fun")
+  this.user.shippingUsername = request.body.shipping_username;
+  this.user.shippingCity = request.body.shipping_city;
+  this.user.shippingState = request.body.shipping_State;
+  this.user.shippingAddress = request.body.shipping_address1;
+  this.user.shippingPostalCode = request.body.shipping_PC;
+  this.user.shippingEmail = request.body.shipping_email;
+
+    this.user.save(function(err) {
+          if(!err)
+          {
+            response.redirect('/checkout');
+          }
+          else
+          {
+              request.flash('error', 'Could not save!');
+          }
+        });
+  
+};
+
+
 
 userSchema.methods.updateUserPaymentInfo = function(request, response){
     

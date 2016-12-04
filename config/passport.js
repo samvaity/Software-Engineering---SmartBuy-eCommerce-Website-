@@ -108,29 +108,33 @@ module.exports = function(passport) {
 	passport.use(new FacebookStrategy({
     		clientID: FACEBOOK_APP_ID,
     		clientSecret: FACEBOOK_APP_SECRET,
-    		callbackURL: "http://localhost:8080/auth/facebook/callback",
+            callbackURL: "http://localhost:8080/auth/facebook/callback",
             profileFields: ['id', 'displayName', 'link', 'photos', 'emails']
   		},
 
 
   		function(req, accessToken, refreshToken, profile, done) {
     		// asynchronous verification, for effect...
-               
+               console.log("In facebook")
     			process.nextTick(function () {
             			if (!req.user) {
+                            console.log(profile.emails[0].value)
                           				User.findOne({ 'user.email' :  profile.emails[0].value }, function(err, user) {
                 	    				if (err){ return done(err);}
                         				if (user) {
+                                            console.log("mil gaya")
                             				return done(null, user);
                         				} else {
                             			var newUser = new User();
             							newUser.user.username    = profile.displayName;
                                     	newUser.user.email    = profile.emails[0].value;
-            							/*newUser.user.name	= profile.displayName
-							newUser.user.address	= ''*/
-                        				newUser.save(function(err) {
+            							newUser.save(function(err) {
                             					if (err)
-                                					throw err;
+                                					{
+                                                         console.log("in db error")
+                                                        throw err;}
+                                                console.log("after db error")
+                                                console.log(newUser)
                             				return done(null, newUser);
                         				});
                     				}
@@ -167,20 +171,25 @@ module.exports = function(passport) {
     					process.nextTick(function () {
       
      						if (!req.user) {
+                                console.log("In google")
+                                console.log( profile.emails[0].value)
  							User.findOne({ 'user.email' :  profile.emails[0].value }, function(err, user) {
             	    						if (err){ return done(err);}
                     					if (user) {
+                                            console.log("got user")
                         					return done(null, user);
                     					} else {
                         					var newUser            = new User();
-								newUser.user.username    = profile.displayName;
-								newUser.user.email    = profile.emails[0].value;
-								/*newUser.user.name	= ''
-								newUser.user.address	= ''
+								            newUser.user.username    = profile.displayName;
+								            newUser.user.email    = profile.emails[0].value;
+								            /*newUser.user.name	= ''
+								            newUser.user.address	= ''
 */
                         					newUser.save(function(err) {
                             						if (err)
-                                						throw err;
+                                						{
+                                                            console.log("Naya user save");
+                                                            throw err;}
                             					return done(null, newUser);
                         					});
                     					}
@@ -192,7 +201,10 @@ module.exports = function(passport) {
 							user.user.email    = profile.emails[0].value;
                 					user.save(function(err) {
                     					if (err)
-                        					throw err;
+                        					{
+                                                console.log("After save")
+                                                throw err;
+                                            }
                     					return done(null, user);
 							});
 						}

@@ -43,23 +43,29 @@
                      </li>
                   </ul>
                </nav>
+              
                <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active" id="product-description">
-                     <div >
+                   <form action="/addShippingAddress"  method="post">
+                     <div>
                         <h3 style="font-size: 20px!important;text-transform: uppercase;">Add Shipment Address</h3>
                      </div>
-                     <form action="/addShippingAddress"  method="post">
-                        <div class="row">
-                           <div class="col-md-5">
+                     <div>
+                        <input  name="userEmail" type="hidden" value="<%= varUserEmail %>"></input>
+                     </div>
+                     <!-- <p><%= shippingUser.user.shippingUserName %><p>
+ -->
+                     <div class="row">
+                           <!-- <div class="col-md-5">
                               <div class="form-group">
                                  <label for="shipping_username">Name <sup>*</sup></label>
                                  <input type="text" required name="shipping_username" class="form-control" id="shipping_username" placeholder="Name">
                               </div>
-                           </div>
+                           </div> -->
                            <div class="col-md-5">
                               <div class="form-group">
                                  <label for="shipping_email">Email <sup>*</sup></label>
-                                 <input type="email" required name ="shipping_email" class="form-control" id="shipping_email" placeholder="Email">
+                                 <input type="email" required name ="shipping_email" value="<%= shippingUser.user.email %>" class="form-control" id="shipping_email" placeholder="Email">
                               </div>
                            </div>
                         </div>
@@ -68,7 +74,7 @@
                               <div class="form-group">
                                  <label for="shipping_address1">Address <sup>*</sup>
                                  </label>
-                                 <input type="text" required name ="shipping_address1" class="form-control" id="shipping_address1" placeholder="Address">
+                                 <input type="text" required name ="shipping_address1" value="<%= shippingUser.user.shippingAddress %>" class="form-control" id="shipping_address1" placeholder="Address">
                               </div>
                            </div>
                         </div>
@@ -76,19 +82,19 @@
                            <div class="col-md-4">
                               <div class="form-group">
                                  <label for="shipping_city">City<sup>*</sup></label>
-                                 <input type="text" name="shipping_city" required class="form-control" placeholder="City" id="shipping_city" rows="7" placeholder="City">
+                                 <input type="text" name="shipping_city" required class="form-control" value="<%= shippingUser.user.shippingCity %>"  placeholder="City" id="shipping_city" rows="7" placeholder="City">
                               </div>
                            </div>
                            <div class="col-md-3">
                               <div class="form-group">
                                  <label for="shipping_State">State<sup>*</sup></label>
-                                 <input type="text" name="shipping_State" required class="form-control" placeholder="State" id="shipping_State" rows="7" >
+                                 <input type="text" name="shipping_State" required class="form-control" value="<%= shippingUser.user.shippingState %>" placeholder="State" id="shipping_State" rows="7" >
                               </div>
                            </div>
                            <div class="col-md-3">
                               <div class="form-group">
                                  <label for="shipping_PC">Postal Code<sup>*</sup></label>
-                                 <input type="text" name="shipping_PC" required class="form-control" placeholder="Postal Code" id="shipping_PC" rows="7" >
+                                 <input type="text" name="shipping_PC" required class="form-control" value="<%= shippingUser.user.shippingPostalCode %>" placeholder="Postal Code" id="shipping_PC" rows="7" >
                               </div>
                            </div>
                         </div>
@@ -98,7 +104,7 @@
                               <div class="form-group">
                                  <div class="form-submit clearfix ">
                                     <div style="align-content:center;" class="pull-middle">
-                                       <button type="submit"  class="submit btn btn-lg btn-primary">Save</button>
+                                       <button type="submit" class="submit btn btn-lg btn-primary">Save</button>
                                     </div>
                                  </div>
                               </div>
@@ -107,14 +113,19 @@
                               <div class="form-group">
                                  <div class="form-submit clearfix ">
                                     <div style="align-content:center;" class="pull-middle">
-                                       <button type="submit" href="/checkout" class="submit btn btn-lg btn-primary">Cancel</button>
+                                       <button type="reset" class="submit btn btn-lg btn-primary">Cancel</button>
                                     </div>
                                  </div>
                               </div>
                            </div>
                         </div>
-                    </form>
-                  </div>
+
+                   </form>
+                 
+                </div>
+                    
+                        
+                 
                   <!-- tab content -->
                 
                   <div role="tabpanel" class="tab-pane" id="product-review">
@@ -203,27 +214,27 @@
                  
                   <div role="tabpanel" class="tab-pane" id="product-infomation">
                       <h3>Items <span></span></h3>
+                      <% var sum = Number(0) %>
                         <ol class="product-review-list">
                         <% orders.forEach(function(order) { %>
-                        
-                           <div>
+                        <%  sum = Number(sum) + Number(order["cart"]["productPrice"]) %>
+                            <div>
                               <input type="hidden" name="cartID" value="<%= order['_id'] %>"></input>
                            </div>
 
                          <div style="float: right; clear: left;"> <img src="./img/samples/products/product/tiny/thumb-1.jpg" style="te" alt=""></div>
                            <li>
-                              <h4 class="review-title"><%= order["cart"]["productName"] %></h4>
+                              <h2 class="review-title" style="font-size: 25px!important;"><%= order["cart"]["productName"] %></h2>
                               
                               <div class="review-comment">
                                  
                               </div>
-                              <div class="review-meta">
-                                 <span>Quantity - </span>
+                              <div class="review-comment"><span>Quantity - </span>
                                  <a href="#" class="author"><%= order["cart"]["quantity"]%></a>
                               </div>
-                              <div class="review-meta">
+                              <div class="review-comment">
                                  <span>Price - </span>
-                                 <a href="#" class="author"> <%= order["cart"]["productPrice"]%> </a>
+                                 <a href="#" class="author"> <%= order["cart"]["productPrice"] %> </a>
                               </div>
                            </li>
                             <% }); %> 
@@ -232,13 +243,14 @@
                          <div class="row">
                            <div class="col-md-5">
                               <div class="form-group">
-                                 <label for="cart_totalPrice">Cart total Price :<span>Not working yet</span> </label>
+                                 <h3>Cart total Price :<span class="amount">$<%=  sum %></span> </h3>
                               </div>
                             </div>
-                             
+                             </div>
+                             <div class="row">
                              <div class="col-md-3">
                               <div class="form-group">
-                                 <div class="product-list-actions">
+                                 <div class="product-review-list">
                    <a href="/checkout/deletCart" >
                    <button  class="btn btn-lg btn-primary" onclick='return confirm("Order has been placed!! Order ID :  <%= Math.floor(Math.random() * 200000000) %> ")'>Place your order</button>
                    </a>
@@ -246,10 +258,11 @@
                               </div>
                            </div>
                           </div>
-                          <% } %> 
+                          <% } else { %> 
                           <div>
                   <h3>No Items in Cart to Review<span></span></h3>
                   </div>
+                  <% } %>
                   </div>
                </div>
             </div>
