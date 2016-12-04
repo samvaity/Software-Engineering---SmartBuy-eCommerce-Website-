@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Categories Page</title>
+    <!--<% include ./ejs/head %>
+    <link rel="stylesheet" type="text/css" href="css/searchResults.css">
+    <script type="text/javascript" src="views/js/search.js"></script>-->
+</head>
+<body> <% include navbar.html %>
+    <div class="page-container container-fluid container content-container list-page-bootstrap-container">
+    <form class="filter-checkbox" action="/search" method="post">
+    <div class="container-fluid ">
+        <div class="results-header">
+            <!--<div class="row breadcrumb-row">
+                <div class="col-xs-12">
+                    <nav class="breadcrumb-navigation" role="navigation" aria-label="Breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class=""><a href="/">SmartBuy</a></li>
+                            <li class="active"><a href="#">All Categories</a></li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="clearfix"></div>
+            </div>-->   
+            <div class="row results-title">
+                <div class="col-sm-12">
+                    <!--<h1 class="result-for">
+                        Search results for 
+                    </h1>-->
+                </div>
+            </div>
+            <div class="row results-title">
+                <div class="col-sm-12">
+                        <input type="text" value="<%= searchtext %>" name="search_text" class="hide">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row">
+            <div class="left-container col-sm-3 search-filters">
+                <nav class="filters" role="navigation" aria-label="Secondary">
+                    <h2 class="sr-only">Filters</h2>
+                    <ul class="filter-list" role="group" aria-label="Filters: Selecting a filter checkbox will refresh the page to update the results.">
+                        <li id="brand_filter" data-name="Brand" data-id="brand_filter" class="filter-item">
+                            <div class="filter-title"> <!--<h3 class="title">Sellers</h3> --></div>
+                            <div class="filter-content">
+                                
+                                
+                            </div>
+                        </li>
+                        <li id="price-filter" data-name="Price" data-id="price-filter" class="filter-item">
+                            <div class="filter-title">  <!--<h3 class="title ">Price</h3> --></div>
+                            <div class="filter-content">
+                                
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="right-container all-products col-sm-9 search-filter-results">
+                <main class="page-results" id="page-results" role="main" aria-labelledby="page-results-heading">
+                    <h2 class="sr-only" id="page-results-heading">Results</h2>
+                    <div class="main-results" id="main-results" role="group" tabindex="-1" aria-labelledby="main-results-heading">
+                        <div class="list-control-bar list-header-controls">
+                            <!--<div class="row">
+                                <div class="col-sm-6">-->
+                                
+<!--<div class="container">-->
+    <div class="well well-sm">
+        <strong><h2>Category Title</h2></strong>
+        <!--<div class="btn-group">
+            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+            </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                class="glyphicon glyphicon-th"></span>Grid</a>
+        </div>-->
+    </div>
+    <div id="categories-list" class="row list-group">
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="images/11.jpg" alt="" />
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                        Product title</h4>
+                    <p class="group inner list-group-item-text">
+                        Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+						
+						</p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                $21.000</p>
+                        
+                            <a class="btn btn-success" href="#">Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="images/11.jpg" alt="" />
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                        Product title</h4>
+                    <p class="group inner list-group-item-text">
+                        Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                $21.000</p>
+                        
+                            <a class="btn btn-success" href="#">Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="images/11.jpg" alt="" />
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                        Product title</h4>
+                    <p class="group inner list-group-item-text">
+                        Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                $21.000</p>
+                        
+                            <a class="btn btn-success" href="#">Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="images/11.jpg" alt="" />
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                        Product title</h4>
+                    <p class="group inner list-group-item-text">
+                        Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                $21.000</p>
+                        
+                            <a class="btn btn-success" href="#">Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="images/11.jpg" alt="" />
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                        Product title</h4>
+                    <p class="group inner list-group-item-text">
+                        Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                $21.000</p>
+                        
+                            <a class="btn btn-success" href="#">Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="images/11.jpg" alt="" />
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                        Product title</h4>
+                    <p class="group inner list-group-item-text">
+                        Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                $21.000</p>
+                        
+                            <a class="btn btn-success" href="#">Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="images/11.jpg" alt="" />
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                        Product title</h4>
+                    <p class="group inner list-group-item-text">
+                        Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                $21.000</p>
+                        
+                            <a class="btn btn-success" href="#">Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--</div>-->
+
+<script type="text/javascript">
+// View en grid et liste pour categories
+$(document).ready(function() {
+    $('#list').click(function(event){event.preventDefault();$('#categories-list .item').addClass('list-group-item');});
+    $('#grid').click(function(event){event.preventDefault();$('#categories-list .item').removeClass('list-group-item');$('#categories-list .item').addClass('grid-group-item');});
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+								
+                                <!--</div>-->
+                                <div class="col-sm-6"></div>
+                                <!--<div class="col-sm-3">
+                                    <div class="results-display-picker">
+                                        <label>View:</label> 
+                                        <button class="btn btn-sm display-list-view" aria-pressed="false" data-track="PLPListView">
+                                            <span class="glyphicon glyphicon-th-list"></span>
+                                            List
+                                        </button>
+                                        <button class="btn btn-sm display-grid-view" aria-pressed="true" data-track="PLPGridView">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                            Grid
+                                        </button>
+                                    </div>
+                                </div>-->
+                                <div class="clearfix"></div> 
+                            </div>
+                            <div class="clearfix"></div> 
+                        </div>
+                        <div class="row applied-filters-container">
+                            <div class="col-sm-12">
+                                <div class="applied-filter-content">
+                                   
+                                </div>
+                            </div>
+                            <div class="clearfix"></div> 
+                        </div>
+                        <div class="row products-grid-container list-items">
+                            
+                                
+                        </div>
+                        <div class="pagination pull-right">
+                            
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </main>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        </div>
+        </form>
+    </div>  
+  
+</body>
+<footer>
+  <% include footer.html %>
+</footer>
+</html>
