@@ -29,7 +29,7 @@ module.exports = function(app, passport,server) {
         { name: 'Logout', ref:'/logout' }
     ];
     if(user.user.role == 'buyer' || user.user.role == ""){
-		response.render('buyerHomepage.html', {
+		response.render('webhome.html', {
       	user : user,
       	nextPage:nextPage,
         tagline: tagline,

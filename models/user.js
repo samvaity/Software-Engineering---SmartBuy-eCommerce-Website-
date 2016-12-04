@@ -22,7 +22,8 @@ var userSchema = mongoose.Schema({
     address_city        	: String, 
     address_state       	: String, 
     address_country     	: String,
-    address_postCode    	: Number,
+    address_postCode    	: Number
+
     }
 });
 

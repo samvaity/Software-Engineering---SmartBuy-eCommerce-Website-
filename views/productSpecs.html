@@ -107,7 +107,9 @@
                         <% if (product.product.discount > 0) { %>
                         <del class="amount">$<%= product.product.discount %></del>
                         <% } %>
+                        <% if (userRole == 'buyer') { %>
                         <button class="btn btn-lg btn-primary">Add to cart</button>
+                        <% }  %>
                      </div>
                      <!-- /.product-list-actions -->
                   </div>
