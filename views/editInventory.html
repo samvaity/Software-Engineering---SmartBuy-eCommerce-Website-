@@ -150,17 +150,69 @@
 	                    </div>
 
 						<div class="form-group">
-					  		<label class="col-md-4 control-label">Pictures</label>  
+					  		<label class="col-md-4 control-label">Full Size Images</label>  
 					    	<div class="col-md-4 inputGroupContainer">
 					    		<div class="input-group">
 					        		<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-									    <input type="file" name="prodImages" multiple>
+									    <input type="file" name="prodImagesLarge" multiple  <% if (largeImages.length == 0) { %> required <% } %> >
 				    					<!--<input type="submit" value="Submit">-->
 					  				<!--<input name="product_picture" placeholder="Pictures" class="form-control" type="image">-->
 					    		</div>
 					  		</div>
 						</div>
-
+						<div class="form-group">
+							<div class="col-md-4"></div>
+							<div class="col-md-8 inputGroupContainer">
+								<label>*NOTE: Please provide atleast one full size image for a product. Image size expected: 370 x 579 </label> 
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-4"></div>
+							<div class="col-md-8 inputGroupContainer">
+								<label class="control-label input-group">Images previously added: </label>
+								<ul class="previous-images">
+	                                <% if (largeImages.length != 0) { %>
+	                                <% largeImages.forEach(function(largeImage) { 
+	                                    if(largeImage.length != 0) { %>
+	                                <li class="image-value" data-filter-id="brand_filter" >
+                                        <span class="image"><%= largeImage %></span>
+	                                </li>
+	                                <% } }); } %>   
+                                </ul>
+							</div> 
+						</div>
+						<div class="form-group">
+					  		<label class="col-md-4 control-label">Thumbnail Images</label>  
+					    	<div class="col-md-4 inputGroupContainer">
+					    		<div class="input-group">
+					        		<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+									    <input type="file" name="prodImagesThumbnail" multiple>
+				    					<!--<input type="submit" value="Submit">-->
+					  				<!--<input name="product_picture" placeholder="Pictures" class="form-control" type="image">-->
+					    		</div>
+					  		</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-4"></div>
+							<div class="col-md-8 inputGroupContainer">
+								<label class="control-label input-group">*NOTE: Please provide thumbnail images of size 225 x 225 </label>
+							</div> 
+						</div>
+						<div class="form-group">
+							<div class="col-md-4"></div>
+							<div class="col-md-8 inputGroupContainer">
+								<label class="control-label input-group">Images previously added: </label>
+								<ul class="previous-images">
+	                                <% if (thumbnailImages.length != 0) { %>
+	                                <% thumbnailImages.forEach(function(thumbnailImage) { 
+	                                    if(thumbnailImage.length != 0) { %>
+	                                <li class="image-value" data-filter-id="brand_filter" >
+                                        <span class="image"><%= thumbnailImage %></span>
+	                                </li>
+	                                <% } }); } %>   
+                                </ul>
+							</div> 
+						</div>
 						<div class="form-group">
 							<label class="col-md-4 control-label"></label>
 							<div class="col-md-2">

@@ -2,6 +2,7 @@ var Product = require('../models/product');
 var User = require('../models/user');
 var Category = require('../models/category');
 var commonserver = require('./commonserver');
+var newGrid = require('../models/fsfiles');
 
 module.exports = function(app, multer, mongoose, Grid) {
  
@@ -15,7 +16,12 @@ module.exports = function(app, multer, mongoose, Grid) {
       callback(null, file.fieldname + '-' + Date.now());
     }
   });
-  var upload = multer({ storage : storage}).array('prodImages');
+
+  var upload = multer({ storage : storage}).fields([{
+           name: 'prodImagesLarge'
+         }, {
+           name: 'prodImagesThumbnail'
+         }]);
   var gfs;
   conn.once('open', function() {
     gfs = Grid(conn.db);
@@ -29,28 +35,54 @@ module.exports = function(app, multer, mongoose, Grid) {
         throw err;
       }
       else{
-        var tagline = request.user.user.username;
-        var tags = [
-          { name: 'My Account', ref:'/Account' },
-          { name: 'My Orders', ref:'/Orders' },
-          { name: 'Logout', ref:'/logout' }
-        ];
         var nextPage = "#";
         if(product_id != null){
           Product.findOne({"_id": mongoose.mongo.ObjectID(product_id)}, function(err, product){
             if (err){           // Error occured while fetching product
                 throw err;
             }
-            else{              // No error in fetching product
+            else if(product){              // No error in fetching product & a product is found
+              newGrid.find({$and : [{"metadata.productname": product.product.name}, {"metadata.sellerID": product.product.sellerID}]}).lean().exec(function(err, files) {
+                var thumbnailImages = [], largeImages = [];
+                if(err){  // error occured while retrieving images
+                  throw err;
+                }
+                else if(files){   //images retrieved successfully
+                  files.forEach(function(file, index, filesArray){
+                    if(file['metadata']['imagetype'] == "largeimage"){   // largeimages found
+                        largeImages.push(file["filename"]);
+                    }
+                    else if(file['metadata']['imagetype'] == "thumbnailimage"){   // thumbnailimages found
+                        thumbnailImages.push(file["filename"]);
+                    }
+                  });
+                }
+                response.render('editInventory.html', { 
+                  user: request.user,
+                  categories: categories,
+                  tagline: commonserver.getTagLine(request.user),
+                  nextPage: nextPage,
+                  largeImages: largeImages,
+                  thumbnailImages: thumbnailImages,
+                  tags: commonserver.getTags(),
+                  product: product, 
+                  searchtext: "",
+                  message: request.flash('error in adding inventory') 
+                });
+              });
+            }
+            else{       // No product found
               response.render('editInventory.html', { 
                 user: request.user,
                 categories: categories,
                 tagline: commonserver.getTagLine(request.user),
                 nextPage: nextPage,
+                largeImages: [],
+                thumbnailImages: [],
                 tags: commonserver.getTags(),
                 product: product, 
                 searchtext: "",
-                message: request.flash('error in adding inventory') 
+                message: "*No product found",
               });
             }
           });

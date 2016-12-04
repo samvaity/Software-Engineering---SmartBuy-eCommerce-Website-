@@ -38,3 +38,30 @@ table.small-editor iframe.k-content
 /*
 .content-container button:hover{ background: #816263; border-color: #816263; }*/
 .content-container button.cancel {padding-top: 5px;}
+
+/**** previous images list ****/
+ul.previous-images {
+    list-style: none;
+    padding: 0;
+}
+.previous-images li.image-value {
+    position: relative;
+    border-radius: 4px;
+    padding: 8px 10px;
+    border: solid 1px #e1e1e1;
+}
+.previous-images li:nth-last-child(2) {
+    margin-right: 15px;
+}
+.previous-images li {
+    float: left;
+    margin: 0 10px 10px 0;
+    padding: 8px 0;
+}
+.previous-images .image {
+    display: inline-block;
+    position: relative;
+    top: -1px;
+    margin: 0 8px 0 0;
+}
+/******************************/
