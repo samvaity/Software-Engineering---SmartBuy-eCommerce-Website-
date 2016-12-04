@@ -1,9 +1,9 @@
-var commonserver = require('./commonserver');
+/*var commonserver = require('./commonserver');
 module.exports = function(app) {
 
 
 //spl case for when user puts /login in the web url
-    app.get('/webhome',  function(request, response) {
+    app.get('/',  function(request, response) {
 		//console.log('n');
             response.render('webhome.html', { 
 	    	//for pagination
@@ -16,3 +16,4 @@ module.exports = function(app) {
 	  	});
         });
 		}
+*/

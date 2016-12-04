@@ -12,12 +12,32 @@ module.exports.auth = function (req, res, next) {
   if (req.isAuthenticated()) {  return next(); }
   	var tagline = "Login";
   	var nextPage = "/login";
-	var tags = [];
-   	res.render('index.html', {
+	  var tags = [];
+   	res.render('webhome.html', {
 			tagline: tagline,
 			nextPage: nextPage,
-			tags:tags
+			tags:tags,
+      searchtext: ""
 		});
+
+/*    res.redirect("/");*/
+ 
+}
+
+
+module.exports.cartAuth = function (req, res, next) {
+  if (req.isAuthenticated()) {  return next(); }
+    var tagline = "Login";
+    var nextPage = "/login";
+    var tags = [];
+    res.render('shoppingCart.html', {
+      tagline: tagline,
+      nextPage: nextPage,
+      tags:tags,
+      searchtext: ""
+    });
+/*    res.redirect("/");*/
+ 
 }
 
 module.exports.splAuth =  function (req, res, next) {
