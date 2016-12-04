@@ -20,8 +20,9 @@ module.exports = function(app) {
 	      		];
 
       		var nextPage = "#";
-			console.log(comments[0]);
-			console.log(product);
+			//console.log(comments[0]);
+			console.log("After this");
+			console.log(request.user.user.role);
 		 	response.render('productSpecs.html', { 
 				productName:product[0].product.name,
 				productSpecification:product[0].product.specifications,
@@ -29,8 +30,10 @@ module.exports = function(app) {
 				productPrice:product[0].product.price,
 				product:product[0],
 				tagline: tagline,
+				userRole: request.user.user.role,
          		nextPage:nextPage,
          		comments:comments,
+         		searchtext: "",
           		tags:tags
 				});
 		 	});

@@ -18,16 +18,16 @@
          window.SHOW_LOADING = false;
       </script>
    </head>
-   <body>
+   <body><div> <% include navbar.html %></div>
       <div class="container">
          <div class="product-slider-wrapper">
             <div class="swiper-container product-slider-thumbs">
                <div class="swiper-wrapper">
                   <div class="swiper-slide">
-                     <img src="images/products/thumb-2.jpg" alt="">
+                     <img src="./img/samples/products/product/thumb-2.jpg" alt="">
                   </div>
                   <div class="swiper-slide">
-                     <img src="images/products/thumb-2.jpg" alt="">
+                     <img src="./img/samples/products/product/thumb-2.jpg" alt="">
                   </div>
                   <!--  <div class="swiper-slide">
                      <img src="images/products/thumb-2.jpg" alt="">
@@ -163,7 +163,9 @@
                         <% if (product.product.discount > 0) { %>
                         <del class="amount">$<%= product.product.discount %></del>
                         <% } %>
+                        <% if (userRole == 'buyer') { %>
                         <button class="btn btn-lg btn-primary">Add to cart</button>
+                        <% }  %>
                      </div>
                      <!-- /.product-list-actions -->
                   </div>
