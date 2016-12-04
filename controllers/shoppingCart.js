@@ -8,6 +8,7 @@ module.exports = function(app) {
         app.get('/Orders', commonserver.anypageAuth, function(request, response) {
                     //console.log(request);
                     console.log("is it come")
+                    console.log(request.user)
                     Cart.find({"cart.userEmail": request.user.user.email}, function(err, orders) {
                     		if (err){           // Error occured while fetching categories
 					        throw err;
@@ -21,7 +22,7 @@ module.exports = function(app) {
 					          { name: 'Logout', ref:'/logout' }
 					        ];
 					        var nextPage = "#";
-                            console.log(user.role)
+                            //console.log(user.role)
 					        if(orders != null){
 							           console.log(orders[0]);
                                         // No error in fetching cart

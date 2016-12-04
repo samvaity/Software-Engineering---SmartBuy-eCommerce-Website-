@@ -2,10 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
     
-var commentSchema = mongoose.Schema({
+var orderSchema = mongoose.Schema({
     order         : 
     {
 	userEmail    : String,
+	shippingName : String,
 	shippingAddress : String,
 	shippingState : String,
 	shipingCountry: String,
@@ -16,4 +17,4 @@ var commentSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Cart', commentSchema);
+module.exports = mongoose.model('Order', orderSchema);

@@ -4,7 +4,7 @@ var User = require('../models/user');
 
 module.exports = function(app) {
 
-       	app.get('/checkout', commonserver.auth, function(request, response) 
+       	app.get('/checkout', commonserver.anypageAuth, function(request, response) 
        	{
 			var user = request.user;
 			var tagline = user.user.username;
