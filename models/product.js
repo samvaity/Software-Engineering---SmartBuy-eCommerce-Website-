@@ -65,7 +65,7 @@ productSchema.methods.updateProduct = function(request, response, gfs, redirectT
 				var prodThumbnailImages = (request.files.prodImagesThumbnail) ? request.files.prodImagesThumbnail : "";
 				var totalImages = parseInt(prodLargeImages.length) + parseInt(prodThumbnailImages.length);
 			
-				var imagessaved = 0;
+				var imagessaved = 0;				
 				for(var i=0; i<prodLargeImages.length;i++){
 					var writeStream = gfs.createWriteStream({
 			            filename: prodLargeImages[i].originalname,

@@ -47,7 +47,7 @@ require('./controllers/sellerproducts.js')(app, mongoose, Grid);
 require('./controllers/search.js')(app, mongoose, Grid);
 require('./controllers/searchPost.js')(app, mongoose, Grid);
 require('./controllers/login.js')(app,passport);
-require('./controllers/productSpecs.js')(app);
+require('./controllers/productSpecs.js')(app, mongoose, Grid);
 require('./controllers/addComment.js')(app);
 require('./controllers/signup.js')(app, passport,server); 
 require('./controllers/forgot.js')(app);
