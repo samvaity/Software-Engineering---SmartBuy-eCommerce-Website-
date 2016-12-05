@@ -23,11 +23,7 @@ cartSchema.methods.deleteCart = function(request, response, orders,  redirectTo)
 		else { 
 		    ordersCounter--; 
 			console.log("cart deleted successfully"); 
-			if(ordersCounter == 0) { res.render('shoppingCart.html',{});
-
-        if (req.session.state) {
-            res.json({state: req.session.state});
-        } }
+			if(ordersCounter == 0) { return }
 			} 
 		});
 	});

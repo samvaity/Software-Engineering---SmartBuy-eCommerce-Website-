@@ -137,7 +137,8 @@ module.exports = function(app, passport,server) {
   
   /* to handle 500 error pages*/
   app.use(function(error, req, res, next) {
-     res.send('500: Internal Server Error', 500);
+     res.status(500);
+     res.render('500.html', {title: '500: Server Error'});
   });
 /*
 var io = require('socket.io').listen(server);
