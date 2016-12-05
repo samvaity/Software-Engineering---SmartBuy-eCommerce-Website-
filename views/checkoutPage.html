@@ -46,6 +46,7 @@
               
                <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active" id="product-description">
+                     <% if (shipping_address1 != null) { %>
                    <form action="/addShippingAddress"  method="post">
                      <div>
                         <h3 style="font-size: 20px!important;text-transform: uppercase;">Add Shipment Address</h3>
@@ -121,7 +122,72 @@
                         </div>
 
                    </form>
-                 
+                 <% } else { %>
+                 <form action="/addShippingAddress"  method="post">
+                     <div>
+                        <h3 style="font-size: 20px!important;text-transform: uppercase;">Add Shipment Address</h3>
+                     </div>
+                     <div>
+                        <input  name="userEmail" type="hidden" value="<%= varUserEmail %>"></input>
+                     </div>
+                     <!-- <p><%= shippingUser.user.shippingUserName %><p>
+ -->
+                     <div class="row">
+                           <!-- <div class="col-md-5">
+                              <div class="form-group">
+                                 <label for="shipping_username">Name <sup>*</sup></label>
+                                 <input type="text" required name="shipping_username" class="form-control" id="shipping_username" placeholder="Name">
+                              </div>
+                           </div> -->
+                           <div class="col-md-5">
+                              <div class="form-group">
+                                 <label for="shipping_email">Email <sup>*</sup></label>
+                                 <input type="email" required name ="shipping_email"  class="form-control" id="shipping_email" placeholder="Email">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-10">
+                              <div class="form-group">
+                                 <label for="shipping_address1">Address <sup>*</sup>
+                                 </label>
+                                 <input type="text" required name ="shipping_address1"  class="form-control" id="shipping_address1" placeholder="Address">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label for="shipping_city">City<sup>*</sup></label>
+                                 <input type="text" name="shipping_city" required class="form-control"   placeholder="City" id="shipping_city" rows="7" placeholder="City">
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label for="shipping_State">State<sup>*</sup></label>
+                                 <input type="text" name="shipping_State" required class="form-control"  placeholder="State" id="shipping_State" rows="7" >
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label for="shipping_PC">Postal Code<sup>*</sup></label>
+                                 <input type="text" name="shipping_PC" required class="form-control" placeholder="Postal Code" id="shipping_PC" rows="7" >
+                              </div>
+                           </div>
+                        </div>
+<div class ="row">
+                 <div class="col-md-3">
+                              <div class="form-group">
+                                 <div class="form-submit clearfix ">
+                                    <div style="align-content:center;" class="pull-middle">
+                                       <button type="reset"  class="submit btn btn-lg btn-primary">Add new Shipping Address</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           </div>
+                           </form>
+                  <% } %>
                 </div>
                     
                         
@@ -222,7 +288,7 @@
                               <input type="hidden" name="cartID" value="<%= order['_id'] %>"></input>
                            </div>
 
-                         <div style="float: right; clear: left;"> <img src="./img/samples/products/product/tiny/thumb-1.jpg" style="te" alt=""></div>
+                         <div style="float: right; clear: left;"> <img src="/productimages/5820f30167b3aa34f838cac95496140_sa.jpg" style="te" alt=""></div>
                            <li>
                               <h2 class="review-title" style="font-size: 25px!important;"><%= order["cart"]["productName"] %></h2>
                               
