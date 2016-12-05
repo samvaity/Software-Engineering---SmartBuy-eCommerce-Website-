@@ -33,14 +33,9 @@ redirect the user back to this application at /auth/facebook/callback*/
 // login page. Otherwise, the primary route function function will be called,
 // which, in this example, will redirect the user to the home page.
         app.get('/auth/facebook/callback',
-            passport.authenticate('facebook', { 
-                // successRedirect : '/',  
-                /*failureRedirect: '/login',*/ function(request, response) {
-                    console.log("In here")
-                       response.redirect("/");
-        }
-                 }));
-
+         passport.authenticate('facebook', { 
+                successRedirect : '/',  
+                failureRedirect: '/login' }));
 
 // GET /auth/google
 // Use passport.authenticate() as route middleware to authenticate the

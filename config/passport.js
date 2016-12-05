@@ -64,13 +64,10 @@ module.exports = function(passport) {
                         return done(null, false, req.flash('signuperror', 'User already exists'));
                     } else {
                         var newUser            = new User();
-			             newUser.user.username    = req.body.username;
+			            newUser.user.username  = req.body.username;
                         newUser.user.email    = email;
                         newUser.user.password = newUser.generateHash(password);
-                        console.log(newUser);
-			newUser.user.name	= ''
-			//newUser.user.address	= ''
-            newUser.user.role    = req.body.roles;
+                        newUser.user.role    = req.body.roles;
             
                         newUser.save(function(err) {
                             if (err)
@@ -128,6 +125,7 @@ module.exports = function(passport) {
                             			var newUser = new User();
             							newUser.user.username    = profile.displayName;
                                     	newUser.user.email    = profile.emails[0].value;
+                                        newUser.user.role    = "buyer";
             							newUser.save(function(err) {
                             					if (err)
                                 					{
@@ -144,10 +142,8 @@ module.exports = function(passport) {
 					var user            = req.user;
 					user.user.username    = profile.displayName;
                 	user.user.email    = profile.emails[0].value;
-					/*user.user.name	= ''
-					user.user.address	= ''
-
-                	*/		user.save(function(err) {
+					newUser.user.role    = "buyer";
+                    		user.save(function(err) {
                     				if (err)
                         				throw err;
                     			return done(null, user);
@@ -173,32 +169,34 @@ module.exports = function(passport) {
      						if (!req.user) {
                                 console.log("In google")
                                 console.log( profile.emails[0].value)
- 							User.findOne({ 'user.email' :  profile.emails[0].value }, function(err, user) {
+ 							    User.findOne({ 'user.email' :  profile.emails[0].value }, function(err, user) {
             	    						if (err){ return done(err);}
                     					if (user) {
                                             console.log("got user")
                         					return done(null, user);
                     					} else {
+                                            console.log("New patil")
                         					var newUser            = new User();
 								            newUser.user.username    = profile.displayName;
 								            newUser.user.email    = profile.emails[0].value;
-								            /*newUser.user.name	= ''
-								            newUser.user.address	= ''
-*/
-                        					newUser.save(function(err) {
-                            						if (err)
-                                						{
-                                                            console.log("Naya user save");
-                                                            throw err;}
+                                            newUser.user.role    = "buyer";
+								            newUser.save(function(err) {
+                            				if (err)
+                                				{
+                                                    console.log("Naya user save nahi ");
+                                                            throw err;
+                                                }
                             					return done(null, newUser);
                         					});
                     					}
 
                 					});
-                         			} else {
-							var user            = req.user;
+                         			}
+                                     else {
+							var user  = req.user;
 							user.user.username    = profile.displayName;
 							user.user.email    = profile.emails[0].value;
+                            newUser.user.role    = "buyer";
                 					user.save(function(err) {
                     					if (err)
                         					{
