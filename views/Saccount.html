@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Account Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+		body{margin-top:20px;}
+		.fa-fw {width: 2em;}
+		
+		
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<div> <% include navbar.html %></div>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<ul class="nav nav-pills nav-stacked admin-menu">
+					<li class="active"><a href="#" data-target-id="Profile"><i class="fa fa-home fa-fw"></i>Profile</a></li>
+					<li><a href="http://www.jquery2dotnet.com" data-target-id="Payment_Information"><i class="fa fa-list-alt fa-fw"></i>Payment Information</a></li>
+					<li><a href="http://www.jquery2dotnet.com" data-target-id="Adresses"><i class="fa fa-bar-chart-o fa-fw"></i>Adresses</a></li>
+					<li><a href="http://www.jquery2dotnet.com" data-target-id="Dashboard"><i class="fa fa-bar-chart-o fa-fw"></i>Dashboard</a></li>
+				</ul>
+			</div>
+			
+			<div class="col-md-9 well admin-content" id="Profile">
+			
+				<form class="form-horizontal" action=/personalInfo method = "post">
+					<fieldset>
+
+					<!-- Form Name -->
+					<legend>Personal Information</legend>
+
+					<!-- Text input-->
+					<div class="form-group">
+					  <label class="col-md-4 control-label" for="email">Email:</label>  
+					  <div class="col-md-4">
+					  <input id="email" value = '<%= user.user.email%>' readonly name="email" type="text" placeholder="Email" class="form-control input-md" required="">
+							
+					  </div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+					  <label class="col-md-4 control-label" for="username">Username:</label>  
+					  <div class="col-md-4">
+					  <input id="username" value = '<%= user.user.username%>' name= "username" type="text" placeholder="Username" class="form-control input-md" required="">
+						
+					  </div>
+					</div>
+
+					<!-- Text input-->
+					<!--<div class="form-group">
+					  <label class="col-md-4 control-label" for="dob">Date of Birth</label>  
+					  <div class="col-md-4">
+					  <input id="dob" name="dob" type="text" placeholder="Date of Birth" class="form-control input-md">
+					  <span class="help-block">MM-DD-YYYY</span>  
+					  </div>
+					</div>-->
+
+
+					<div class="col-sm-12">
+						<div class="text-center">
+							<input class="btn btn-success" type="submit" align="center-block" name="submit"  value="Save">
+					    </div>
+					</div>
+
+					</fieldset>
+				</form>
+
+			</div>
+			
+			<div class="col-md-9 well admin-content" id="Payment_Information">
+			
+			
+			    <style type="text/css">
+					body { margin-top:20px; }
+					.panel-title {display: inline;font-weight: bold;}
+					.checkbox.pull-right { margin: 0; }
+					.pl-ziro { padding-left: 0px; }
+				</style>
+			
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-md-4">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										Payment Details
+									</h3>
+							</div>
+
+							<div class="panel-body">
+								<form action = '/paymentInfo' method="post"  role="form">
+									<fieldset>
+									<input id="email" value = '<%= user.user.email%>' readonly name="email" type="hidden" placeholder="Email" class="form-control input-md" required="">
+									<div class="form-group">										
+										<label for="cardNumber"> CARD NUMBER </label>
+										<div class="input-group">
+											<input type="text" class="form-control" id="cardNumber" name="cardNumber" value='<%= user.user.payment_cardNumber%>' placeholder="Valid Card Number"
+												required autofocus />
+											<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+										</div>
+									</div>
+									  <!-- Name -->
+						  <div class="control-group">
+							<label class="control-label"  for="name">CARD HOLDER'S NAME</label>
+							<div class="controls">
+								 <input type="text" class="form-control" id="name" name="name" value='<%= user.user.payment_name%>' placeholder=""
+												required  />
+							</div>
+						  </div>
+									<div class="row">
+										<div class="col-xs-7 col-md-7">
+											<div class="form-group">
+												<label for="expityMonth">
+													EXPIRY DATE</label>
+												<div class="col-xs-6 col-lg-6 pl-ziro">
+													<input type="text" class="form-control" id="expiryMonth" name="expiryMonth" value='<%= user.user.payment_expiryMonth%>' placeholder="MM" required />
+												</div>
+												<div class="col-xs-6 col-lg-6 pl-ziro">
+													<input type="text" class="form-control" id="expiryYear" name="expiryYear" value='<%= user.user.payment_expiryYear%>' placeholder="YY" required /></div>
+											</div>
+										</div>
+										<div class="col-xs-5 col-md-5 pull-right">
+											<div class="form-group">
+												<label for="cvCode">
+													CVV</label>
+												<input type="password" class="form-control" id="cvCode" name="cvCode" value='<%= user.user.payment_cvCode%>' placeholder="CVV2" required />
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-12">
+										<div class="text-center">
+											<input class="btn btn-success" type="submit" align="center-block" name="submit"  value="Save">
+										</div>
+									</div>
+
+									</fieldset>
+									</form>
+								</div>
+							</div>
+
+							<br/>
+							
+							<!--<a class="btn btn-success btn-lg btn-block" role="button">Save</a>-->
+						</div>
+					</div>
+				</div>
+			
+			</div>
+			
+			
+			<div class="col-md-9 well admin-content" id="Adresses">
+				
+				<div class="row">
+					<div class="col-md-7 col-md-offset-2">
+					  <form class="form-horizontal" action=/addressInfo method = "post" role="form">
+						<fieldset>
+
+						  <!-- Form Name -->
+						  <legend>Address Details</legend>
+
+							<input id="email" value = '<%= user.user.email%>' readonly name="email" type="hidden" placeholder="Email" class="form-control input-md" required="">
+
+						  <!-- Text input-->
+						  <div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">Line 1</label>
+								<div class="col-sm-10">
+									<input type="text" value = '<%= user.user.address_line1%>' name= "line1" placeholder="Address Line 1" class="form-control">
+								</div>
+						  </div>
+
+						  <!-- Text input-->
+						  <div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">Line 2</label>
+								<div class="col-sm-10">
+									<input type="text" value = '<%= user.user.address_line2%>' name= "line2" placeholder="Address Line 2" class="form-control">
+								</div>
+						  </div>
+
+						  <!-- Text input-->
+						  <div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">City</label>
+								<div class="col-sm-10">
+									<input type="text" value = '<%= user.user.address_city%>' name= "city" placeholder="City" class="form-control">
+								</div>
+						  </div>
+
+						  <!-- Text input-->
+						  <div class="form-group">
+									<label class="col-sm-2 control-label" for="textinput">State</label>
+									<div class="col-sm-10">
+										<input type="text" value = '<%= user.user.address_state%>' name= "state" placeholder="State" class="form-control">
+									</div>
+						  </div>
+
+							<!-- Text input-->
+						  <div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">Country</label>
+								<div class="col-sm-10">
+									<input type="text" value = '<%= user.user.address_country%>' name= "country" placeholder="Country" class="form-control">
+								</div>
+						  </div>
+
+						  <!-- Text input-->
+						  <div class="form-group">
+									<label class="col-sm-2 control-label" for="textinput">Postcode</label>
+									<div class="col-sm-10">
+										<input type="text" value = '<%= user.user.address_postCode%>' name= "postCode" placeholder="PostCode" class="form-control">
+									</div>
+							</div>
+
+							<div class="col-sm-12">
+								<div class="text-center">
+									<input class="btn btn-success" type="submit" align="center-block" name="submit"  value="Save">
+								</div>
+							</div>
+
+						</fieldset>
+					  </form>
+					</div><!-- /.col-lg-12 -->
+				</div><!-- /.row -->
+
+			</div>
+
+
+			<div class="col-md-9 well admin-content" id="Dashboard">
+
+					<div style="width: 60%">
+						<canvas id="lineChartSeller" height="400" width = "400"> </canvas>
+					</div>
+
+					<br></br>
+					<br></br>
+
+					<div style="display: table;">
+						<div style="display: table-row">
+							<div style="width: 350px; display: table-cell;"> 
+								<canvas id="barChartSeller1" height = "350"> </canvas>
+							</div>
+
+							<div style="width: 350px; display: table-cell;">
+								<canvas id="barChartSeller2" height = "350"> </canvas>
+							</div>
+						</div>
+					</div>
+					
+					<br></br>
+					<br></br>
+
+					<div style="display: table;">
+						<div style="display: table-row">
+							<div style="width: 350px; display: table-cell;"> 
+								<canvas id="radarChartSeller1" > </canvas>
+							</div>
+
+							<div style="width: 350px; display: table-cell;">
+								<canvas id="radarChartSeller2" > </canvas>
+							</div>
+						</div>
+					</div>
+
+					<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+					<script src="views/js/dashboardsSeller.js"></script>
+
+		</div>
+		
+	</div>
+
+	<script type="text/javascript">
+	
+		$(document).ready(function(){
+				var navItems = $('.admin-menu li > a');
+				var navListItems = $('.admin-menu li');
+				var allWells = $('.admin-content');
+				var allWellsExceptFirst = $('.admin-content:not(:first)');
+				
+				allWellsExceptFirst.hide();
+				navItems.click(function(e)
+				{
+					e.preventDefault();
+					navListItems.removeClass('active');
+					$(this).closest('li').addClass('active');
+					
+					allWells.hide();
+					var target = $(this).attr('data-target-id');
+					$('#' + target).show();
+				});
+		});
+		
+		
+	</script>
+	
+</body>
+</html>
