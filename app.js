@@ -19,12 +19,10 @@ require('./config/passport')(passport);
 app.configure(function() {
 
    app.use(express.cookieParser());
-   //app.use(express.bodyParser()); 
    app.use(bodyParser.urlencoded({ extended: false }))
    app.use(bodyParser.json());
    app.use(multer({ dest: './uploads/'}));
    app.use(express.static(path.join(__dirname, 'public')));
-   //app.use('/app', express.static(path.join(__dirname, 'app')));
    app.use('/models', express.static(path.join(__dirname, 'models')));
    app.set('models', __dirname + '/models');
    app.use('/controllers', express.static(path.join(__dirname, 'controllers')));
@@ -33,7 +31,6 @@ app.configure(function() {
    app.set('views', __dirname + '/views');
    app.engine('html', require('ejs').renderFile);
    app.use(express.session({ secret: 'smartbuy' }));  
-  /*app.use(express.bodyParser({uploadDir:'/images'}));*/
    app.use(passport.initialize());
    app.use(passport.session()); 
    app.use(flash()); 
@@ -59,7 +56,6 @@ require('./controllers/addToCart.js')(app);
 require('./controllers/category.js')(app, mongoose, Grid);
 require('./controllers/categoryPost.js')(app, mongoose, Grid);
 require('./controllers/addShippingAddress.js')(app);
-/*require('./controllers/webhome.js')(app);*/
 require('./controllers/accountManagement.js')(app);
 require('./controllers/checkout.js')(app);
 

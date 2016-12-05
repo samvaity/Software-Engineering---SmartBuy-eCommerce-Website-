@@ -2,6 +2,8 @@ var Cart = require('../models/Cart');
 var commonserver = require('./commonserver');
 
 module.exports = function(app) {
+
+    //functionality implemnetation of adding the user's products to cart
 	app.post('/addToCart',  commonserver.anypageAuth, function(req, res) {
     console.log("Is it coming here");
     console.log(req.body);
@@ -18,23 +20,19 @@ module.exports = function(app) {
      console.log("dddddddddd");
      console.log(newCart);
      newCart.save(function(err) {
-        if (!err)
-        {
-            console.log("No error");
-           res.redirect(redirectTo);
-                       
-        }
-        else
-        {
-           response.render('sellerproducts.html', { 
-            message: request.flash('Error in adding Cart')
+                if (!err)
+                {
+                    console.log("No error");
+                   res.redirect(redirectTo);
+                               
+                }
+                else
+                {
+                   response.render('webhome.html', { 
+                    message: request.flash('Error in adding Cart')
+                });
+                }           
         });
-        }           
- });
-   
-                       
-       
-
-	});
+   });
 
 }
