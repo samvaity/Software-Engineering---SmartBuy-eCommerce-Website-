@@ -20,6 +20,7 @@
     "async": "latest",
     "bcrypt-nodejs": "latest",
     "body-parser": "^1.15.2",
+    "chart.js": "^2.4.0",
     "connect-flash": "0.1.1",
     "ejs": "0.8.5",
     "express": "3.4.8",
