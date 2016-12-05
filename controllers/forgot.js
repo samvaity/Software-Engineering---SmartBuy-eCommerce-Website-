@@ -14,6 +14,8 @@ app.get('/forgot', function(req, res) {
   });
 });
 
+/*this method will send an email to the user entered address and if the address
+ is found it will send user an email with reset password link. */
 app.post('/forgot', function(req, res, next) {
   async.waterfall([
     function(done) {
@@ -33,11 +35,6 @@ app.post('/forgot', function(req, res, next) {
         //console.log(user);
         user.user.resetPasswordToken = token;
         user.user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-     /*   user.markModified(user);
-         user.markModified(user);*/
-/* User.markModified(user.resetPasswordToken);
- User.markModified(user.resetPasswordExpires);
-*/
         user.save(function(err) {
           done(err, token, user);
         });
@@ -67,8 +64,9 @@ app.post('/forgot', function(req, res, next) {
       });
     }
   ], function(err) {
-    if (err) return next(err);
-    res.redirect('/forgot');
+    if (err) { return next(err);}
+    else
+      {res.redirect('/');}
   });
 });
 

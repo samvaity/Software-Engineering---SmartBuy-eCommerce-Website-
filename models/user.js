@@ -6,9 +6,9 @@ var userSchema = mongoose.Schema({
 	username     		    : String,
     email        		    : String,
     password     	    	: String,
-	role			        : String,
-	address      	    	: String,
-	resetPasswordToken	    : String,
+	  role			          : String,
+	  address      	    	: String,
+	  resetPasswordToken	 : String,
   	resetPasswordExpires	: Date,
   	
   	payment_cardNumbe	    : Number,
@@ -24,14 +24,14 @@ var userSchema = mongoose.Schema({
     address_country     	: String,
     address_postCode    	: Number,
 
-    shippingName : String,
-    shippingAddress : String,
-    shippingState : String,
-    shipingCountry: String,
-    shippingCity:String,
-    shippingUsername: String,
-    shippingPostalCode: String,
-    shippingEmail : String
+    shippingName          : String,
+    shippingAddress       : String,
+    shippingState         : String,
+    shipingCountry        : String,
+    shipping_city         :String,
+    shipping_username     : String,
+    shippingPostalCode    : String,
+    shippingEmail         : String
 
     }
 });
@@ -44,6 +44,7 @@ userSchema.methods.verifyPassword = function(password) {
     return bcrypt.compareSync(password, this.user.password);
 };
 
+//method to update user's profile
 userSchema.methods.updateUserProfile = function(request, response){
 
 	this.user.username = request.body.username;
@@ -61,7 +62,7 @@ userSchema.methods.updateUserProfile = function(request, response){
 	
 };
 
-
+//method to update shipping details of user
 userSchema.methods.updateShippingDetails= function(request, response){
 console.log("calling the fun")
   this.user.shippingUsername = request.body.shipping_username;
@@ -85,15 +86,9 @@ console.log("calling the fun")
 };
 
 
-
+//method to update user's payment information
 userSchema.methods.updateUserPaymentInfo = function(request, response){
-    
-	// this.user.payment.push({cardNumber : request.body.cardNumber, 
-    //                         cvCode : request.body.cvCode,
-    //                         expiryMonth : request.body.expiryMonth,
-	//                         expiryYear : request.body.expiryYear,
-	//                         name : request.body.name});
-
+ 
     this.user.payment_cardNumber = request.body.cardNumber;
     this.user.payment_cvCode = request.body.cvCode;
     this.user.payment_expiryMonth = request.body.expiryMonth;
@@ -114,6 +109,7 @@ userSchema.methods.updateUserPaymentInfo = function(request, response){
 	
 };
 
+//method to update user's own address information
 userSchema.methods.updateUserAddress = function(request, response){
 
     this.user.address_line1 = request.body.line1;
