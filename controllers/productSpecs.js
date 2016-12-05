@@ -11,11 +11,14 @@ module.exports = function(app, mongoose, Grid) {
 /*Get for Product Specs */ 
 	app.get('/productSpecs', function(request, response) {
 		var product_id = request.param('productID');	
+		var sessionEmail = request.user.user.email;
+		console.log(sessionEmail);
 		Product.find({"_id" : product_id},function(err, product){
 			if (err){						// Error occured while fetching product
 			        throw err;
 			}
 			else if(product){
+
 				Comment.find({"comment.productID" : product_id},function(err, comments){
 
 				 	newGrid.find({$and : [{"metadata.productname": product[0].product.name}, {"metadata.sellerID": product[0].product.sellerID},{"metadata.imagetype": "largeimage"}]}).lean().exec(function(err, files) {
@@ -88,6 +91,7 @@ module.exports = function(app, mongoose, Grid) {
 								tagline: commonserver.getTagLine(request.user),
 								searchtext: "",
 								user: user,
+								sessionEmail : sessionEmail,
 								images: largeImages,
 								userRole: userRole,
 				         		nextPage:nextPage,

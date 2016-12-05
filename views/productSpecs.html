@@ -97,20 +97,32 @@
                      <p><%= product.product.description %></p>
                   </div>
                   <!-- /.product-description -->
+                  <form action="/addToCart" method="post">
                   <div class="product-actions-wrapper">
-                     <form action="product-quick-view.html" method="POST">
+                    <div>
+                              <input type = "hidden" name="productID" value="<%= product['_id'] %>"></input>
+                           </div>
+                           <div>
+                              <input  name="userEmail"  type = "hidden" value="<%= sessionEmail %>"></input>
+                           </div>
+                           <div>
+                              <input  name="productTitle"  type = "hidden" value="<%= productName %>"></input>
+                           </div>
+                           <div>
+                              <input  name="productPrice"  type = "hidden" value="<%= product.product.price %>"></input>
+                           </div>
                         <div class="row">
                            <div class="col-md-3">
                               <div class="form-group">
                                  <% if (product.product.quantity > 0) { %>
                                  <label for="p_qty">Quantity<sup>*</sup>
                                  </label>
-                                 <input type='number' class="form-control"  min="1" max='<%= product.product.quantity %>' id='qty' placeholder="Quantity" />
+                                 <input type='number' class="form-control" name = "quantity" min="1" max='<%= product.product.quantity %>' id='qty' placeholder="Quantity" />
                                  <% }  %>
                               </div>
                            </div>
                         </div>
-                     </form>
+                    
                      <!-- /.form -->
                      <div class="product-list-actions">
                         <span class="product-price">
@@ -118,12 +130,13 @@
                         <% if (product.product.discount > 0) { %>
                         <del class="amount">$<%= product.product.discount %></del>
                         <% } %>
-                        <% if (userRole == 'buyer') { %>
-                        <button class="btn btn-lg btn-primary">Add to cart</button>
-                        <% }  %>
+
+                         
+                        <button class="btn btn-lg btn-primary" type="submit">Add to cart</button>
                      </div>
-                     <!-- /.product-list-actions -->
-                  </div>
+                      <!-- /.product-list-actions -->
+                 </div>
+                   </form>
                   <!-- /.product-actions-wrapper -->
                   <div class="product-meta">
                      <span class="product-category">

@@ -26,7 +26,7 @@ module.exports = function(app) {
         }
         else
         {
-           response.render('sellerproducts.html', { 
+           response.render('webhome.html', { 
             message: request.flash('Error in adding Cart')
         });
         }           
