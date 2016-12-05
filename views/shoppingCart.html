@@ -34,18 +34,18 @@
                         <ol class="product-review-list">
                         <% orders.forEach(function(order) { %>
                         
-                         <div style="float: right; clear: left;"> <img src="./img/samples/products/product/tiny/thumb-1.jpg" style="te" alt=""></div>
+                         <div style="float: right; clear: left;"> <img src="/productimages/5820f30167b3aa34f838cac95496140_sa.jpg" style="te" alt=""></div>
                            <li>
-                              <h4 class="review-title"><%= order["cart"]["productName"]%></h4>
+                              <h3 class="review-comment"><%= order["cart"]["productName"]%></h3>
                               
                               <div class="review-comment">
                                  
                               </div>
-                              <div class="review-meta">
+                              <div class="review-comment">
                                  <span>Quantity - </span>
                                  <a href="#" class="author"><%= order["cart"]["quantity"]%></a>
                               </div>
-                              <div class="review-meta">
+                              <div class="review-comment">
                                  <span>Price - </span>
                                  <a href="#" class="author"> <%= order["cart"]["productPrice"]%> </a>
                               </div>
