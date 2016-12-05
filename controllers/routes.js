@@ -39,13 +39,7 @@ module.exports = function(app, passport,server) {
   }
     else if(user.user.role == 'seller')
     {
-    response.render('sellerHomepage.html', {
-          user : user,
-          nextPage:nextPage,
-          tagline: tagline,
-          searchtext: "",
-          tags:tagsForSeller
-         });
+      response.redirect('/sellerproducts');
     }
     else if(user.user.role == 'admin')
     {
