@@ -37,7 +37,6 @@ module.exports = function(app, mongoose, Grid) {
 
 		var user = (request.user) ? (request.user) : "";
 		var category = (category) ? (category) : "";
-
 	    /********************************************/
 	    response.render('category.html', { 
 	    	//for pagination
@@ -61,17 +60,16 @@ module.exports = function(app, mongoose, Grid) {
 	}
 
 	// Retrieves data relevant to the search query and passes it to the view
-	app.get('/category', function(request, response) {
+	app.post('/category', function(request, response) {
 		var searchtext = "";
-		var category = request.param('category');
-		console.log(category);
+		var category = request.body.category;
 		var sellerBrandsFilter = request.body.seller;
 		var sellerfiltersapplied = (request.body.sellername) ?  request.body.sellername : "";
 		var priceFilters = (request.body.price) ? request.body.price : "";
 		var pagenumber = request.body.page;
 		var sortby = request.body.sortby; 
 		var response1 = response;
-		
+
 		/* gets all seller brands, to be dispplayed in refinement panel */
 		User.find({"user.role": "seller"}, function(err, sellerbrands){
 			var productSubQuery = [];
@@ -208,7 +206,6 @@ module.exports = function(app, mongoose, Grid) {
 										if(sortby){
 											allproducts.sort(sortBy(sortby));
 										}
-										console.log(category);
 										renderSearch(allproducts, request, response, sellerbrands, sortby, "#", searchtext, sellerfiltersapplied, priceFilters, request.flash('error while loading data'), category);
 									}
 						        });

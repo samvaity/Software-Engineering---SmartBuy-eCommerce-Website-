@@ -34,7 +34,8 @@ module.exports = function(app, mongoose, Grid) {
 	    if(productsArrays.length > 0){
 	    	productsList = productsArrays[+currentPage - 1];
 		}
-
+		
+		var user = (request.user) ? (request.user) : "";
 	    /********************************************/
 	    response.render('search.html', { 
 	    	//for pagination
@@ -44,7 +45,7 @@ module.exports = function(app, mongoose, Grid) {
 	        currentPage: currentPage,
 	        products: productsList,
 	        appliedsortby: sortby,
-	    	user: request.user,
+	    	user: user,
 	        tagline: commonserver.getTagLine(request.user),
 	        nextPage: nextPage,
 	        searchtext: searchtext,

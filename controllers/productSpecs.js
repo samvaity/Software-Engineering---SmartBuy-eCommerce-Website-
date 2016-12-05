@@ -9,7 +9,7 @@ module.exports = function(app, mongoose, Grid) {
 	var gfs = new Grid(mongoose.connection.db);
 
 /*Get for Product Specs */ 
-	app.get('/productSpecs',commonserver.auth, function(request, response) {
+	app.get('/productSpecs', function(request, response) {
 		var product_id = request.param('productID');	
 		Product.find({"_id" : product_id},function(err, product){
 			if (err){						// Error occured while fetching product
@@ -47,12 +47,12 @@ module.exports = function(app, mongoose, Grid) {
 						            if(index === (filesArray.length - 1)){
 	
 						            	product[0]["product"]["imagepath"] = largeImages;
-	
-						            	var tagline = request.user.user.username;
-							     		var tags = [
-								        { name: 'My Account', ref:'/Account' },
-								        { name: 'My Orders', ref:'/Orders' },
-								        { name: 'Logout', ref:'/logout' }];
+										var user = (request.user) ? (request.user) : "";
+						            	var tagline = (user) ? (request.user.user.username) : "";
+						            	var userRole = (user) ? (request.user.user.role) : "";
+
+		
+
 							      		var nextPage = "#";
 									 	response.render('productSpecs.html', { 
 									 		productName:product[0].product.name,
@@ -62,12 +62,12 @@ module.exports = function(app, mongoose, Grid) {
 											product:product[0],
 											tagline: tagline,
 											images: largeImages,
-											user: request.user,
-											userRole: request.user.user.role,
+											user: user,
+											userRole: userRole,
 							         		nextPage:nextPage,
 							         		comments:comments,
 							         		searchtext: "",
-							          		tags:tags
+							          		tags:commonserver.getTags(request.user)
 										});
 						            }
 						        });
