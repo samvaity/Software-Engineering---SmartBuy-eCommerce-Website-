@@ -47,13 +47,13 @@ module.exports = function(app, mongoose, Grid) {
 	        products: productsList,
 	        appliedsortby: sortby,
 	    	user: user,
-	        tagline: commonserver.getTagLine(request.user),
+	        tagline: commonserver.getTagLine(user),
 	        nextPage: nextPage,
 	        searchtext: category,
 	        category: category,
 	        sellerfiltersapplied: sellerfiltersapplied,
 	        pricefiltersapplied: priceFilters,
-	        tags: commonserver.getTags(request.user),
+	        tags: commonserver.getTags(user),
 	        sellers: sellerbrands,
 	  		message: message 
 	  	});
@@ -219,7 +219,6 @@ module.exports = function(app, mongoose, Grid) {
 									if(sortby){
 										allproducts.sort(sortBy(sortby));
 									}
-									console.log(category);
 									renderSearch(allproducts, request, response, sellerbrands, sortby, "#", searchtext, sellerfiltersapplied, priceFilters, request.flash('error while loading data'), category);	
 								}
 							}

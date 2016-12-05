@@ -2,7 +2,7 @@
 <html class="no-js" lang="">
 
 <head>
-
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/ico" sizes="52x52">
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>SmartBuy &middot; Homepage</title>
@@ -183,7 +183,7 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                         </li>
                                     </ul>
                                 </li>-->
-                                  <% if (user.role == 'buyer') { %>
+                                  <% if (user && (user.user.role === 'buyer')) { %>
                                 <li class="menubar-cart">
                                     <a href="#" title="" class="awemenu-icon menu-shopping-cart">
                                         <i class="icon icon-shopping-bag"></i>
@@ -331,16 +331,16 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                                     <div class="col-lg-3">
                                                         <h2 class="upper">TV's</h2>
 
-                                                        <ul class="super">
+                                                       <ul class="super">
                                                             <li><a href="/category?category=Smart TV" title="">Smart TV</a>
                                                             </li>
                                                             <li><a href="/category?category=Curved TV" title="">Curved TV</a>
                                                             </li>
-															<li><a href="/category?category=LED's" title="">LED's</a>
+                                                            <li><a href="/category?category=LED" title="">LED's</a>
                                                             </li>
-															<!--<li><a href="#" title="">4K TV</a>
+                                                            <!--<li><a href="#" title="">4K TV</a>
                                                             </li>-->
-															<li><a href="/category?category=OLED's" title="">OLED's</a>
+                                                            <li><a href="/category?category=OLED" title="">OLED's</a>
                                                             </li>
                                                         </ul> 
                                                     </div>
@@ -387,7 +387,7 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                                 </div>
 
                                                 <div class="bottom-link">
-                                                    <a href="#" class="btn btn-lg btn-dark btn-outline">
+                                                    <a href="/category?category=TV" class="btn btn-lg btn-primary margin-right-15">Shop now</a>
                                                         <span>Shop All TV's</span>
                                                     </a>
                                                 </div>
@@ -413,13 +413,13 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                                         <h2 class="upper">Computers</h2>
 
                                                         <ul class="super">
-                                                            <li><a href="#" title="">Laptops</a>
+                                                            <li><a href="/category?category=Laptops" title="">Laptops</a>
                                                             </li>
-                                                            <li><a href="#" title="">Desktops</a>
+                                                            <li><a href="/category?category=Desktops" title="">Desktops</a>
                                                             </li>
-															<li><a href="#" title="">Accessories</a>
+                                                            <li><a href="/category?category=Accessories" title="">Accessories</a>
                                                             </li>
-                                                            <li><a href="#" title="">Tablets</a>
+                                                            <li><a href="/category?category=Tablets" title="">Tablets</a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -461,7 +461,7 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                                 </div>
 
                                                 <div class="bottom-link">
-                                                    <a href="#" class="btn btn-lg btn-dark btn-outline">
+                                                    <a href="/category?category=Computers" class="btn btn-lg btn-dark btn-outline">
                                                         <span>Shop All Computers</span>
                                                     </a>
                                                 </div>
@@ -487,15 +487,15 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                                         <h2 class="upper">Cameras</h2>
 
                                                         <ul class="super">
-                                                            <li><a href="#" title="">DSLR</a>
+                                                            <li><a href="/category?category=DSLR" title="">DSLR</a>
                                                             </li>
-                                                            <li><a href="#" title="">Mirrorless</a>
+                                                            <li><a href="/category?category=Mirrorless" title="">Mirrorless</a>
                                                             </li>
-															<li><a href="#" title="">Instant print</a>
+                                                            <li><a href="/category?category=Instant Print" title="">Instant print</a>
                                                             </li>
-															<li><a href="#" title="">Point and shoot</a>
+                                                            <li><a href="/category?category=Point and shoot" title="">Point and shoot</a>
                                                             </li>
-															<li><a href="#" title="">Accessories</a>
+                                                            <li><a href="/category?category=Accessories" title="">Accessories</a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -536,7 +536,7 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                                 </div>
 
                                                 <div class="bottom-link">
-                                                    <a href="#" class="btn btn-lg btn-dark btn-outline">
+                                                     <a href="/category?category=Cameras" class="btn btn-lg btn-dark btn-outline">
                                                         <span>Shop All Cameras</span>
                                                     </a>
                                                 </div>
@@ -563,17 +563,17 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                                     <div class="col-lg-3">
                                                         <h2 class="upper">Cell phones</h2>
 														<ul class="super">
-                                                            <li><a href="#" title="">Android</a>
+                                                            <li><a href="/category?category=Android" title="">Android</a>
                                                             </li>
-															<li><a href="#" title="">iOS</a>
+                                                            <li><a href="/category?category=iOS" title="">iOS</a>
                                                             </li>
-															<li><a href="#" title="">BlackBerry</a>
+                                                            <li><a href="/category?category=BlackBerry" title="">BlackBerry</a>
                                                             </li>
-															<li><a href="#" title="">Windows</a>
+                                                            <li><a href="/category?category=Windows" title="">Windows</a>
                                                             </li>
-															<li><a href="#" title="">Bada</a>
+                                                            <li><a href="/category?category=Bada" title="">Bada</a>
                                                             </li>
-															<li><a href="#" title="">webOS</a>
+                                                            <li><a href="/category?category=webOS" title="">webOS</a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -583,57 +583,57 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                                         <div class="sublist">
                                                             <p>Brand</p>
                                                             <ul class="numbers-list">
-                                                                <li><a href="#" title="">A</a>
+                                                                <li><a href="/category?category=A" title="">A</a>
                                                                 </li>
-                                                                <li><a href="#" title="">B</a>
+                                                                <li><a href="/category?category=B" title="">B</a>
                                                                 </li>
-                                                                <li><a href="#" title="">C</a>
+                                                                <li><a href="/category?category=C" title="">C</a>
                                                                 </li>
-                                                                <li><a href="#" title="">D</a>
+                                                                <li><a href="/category?category=D" title="">D</a>
                                                                 </li>
-                                                                <li><a href="#" title="">E</a>
+                                                                <li><a href="/category?category=E" title="">E</a>
                                                                 </li>
-                                                                <li><a href="#" title="">F</a>
+                                                                <li><a href="/category?category=F" title="">F</a>
                                                                 </li>
-                                                                <li><a href="#" title="">G</a>
+                                                                <li><a href="/category?category=G" title="">G</a>
                                                                 </li>
-                                                                <li><a href="#" title="">H</a>
+                                                                <li><a href="/category?category=H" title="">H</a>
                                                                 </li>
-                                                                <li><a href="#" title="">I</a>
+                                                                <li><a href="/category?category=I" title="">I</a>
                                                                 </li>
-                                                                <li><a href="#" title="">J</a>
+                                                                <li><a href="/category?category=J" title="">J</a>
                                                                 </li>
-                                                                <li><a href="#" title="">K</a>
+                                                                <li><a href="/category?category=K" title="">K</a>
                                                                 </li>
-                                                                <li><a href="#" title="">L</a>
+                                                                <li><a href="/category?category=L" title="">L</a>
                                                                 </li>
-                                                                <li><a href="#" title="">M</a>
+                                                                <li><a href="/category?category=M" title="">M</a>
                                                                 </li>
-                                                                <li><a href="#" title="">N</a>
+                                                                <li><a href="/category?category=N" title="">N</a>
                                                                 </li>
-                                                                <li><a href="#" title="">O</a>
+                                                                <li><a href="/category?category=O" title="">O</a>
                                                                 </li>
-                                                                <li><a href="#" title="">P</a>
+                                                                <li><a href="/category?category=P" title="">P</a>
                                                                 </li>
-                                                                <li><a href="#" title="">Q</a>
+                                                                <li><a href="/category?category=Q" title="">Q</a>
                                                                 </li>
-                                                                <li><a href="#" title="">R</a>
+                                                                <li><a href="/category?category=R"  title="">R</a>
                                                                 </li>
-                                                                <li><a href="#" title="">S</a>
+                                                                <li><a href="/category?category=S" title="">S</a>
                                                                 </li>
-                                                                <li><a href="#" title="">T</a>
+                                                                <li><a href="/category?category=T" title="">T</a>
                                                                 </li>
-                                                                <li><a href="#" title="">U</a>
+                                                                <li><a href="/category?category=U" title="">U</a>
                                                                 </li>
-                                                                <li><a href="#" title="">V</a>
+                                                                <li><a href="/category?category=V" title="">V</a>
                                                                 </li>
-                                                                <li><a href="#" title="">W</a>
+                                                                <li><a href="/category?category=W" title="">W</a>
                                                                 </li>
-                                                                <li><a href="#" title="">X</a>
+                                                                <li><a href="/category?category=X" title="">X</a>
                                                                 </li>
-                                                                <li><a href="#" title="">Y</a>
+                                                                <li><a href="/category?category=Y" title="">Y</a>
                                                                 </li>
-                                                                <li><a href="#" title="">Z</a>
+                                                                <li><a href="/category?category=Z" title="">Z</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -672,7 +672,7 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                                 </div>
 
                                                 <div class="bottom-link">
-                                                    <a href="#" class="btn btn-lg btn-dark btn-outline">
+                                                    <a href="/category?category=cell phones" class="btn btn-lg btn-dark btn-outline">
                                                         <span>Shop All cell phones</span>
                                                     </a>
                                                 </div>
@@ -698,13 +698,13 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                                         <h2 class="upper">Wearable devices</h2>
 
                                                         <ul class="super">
-                                                            <li><a href="#" title="">Smart glass</a>
+                                                            <li><a href="/category?category=Smart glass" title="">Smart glass</a>
                                                             </li>
-                                                            <li><a href="#" title="">Smart watch</a>
+                                                            <li><a href="/category?category=Smart watch" title="">Smart watch</a>
                                                             </li>
-															<li><a href="#" title="">Smart band</a>
+                                                            <li><a href="/category?category=Smart band" title="">Smart band</a>
                                                             </li>
-															<li><a href="#" title="">Accessories</a>
+                                                            <li><a href="/category?category=Accessories" title="">Accessories</a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -752,7 +752,7 @@ src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1"
                                                 </div>
 
                                                 <div class="bottom-link">
-                                                    <a href="#" class="btn btn-lg btn-dark btn-outline">
+                                                    <a href="/category?category=Wearable" class="btn btn-lg btn-dark btn-outline">
                                                         <span>Shop All Wearable devices</span>
                                                     </a>
                                                 </div>

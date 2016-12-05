@@ -208,7 +208,6 @@ module.exports = function(app, mongoose, Grid) {
 										if(sortby){
 											allproducts.sort(sortBy(sortby));
 										}
-										console.log(category);
 										renderSearch(allproducts, request, response, sellerbrands, sortby, "#", searchtext, sellerfiltersapplied, priceFilters, request.flash('error while loading data'), category);
 									}
 						        });
@@ -222,7 +221,6 @@ module.exports = function(app, mongoose, Grid) {
 									if(sortby){
 										allproducts.sort(sortBy(sortby));
 									}
-									console.log(category);
 									renderSearch(allproducts, request, response, sellerbrands, sortby, "#", searchtext, sellerfiltersapplied, priceFilters, request.flash('error while loading data'), category);	
 								}
 							}

@@ -10,6 +10,7 @@ module.exports = function(app, mongoose, Grid) {
 
 /*Get for Product Specs */ 
 	app.get('/productSpecs', function(request, response) {
+		console.log("in get");
 		var product_id = request.param('productID');	
 		Product.find({"_id" : product_id},function(err, product){
 			if (err){						// Error occured while fetching product
@@ -17,13 +18,15 @@ module.exports = function(app, mongoose, Grid) {
 			}
 			else if(product){
 				Comment.find({"comment.productID" : product_id},function(err, comments){
+
 				 	newGrid.find({$and : [{"metadata.productname": product[0].product.name}, {"metadata.sellerID": product[0].product.sellerID},{"metadata.imagetype": "largeimage"}]}).lean().exec(function(err, files) {
 						var readStream, buffer = "";
 				 		var largeImages = [];
 				 		if(err){
 				 			throw err;
 				 		}
-				 		else if(files){
+				 		else if(files.length != 0){
+				 			console.log(files);
 				 			files.forEach(function(file, index, filesArray){
 			                    // read file, buffering data as we go
 						 		readStream = gfs.createReadStream({ _id: file['_id'] });
@@ -50,9 +53,6 @@ module.exports = function(app, mongoose, Grid) {
 										var user = (request.user) ? (request.user) : "";
 						            	var tagline = (user) ? (request.user.user.username) : "";
 						            	var userRole = (user) ? (request.user.user.role) : "";
-
-		
-
 							      		var nextPage = "#";
 									 	response.render('productSpecs.html', { 
 									 		productName:product[0].product.name,
@@ -60,7 +60,7 @@ module.exports = function(app, mongoose, Grid) {
 											productDescription:product[0].product.description,
 											productPrice:product[0].product.price,
 											product:product[0],
-											tagline: tagline,
+											tagline: commonserver.getTagLine(request.user),
 											images: largeImages,
 											user: user,
 											userRole: userRole,
@@ -74,12 +74,11 @@ module.exports = function(app, mongoose, Grid) {
 			                });
 				 		}
 				 		else{
+				 			console.log("images not found");
 				 			// No images found
-				 			var tagline = request.user.user.username;
-				     		var tags = [
-					        { name: 'My Account', ref:'/Account' },
-					        { name: 'My Orders', ref:'/Orders' },
-					        { name: 'Logout', ref:'/logout' }];
+				 			var user = (request.user) ? (request.user) : "";
+			            	var tagline = (user) ? (request.user.user.username) : "";
+			            	var userRole = (user) ? (request.user.user.role) : "";
 
 				      		var nextPage = "#";
 						 	response.render('productSpecs.html', { 
@@ -88,14 +87,14 @@ module.exports = function(app, mongoose, Grid) {
 								productDescription:product[0].product.description,
 								productPrice:product[0].product.price,
 								product:product[0],
-								tagline: tagline,
+								tagline: commonserver.getTagLine(request.user),
 								searchtext: "",
-								user: request.user,
+								user: user,
 								images: largeImages,
-								userRole: request.user.user.role,
+								userRole: userRole,
 				         		nextPage:nextPage,
 				         		comments:comments,
-				          		tags:tags
+				          		tags:commonserver.getTags(request.user)
 							});
 				 		}
 				 	});

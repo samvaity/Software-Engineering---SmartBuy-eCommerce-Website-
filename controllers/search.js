@@ -36,6 +36,7 @@ module.exports = function(app, mongoose, Grid) {
 		}
 		var user = (request.user) ? (request.user) : "";
 	    /********************************************/
+	    
 	    response.render('search.html', { 
 	    	//for pagination
 	        pageSize: pageSize,
