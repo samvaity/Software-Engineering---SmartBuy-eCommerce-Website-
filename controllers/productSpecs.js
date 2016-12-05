@@ -10,7 +10,6 @@ module.exports = function(app, mongoose, Grid) {
 
 /*Get for Product Specs */ 
 	app.get('/productSpecs', function(request, response) {
-		console.log("in get");
 		var product_id = request.param('productID');	
 		Product.find({"_id" : product_id},function(err, product){
 			if (err){						// Error occured while fetching product
@@ -74,7 +73,6 @@ module.exports = function(app, mongoose, Grid) {
 			                });
 				 		}
 				 		else{
-				 			console.log("images not found");
 				 			// No images found
 				 			var user = (request.user) ? (request.user) : "";
 			            	var tagline = (user) ? (request.user.user.username) : "";

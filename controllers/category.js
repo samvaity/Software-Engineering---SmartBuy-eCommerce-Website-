@@ -64,7 +64,6 @@ module.exports = function(app, mongoose, Grid) {
 	app.get('/category', function(request, response) {
 		var searchtext = "";
 		var category = request.param('category');
-		console.log(category);
 		var sellerBrandsFilter = request.body.seller;
 		var sellerfiltersapplied = (request.body.sellername) ?  request.body.sellername : "";
 		var priceFilters = (request.body.price) ? request.body.price : "";
