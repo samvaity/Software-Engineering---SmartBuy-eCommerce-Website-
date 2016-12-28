@@ -28,6 +28,7 @@ app.configure(function() {
    app.use('/controllers', express.static(path.join(__dirname, 'controllers')));
    app.set('controllers', __dirname + '/controllers');
    app.use('/views', express.static(path.join(__dirname, 'views')));
+  app.use('/images', express.static(path.join(__dirname, 'images')));
    app.set('views', __dirname + '/views');
    app.engine('html', require('ejs').renderFile);
    app.use(express.session({ secret: 'smartbuy' }));  

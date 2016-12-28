@@ -105,7 +105,7 @@ module.exports = function(passport) {
 	passport.use(new FacebookStrategy({
     		clientID: FACEBOOK_APP_ID,
     		clientSecret: FACEBOOK_APP_SECRET,
-            callbackURL: "http://localhost:8080/auth/facebook/callback",
+            callbackURL: "http://ec2-35-161-15-227.us-west-2.compute.amazonaws.com:8080/auth/facebook/callback",
             profileFields: ['id', 'displayName', 'link', 'photos', 'emails']
   		},
 
@@ -160,7 +160,7 @@ module.exports = function(passport) {
 		passport.use(new GoogleStrategy({
     				clientID: GOOGLE_CONSUMER_KEY,
     				clientSecret: GOOGLE_CONSUMER_SECRET,
-    				callbackURL: "http://localhost:8080/auth/google/callback"
+    				callbackURL: "http://ec2-35-161-15-227.us-west-2.compute.amazonaws.com:8080/auth/google/callback"
   				},
   				function(req, accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...

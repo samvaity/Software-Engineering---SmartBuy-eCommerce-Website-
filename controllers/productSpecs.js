@@ -11,7 +11,7 @@ module.exports = function(app, mongoose, Grid) {
 /*Get for Product Specs */ 
 	app.get('/productSpecs', function(request, response) {
 		var product_id = request.param('productID');	
-		var sessionEmail = request.user.user.email;
+		var sessionEmail = (request.user) ? request.user.user.email : "";
 		console.log(sessionEmail);
 		Product.find({"_id" : product_id},function(err, product){
 			if (err){						// Error occured while fetching product
@@ -65,6 +65,7 @@ module.exports = function(app, mongoose, Grid) {
 											tagline: commonserver.getTagLine(request.user),
 											images: largeImages,
 											user: user,
+											sessionEmail : sessionEmail,
 											userRole: userRole,
 							         		nextPage:nextPage,
 							         		comments:comments,

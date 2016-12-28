@@ -11,7 +11,7 @@ var userSchema = mongoose.Schema({
 	  resetPasswordToken	 : String,
   	resetPasswordExpires	: Date,
   	
-  	payment_cardNumbe	    : Number,
+  	payment_cardNumber	    : Number,
     payment_name        	: String,
     payment_expiryMonth 	: Number, 
     payment_expiryYear  	: Number, 
